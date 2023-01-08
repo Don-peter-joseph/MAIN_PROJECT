@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-healthpad-staging-82713-authRole",
+      "UnauthRoleArn": "arn:aws:iam::443347152588:role/amplify-healthpad-staging-82713-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::443347152588:role/amplify-healthpad-staging-82713-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-healthpad-staging-82713-deployment",
+      "UnauthRoleName": "amplify-healthpad-staging-82713-unauthRole",
+      "StackName": "amplify-healthpad-staging-82713",
+      "StackId": "arn:aws:cloudformation:ap-south-1:443347152588:stack/amplify-healthpad-staging-82713/1983ccd0-84f7-11ed-9577-0620c05e4e46",
+      "AmplifyAppId": "d1aa5vzl8468cw"
+    },
+    "categories": {
+      "auth": {
+        "HealthPad": {}
+      }
+    }
+  }
+}
