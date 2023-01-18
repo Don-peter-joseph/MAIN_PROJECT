@@ -38,7 +38,7 @@ export default function App() {
         prefixes:[prefix],
         config
       }}>
-      <Stack.Navigator initialRouteName="signin">
+      <Stack.Navigator initialRouteName="profilescreen">
         <Stack.Screen name="signin" component={Signin} options={{headerShown:false}}/>
         <Stack.Screen name="signup" component={Signup} options={{headerShown:false}}/>
         <Stack.Screen name="confirmemail" component={Confirmemail} options={{headerShown:false}}/>

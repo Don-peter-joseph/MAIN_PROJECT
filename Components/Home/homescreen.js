@@ -17,7 +17,7 @@ const Home=({navigation})=>{
       console.log(redirectUrl);
     return(
         <View style={styles.outline}>
-            <Pressable style={[{backgroundColor:"blue"}]} onPress={()=>Linking.openURL("exp://u.expo.dev/36ebd0e9-99a3-4ade-a36c-dea5874af8d9?channel-name=default&runtime-version=1.0.0/--/profile")}>
+            <Pressable style={[{backgroundColor:"blue"}]} onPress={()=>Linking.openURL("myapp://profile")}>
                 <Text>Click here</Text>
             </Pressable>
             <Pressable style={[{backgroundColor:"yellow"}]} onPress={()=>webbrower.openBrowserAsync('https://docs.expo.io')}>

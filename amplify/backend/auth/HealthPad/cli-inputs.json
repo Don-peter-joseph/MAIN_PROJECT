@@ -52,7 +52,7 @@
       "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"public_profile\",\"AttributeMapping\":{\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid profile\",\"AttributeMapping\":{\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://u.expo.dev/36ebd0e9-99a3-4ade-a36c-dea5874af8d9?channel-name=default&runtime-version=1.0.0/--/profile\"],\"LogoutURLs\":[\"exp://u.expo.dev/36ebd0e9-99a3-4ade-a36c-dea5874af8d9?channel-name=default&runtime-version=1.0.0/--/profile\"]}",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"myapp://profile\"],\"LogoutURLs\":[\"myapp://profile\"]}",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
