@@ -1,5 +1,5 @@
 import Amplify,{ Auth,Hub } from "aws-amplify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
 import {Dimensions} from 'react-native';
 import config from "../../src/aws-exports";
@@ -9,87 +9,16 @@ const windowHeight = Dimensions.get('window').height;
 
 
 
-// const urlOpenerExpo = async (url, redirectUrl) => {
-//     console.log(">>>>>>>>> in urlOpener")
-//       const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(url, redirectUrl);
-    
-//        console.log(type)
-//        console.log(newUrl)
-//        if (type === 'success') {
-//           WebBrowser.dismissBrowser();
-//           if (Platform.OS === 'ios') {
-//             return Linking.openURL(newUrl);
-//           }
-//        }
-//      return Linking.openURL(newUrl);
-    
-//      };
-     
-//      const updatedConfig = {
-//       ...config,
-//         "oauth":{
-//           ...config.oauth,
-//           urlOpener:urlOpenerExpo
-    
-//         }
-//     }
-//     Amplify.configure(updatedConfig);
-//     Auth.configure(updatedConfig);
-//     class UserStatus extends React.Component {
-    
-//       state = { user: null, customState: null };
-//       componentDidMount() {
-//         Hub.listen("auth", ({ payload: { event, data } }) => {
-//           try {
-//             switch (event) {
-//               case "signIn":
-//                 this.setState({ user: data });
-//                 break;
-//               case "signOut":
-//                 this.setState({ user: null });
-//                 break;
-//               case "customOAuthState":
-//                 this.setState({ customState: data });
-//             }
-//           }
-//           catch(e) {console.log(e)}
-          
-//         });
-    
-//         Auth.currentAuthenticatedUser()
-//           .then(user => this.setState({ user }))
-//           .catch(() => console.log("Not signed in"));
-//       }
-    
-//       render() {
-        
-//         const { user } = this.state;
-//         if (user === null) {
-//           return(<View>
-//             <Text>Signed Out</Text>
-//           </View>)
-//         }
-//         return (
-//           <View>
-//                <Text>{user.signInUserSession.idToken.payload.email}</Text>
-//           <Text>{user.signInUserSession.accessToken.payload.username}</Text>
-//           </View>
-       
-//         )
-//       }
-//     }
+const Signin = ({ navigation,route}) => {
 
-
-
-
-const Signin = ({ navigation }) => {
-
+    
     const [hide,visible]=useState(true)
     const [color,setcolor]=useState('8A8AFF')
     const [eye,seteye]=useState(require('../assets/eyeclosed.png'))
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [loading,setloading]=useState(false);
+
 
     const getemail = (value) => {
         setemail(value);
@@ -116,7 +45,7 @@ const Signin = ({ navigation }) => {
         try{
             const response=await Auth.signIn(email,password);
             console.log(response);
-            navigation.navigate("homescreen");
+            navigation.navigate("profilescreen");
         }
         catch(e){
             Alert.alert('Invalid Input',e.message);

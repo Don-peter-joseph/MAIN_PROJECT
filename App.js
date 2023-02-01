@@ -9,11 +9,11 @@ import Forgotpassword from './Components/Authentication/forgotpassword';
 import Resetpassword from './Components/Authentication/newpassword';
 import Home from './Components/Home/homescreen';
 import Profile from './Components/Home/profile';
-import { Amplify,Auth } from 'aws-amplify';
+import { Amplify,Auth, Hub } from 'aws-amplify';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import awsconfig from './src/aws-exports';
 import * as Linking from 'expo-linking';
-
+import { useEffect, useState } from 'react';
 
 Amplify.configure(awsconfig)
 
@@ -30,22 +30,66 @@ const config={
 const prefix=Linking.createURL('/')
 
 export default function App() { 
-  // Auth.signOut();
-  return (
+  
+  const [user,setUser]=useState(undefined);
+  
+  
+  const checkUser=async()=> {
+    try{
+      const authUser=await Auth.currentAuthenticatedUser({bypassCache:'True'});
+      console.log("current user is "+authUser);
+      setUser(authUser);
+    }
+    catch(e){
+      setUser(null);
+    }
+  };
+  
+  useEffect(()=>{
+    checkUser();
+  },[]);
+  
+  // useEffect(()=>{
+  //     const listener=(data)=>{
+  //         if(data.payload.event=='signIn'){
+  //             console.log("its a signin")
+  //           }
+  //           if(data.payload.event==='signOut'){
+  //               console.log("singout")
+  //             }
+  //           };
+  //           let result=Hub.listen('auth',listener);
+  //           return()=>Hub.dispatch('auth',listener);
+  //         },[]);
+          
+          
+          // if(user==undefined){
+          //   return(
+          //     <View>
+          //       <Text>loading sdfoasdfajsdfjasidjfasjdfasjdfas;d</Text>
+          //     </View>
+          //   )
+          // }
+
+          return (
 
     <NavigationContainer
       linking={{
         prefixes:[prefix],
         config
       }}>
-      <Stack.Navigator initialRouteName="profilescreen">
-        <Stack.Screen name="signin" component={Signin} options={{headerShown:false}}/>
-        <Stack.Screen name="signup" component={Signup} options={{headerShown:false}}/>
-        <Stack.Screen name="confirmemail" component={Confirmemail} options={{headerShown:false}}/>
-        <Stack.Screen name="forgotpassword" component={Forgotpassword} options={{headerShown:false}}/>
-        <Stack.Screen name="resetpassword" component={Resetpassword} options={{headerShown:false}}/>
-        <Stack.Screen name="homescreen" component={Home} options={{headerShown:false}}/>
-        <Stack.Screen name="profilescreen" component={Profile} options={{headerShown:false}}/>
+      <Stack.Navigator screenOptions={{headerShown:false}}>
+        { user? <Stack.Screen name="profilescreen" component={Profile}/> : 
+        ( <>
+        <Stack.Screen name="signin" component={Signin}/>
+        <Stack.Screen name="signup" component={Signup}/>
+        <Stack.Screen name="confirmemail" component={Confirmemail}/>
+        <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
+        <Stack.Screen name="resetpassword" component={Resetpassword}/>
+        <Stack.Screen name="homescreen" component={Home}/>
+        <Stack.Screen name="profilescreen" component={Profile}/> 
+        </>)
+    }
       </Stack.Navigator>
     </NavigationContainer>
   );
