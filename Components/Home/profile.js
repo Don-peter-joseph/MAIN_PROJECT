@@ -27,7 +27,7 @@ const Profile=({navigation,route})=>{
     return(
         <View style={styles.outline}>
             <View style={styles.content}>
-                <Text>Welcome,</Text>
+                <Text>Welcome to HealthPad</Text>
             </View>
             <Pressable style={({pressed})=>[styles.signout,{width:pressed?'52%':'50%'}] } onPress={signOut}>
                 <Text>Sign out</Text>
