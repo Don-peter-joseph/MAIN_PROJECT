@@ -18,7 +18,7 @@ const Home=({navigation})=>{
     return(
         <View style={styles.outline}>
             <Pressable style={[{backgroundColor:"blue"}]} onPress={()=>Linking.openURL("myapp://profile")}>
-                <Text>Click here</Text>
+                <Text>Click here for nothing</Text>
             </Pressable>
             <Pressable style={[{backgroundColor:"yellow"}]} onPress={()=>webbrower.openBrowserAsync('https://docs.expo.io')}>
                 <Text>Click here for brower</Text>
