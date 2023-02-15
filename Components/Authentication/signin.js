@@ -14,7 +14,7 @@ const Signin = ({ navigation,route}) => {
     
     const [hide,visible]=useState(true)
     const [color,setcolor]=useState('8A8AFF')
-    const [eye,seteye]=useState(require('../assets/eyeclosed.png'))
+    const [eye,seteye]=useState(require('./assets/eyeclosed.png'))
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [loading,setloading]=useState(false);
@@ -32,10 +32,10 @@ const Signin = ({ navigation,route}) => {
 
     const changeeye=()=>{
         visible(!hide)
-        if(eye==require('../assets/eye.png'))
-            seteye(require('../assets/eyeclosed.png'))
+        if(eye==require('./assets/eye.png'))
+            seteye(require('./assets/eyeclosed.png'))
         else
-            seteye(require('../assets/eye.png'))
+            seteye(require('./assets/eye.png'))
     }
 
     const Signinpress=async data=>{
@@ -60,11 +60,11 @@ const Signin = ({ navigation,route}) => {
             </View>
             <View style={styles.content}>
                 <View style={styles.mail}> 
-                    <Image style={styles.inputlogo} source={require('../assets/emaillogo-png.png')}/>
+                    <Image style={styles.inputlogo} source={require('./assets/emaillogo-png.png')}/>
                     <TextInput style={[styles.input,{paddingLeft:10}]} placeholder="Email" onChangeText={getemail}/>
                 </View>
                 <View style={styles.password}>
-                    <Image style={styles.inputlogo} source={require('../assets/key.png')}/>
+                    <Image style={styles.inputlogo} source={require('./assets/key.png')}/>
                     <TextInput style={[styles.input,{paddingLeft:10}]} placeholder="password" onChangeText={getpassword} secureTextEntry={hide}/>
                     <Pressable style={{flex:.08,height:'100%',justifyContent:'center'}} onPress={changeeye}>
                         <Image style={{width:'100%',height:'30%'}} source={eye}/>
@@ -81,11 +81,11 @@ const Signin = ({ navigation,route}) => {
             <Text style={{marginBottom:5}}>or Login via</Text>
             <View style={styles.logosection}>
                 <Pressable style={styles.logo} onPress={()=>Auth.federatedSignIn({provider:"Google"})}>
-                    <Image style={{height:40,width:40,marginRight:15}} source={require('../assets/google.png')}/>
+                    <Image style={{height:40,width:40,marginRight:15}} source={require('./assets/google.png')}/>
                     <Text style={{color:'#de5246',fontWeight:'bold'}}>GOOGLE</Text>
                 </Pressable>
                 <Pressable style={[styles.logo,{padding:7}]} onPress={()=>Auth.federatedSignIn({provider:"Facebook"})}>
-                    <Image style={{height:35,width:35}} source={require('../assets/facebook.png')}/>
+                    <Image style={{height:35,width:35}} source={require('./assets/facebook.png')}/>
                     <Text style={{color:'royalblue',fontWeight:'bold'}}>FACEBOOK</Text>
                 </Pressable>
             </View>

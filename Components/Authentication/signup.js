@@ -57,22 +57,22 @@ const Signin = ({ navigation }) => {
             </View>
             <View style={styles.content}>
                 <View style={styles.mail}> 
-                    <Image style={{flex:.07,height:'80%'}} source={require('../assets/profileicon.png')}/>
+                    <Image style={{flex:.07,height:'80%'}} source={require('./assets/profileicon.png')}/>
                     <TextInput style={[styles.input,{paddingLeft:10}]} placeholder="Name" onChangeText={getname}/>
                 </View>
                 <View style={styles.mail}> 
-                    <Image style={styles.inputlogo} source={require('../assets/emaillogo-png.png')}/>
+                    <Image style={styles.inputlogo} source={require('./assets/emaillogo-png.png')}/>
                     <TextInput style={[styles.input,{paddingLeft:10}]} placeholder="Email" onChangeText={getemail}/>
                 </View>
                 <View style={styles.password}>
-                    <Image style={styles.inputlogo} source={require('../assets/key.png')}/>
+                    <Image style={styles.inputlogo} source={require('./assets/key.png')}/>
                     <TextInput style={[styles.input,{paddingLeft:10}]} placeholder="Password" onChangeText={getpassword} secureTextEntry={hide}/>
                     {/* <Pressable style={{flex:.08,height:'100%',justifyContent:'center'}} onChangeText={()=>visible(!hide)}>
                         <Image style={{width:'100%',height:'30%'}} source={require('./assets/eye.png')}/>
                     </Pressable> */}
                 </View>
                 <View style={styles.password}>
-                    <Image style={styles.inputlogo} source={require('../assets/key.png')}/>
+                    <Image style={styles.inputlogo} source={require('./assets/key.png')}/>
                     <TextInput style={[styles.input,{paddingLeft:10}]} placeholder="Confirm Password" onChangeText={getconfirmation} secureTextEntry={duphide}/>
                     {/* <Pressable style={{flex:.08,height:'100%',justifyContent:'center'}} onChangeText={()=>dupvisible(!duphide)}>
                         <Image style={{width:'100%',height:'30%'}} source={require('./assets/eye.png')}/>
@@ -89,11 +89,11 @@ const Signin = ({ navigation }) => {
             <Text style={{marginBottom:5}}>or Signup via</Text>
             <View style={styles.logosection}>
                 <View style={styles.logo}>
-                    <Image style={{height:40,width:40,marginRight:15}} source={require('../assets/google.png')}/>
+                    <Image style={{height:40,width:40,marginRight:15}} source={require('./assets/google.png')}/>
                     <Text style={{color:'#de5246',fontWeight:'bold'}}>GOOGLE</Text>
                 </View>
                 <View style={[styles.logo,{padding:7}]}>
-                    <Image style={{height:35,width:35}} source={require('../assets/facebook.png')}/>
+                    <Image style={{height:35,width:35}} source={require('./assets/facebook.png')}/>
                     <Text style={{color:'royalblue',fontWeight:'bold'}}>FACEBOOK</Text>
                 </View>
             </View>
