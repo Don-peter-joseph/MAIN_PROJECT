@@ -75,7 +75,7 @@ const Signin = ({ navigation,route}) => {
                 </Pressable>
                 <Pressable style={({pressed})=>[styles.login,{backgroundColor:pressed?'#6A8AFF':'#8A8AFF',width:pressed?'72%':'70%'}]}
                 onPress={Signinpress}>
-                        <Text style={{fontSize:20,color:'white'}}>{loading?"Loggin in...":"Login"}</Text>
+                        <Text style={{fontSize:20,color:'white'}}>{loading?"Logging in...":"Login"}</Text>
                 </Pressable>
             </View>
             <Text style={{marginBottom:5}}>or Login via</Text>

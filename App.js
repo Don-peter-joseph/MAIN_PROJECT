@@ -81,12 +81,12 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown:false}}>
         { user? <Stack.Screen name="profilescreen" component={Profile}/> : 
         ( <>
+        <Stack.Screen name="homescreen" component={Home}/>
         <Stack.Screen name="signin" component={Signin}/>
         <Stack.Screen name="signup" component={Signup}/>
         <Stack.Screen name="confirmemail" component={Confirmemail}/>
         <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
         <Stack.Screen name="resetpassword" component={Resetpassword}/>
-        <Stack.Screen name="homescreen" component={Home}/>
         <Stack.Screen name="profilescreen" component={Profile}/> 
         </>)
     }
