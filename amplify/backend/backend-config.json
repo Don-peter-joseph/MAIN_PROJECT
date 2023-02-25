@@ -1,4 +1,5 @@
 {
+  "api": {},
   "auth": {
     "HealthPad": {
       "customAuth": false,
@@ -32,5 +33,25 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
-  }
+  },
+  "function": {},
+  "parameters": {
+    "AMPLIFY_function_foodlambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "foodlambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_foodlambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "foodlambda"
+        }
+      ]
+    }
+  },
+  "storage": {}
 }

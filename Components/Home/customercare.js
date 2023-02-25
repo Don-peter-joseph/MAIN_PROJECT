@@ -14,7 +14,7 @@ const Customercare=({navigation,route})=>{
     return(
         <View style={styles.outline}>
             <View style={styles.content}>
-                <Text>This is scannig screen</Text>
+                <Text>This is customercare screen</Text>
             </View>
         </View>
     )

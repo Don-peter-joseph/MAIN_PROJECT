@@ -14,7 +14,7 @@ const Statistics=({navigation,route})=>{
     return(
         <View style={styles.outline}>
             <View style={styles.content}>
-                <Text>This is scannig screen</Text>
+                <Text>This is statistics screen</Text>
             </View>
         </View>
     )

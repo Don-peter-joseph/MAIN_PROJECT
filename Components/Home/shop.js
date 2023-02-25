@@ -14,7 +14,7 @@ const Shop=({navigation,route})=>{
     return(
         <View style={styles.outline}>
             <View style={styles.content}>
-                <Text>This is scannig screen</Text>
+                <Text>This is shopping screen</Text>
             </View>
         </View>
     )
