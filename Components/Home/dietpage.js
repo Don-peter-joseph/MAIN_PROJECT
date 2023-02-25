@@ -14,7 +14,7 @@ const Diet=({navigation,route})=>{
     return(
         <View style={styles.outline}>
             <View style={styles.content}>
-                <Text>This is scannig screen</Text>
+                <Text>This is diet screen</Text>
             </View>
         </View>
     )

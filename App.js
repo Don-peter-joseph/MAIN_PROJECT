@@ -9,6 +9,13 @@ import Forgotpassword from './Components/Authentication/forgotpassword';
 import Resetpassword from './Components/Authentication/newpassword';
 import Home from './Components/Home/homescreen';
 import Profile from './Components/Home/profile';
+import Scanimage from './Components/Home/scanpage';
+import Shop from './Components/Home/shop';
+import Statistics from './Components/Home/statistics';
+import Consult from './Components/Home/consultpage';
+import Diet from './Components/Home/dietpage';
+import Customercare from './Components/Home/customercare';
+
 import { Amplify,Auth, Hub } from 'aws-amplify';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import awsconfig from './src/aws-exports';
@@ -88,6 +95,12 @@ export default function App() {
         <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
         <Stack.Screen name="resetpassword" component={Resetpassword}/>
         <Stack.Screen name="profilescreen" component={Profile}/> 
+        <Stack.Screen name="shopscreen" component={Shop}/>
+        <Stack.Screen name="servicescreen" component={Customercare}/>
+        <Stack.Screen name="consultscreen" component={Consult}/>
+        <Stack.Screen name="dietscreen" component={Diet}/>
+        <Stack.Screen name="statisticsscreen" component={Statistics}/>
+        <Stack.Screen name="scanscreen" component={Scanimage}/>
         </>)
     }
       </Stack.Navigator>
