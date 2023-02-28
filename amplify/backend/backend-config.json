@@ -53,5 +53,11 @@
       ]
     }
   },
-  "storage": {}
+  "storage": {
+    "foodlabels": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
+  }
 }
