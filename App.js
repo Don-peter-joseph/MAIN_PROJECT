@@ -15,6 +15,7 @@ import Statistics from './Components/Home/statistics';
 import Consult from './Components/Home/consultpage';
 import Diet from './Components/Home/dietpage';
 import Customercare from './Components/Home/customercare';
+import Detailsfirst from './Components/Home/details';
 
 import { Amplify,Auth, Hub } from 'aws-amplify';
 import {withAuthenticator} from 'aws-amplify-react-native';
@@ -88,8 +89,9 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown:false}}>
         { user? <Stack.Screen name="profilescreen" component={Profile}/> : 
         ( <>
-        <Stack.Screen name="homescreen" component={Home}/>
+        <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
         <Stack.Screen name="signin" component={Signin}/>
+        <Stack.Screen name="homescreen" component={Home}/>
         <Stack.Screen name="signup" component={Signup}/>
         <Stack.Screen name="confirmemail" component={Confirmemail}/>
         <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
