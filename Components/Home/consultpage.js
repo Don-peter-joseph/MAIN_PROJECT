@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
 import {Dimensions} from 'react-native';
 import * as Linking from 'expo-linking';
+import { FileSystem } from 'expo';
 import * as webbrower from 'expo-web-browser';
 
 

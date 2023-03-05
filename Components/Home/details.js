@@ -84,7 +84,7 @@ const Detailsfirst = () => {
        <View style={styles.form1}>
       <Text style={styles.select}>Select your State or UT :</Text>
       <TouchableOpacity style={styles.box} onPress={() => {setClicked(!clicked); }}>
-        <Text style={{fontWeight:'600', color:'#810CA8+'}}>
+        <Text style={{fontWeight:'600', color:'#810CA8'}}>
           {selectedname == '' ? 'Select one' : selectedname}
         </Text>
         {clicked ? (
