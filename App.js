@@ -17,12 +17,13 @@ import Diet from './Components/Home/dietpage';
 import Customercare from './Components/Home/customercare';
 
 import { Amplify,Auth, Hub } from 'aws-amplify';
+import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import awsconfig from './src/aws-exports';
 import * as Linking from 'expo-linking';
 import { useEffect, useState } from 'react';
 
-Amplify.configure(awsconfig)
+Amplify.configure(awsconfig);
 
 const Stack = createNativeStackNavigator();
 
@@ -88,8 +89,8 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown:false}}>
         { user? <Stack.Screen name="profilescreen" component={Profile}/> : 
         ( <>
-        <Stack.Screen name="homescreen" component={Home}/>
         <Stack.Screen name="signin" component={Signin}/>
+        <Stack.Screen name="homescreen" component={Home}/>
         <Stack.Screen name="signup" component={Signup}/>
         <Stack.Screen name="confirmemail" component={Confirmemail}/>
         <Stack.Screen name="forgotpassword" component={Forgotpassword}/>

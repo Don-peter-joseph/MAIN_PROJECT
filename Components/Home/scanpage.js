@@ -8,8 +8,10 @@ import {Amplify,Storage} from 'aws-amplify';
 import awsconfig from '../../src/aws-exports';
 import {RNS3} from 'react-native-aws3';
 import { fromByteArray } from "base64-js";
+import {Predictions} from '@aws-amplify/predictions';
+// import RNFetchBlob from 'react-native-fetch-blob';
+import {Buffer} from 'buffer';
 
-Amplify.configure(awsconfig);
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -18,12 +20,10 @@ const Scanimage=({navigation,route})=>{
 
 
     const[hasCameraPermission,sethasCameraPermission]=useState(null);
-    // const [CameraPermissionInformation, requestPermission] = useCameraPermissions();
     const [takenImage, setTakenImage] = useState();
     const [type,settype]=useState(Camera.Constants.Type.back);
     const [flash,setflash]=useState(Camera.Constants.FlashMode.off);
     const cameraRef=useRef(null);
-    // const byteimage="";
 
     useEffect(()=>{
         (async()=>{
@@ -33,56 +33,10 @@ const Scanimage=({navigation,route})=>{
         })();
     },[])
 
-    //client for aws rekognition
-    const client = new RekognitionClient({
-        region: 'ap-south-1',
-        credentials: {
-          accessKeyId:'AKIAWOOMMV3GPB3EJZB5',                          //change it important
-          secretAccessKey: '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',
-        }
-    });
-
     if(hasCameraPermission===false){
         return <Text>No camera permission</Text>
     }
 
-
-
-    //converting image to base64 binary
-    
-    const detectLabels=async(sourceBytes)=>{
-      const detectLabelsCommand = new DetectLabelsCommand({
-        Image: {
-          Bytes: sourceBytes,
-        },
-        MaxLabels: 10,
-      });
-      
-      client.send(detectLabelsCommand).then((response) => {
-        console.log(response.Labels);
-      }).catch((error) => {
-        console.error(error);
-      });
-    }
-
-    // const detectLabels = async (sourceBytes) => {
-    //     // console.log(sourceBytes)
-    //     try {
-    //       const params = {
-    //         Image: {
-    //           Bytes: sourceBytes,
-    //         },
-    //         MaxLabels: 10,
-    //         MinConfidence: 70,
-    //       };         
-    //       const command = new DetectLabelsCommand(params);
-    //       const response = await client.send(command);
-    //       console.log("THIS IS response\n"+response)
-    //       console.log(response.Labels);
-    //     } catch (err) {
-    //       console.error(err);
-    //     }
-    //   };
 
       //upload image to s3 bucket
 
@@ -92,36 +46,62 @@ const Scanimage=({navigation,route})=>{
         return blob;
       }
 
-      const uploadimage=async(image)=>{
-        const img=await fetchimage(image.uri)
-        return Storage.put(`demo${Math.random()}.jpg`,img,{
-            level:'public',
-            contentType:image.type,
-            progressCallback(uploadProgress){
-              console.log('PROGRESS-- ',uploadProgress.loaded+'/'+uploadProgress.total);
-            }
-          })
-        .then((res)=>{
-          Storage.get(res.key)
-          .then((result)=>{
-            console.log("RESULT-- ",result);
-          })
-          .catch(e=>{
-            console.log(error);
-          })
-        }).catch(error=>{
-          console.log(error);
-        })
+        const base64ToArrayBuffer = (base64) => {
+        const bytes = Buffer.from(base64, 'base64');
+        const arrayBuffer = bytes.buffer;
+        return arrayBuffer;
+        };
+
+      // const uploadimage=async(image)=>{
+      //   const img=await fetchimage(image.uri)
+      //   return Storage.put(`demo${Math.random()}.jpg`,img,{
+      //       level:'public',
+      //       contentType:image.type,
+      //       progressCallback(uploadProgress){
+      //         console.log('PROGRESS-- ',uploadProgress.loaded+'/'+uploadProgress.total);
+      //       }
+      //     })
+      //   .then((res)=>{
+      //     Storage.get(res.key)
+      //     .then((result)=>{
+      //       console.log("RESULT-- ",result);
+      //     })
+      //     .catch(e=>{
+      //       console.log(error);
+      //     })
+      //   }).catch(error=>{
+      //     console.log(error);
+      //   })
+      // }
+
+    
+      const Recognize=async(file)=>{
+        Predictions.identify({
+          text: {
+              source: {
+                  file
+              }
+          }
+      })
+      .then(response => console.log({ response }))
+      .catch(err => console.log({ err }));
       }
 
       const takePicture=async()=>{
         if(cameraRef){
             try{
-                const options={quality:0.5,base64:false,skipProcessing:true};
+                const options={quality:0.5,base64:true,skipProcessing:true};
                 const data=await cameraRef.current.takePictureAsync(options);          
                 setTakenImage(data.uri);
-                // await detectLabels(data.base64);
-                uploadimage(data);
+                // uploadimage(data);
+                // const file={
+                //   uri:data.uri,
+                //   type:'image/jpeg',
+                //   name:`textrecognition${Math.random()}.jpg`
+                // }
+                const arrayBuffer = base64ToArrayBuffer(data.base64);
+                console.log(arrayBuffer.byteLength)
+                Recognize(arrayBuffer);
 
             }catch(e){
                 console.log(e);
