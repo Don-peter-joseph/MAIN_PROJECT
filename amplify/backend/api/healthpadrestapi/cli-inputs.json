@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/images": {
+      "name": "/images",
+      "lambdaFunction": "detectfaceshealthpad",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

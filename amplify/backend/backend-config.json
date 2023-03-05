@@ -1,5 +1,20 @@
 {
-  "api": {},
+  "api": {
+    "healthpadrestapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "detectfaceshealthpad",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
+  },
   "auth": {
     "HealthPad": {
       "customAuth": false,
@@ -34,7 +49,13 @@
       "service": "Cognito"
     }
   },
-  "function": {},
+  "function": {
+    "detectfaceshealthpad": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "parameters": {
     "AMPLIFY_function_foodlambda_deploymentBucketName": {
       "usedBy": [

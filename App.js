@@ -16,6 +16,8 @@ import Consult from './Components/Home/consultpage';
 import Diet from './Components/Home/dietpage';
 import Customercare from './Components/Home/customercare';
 import Detailsfirst from './Components/Home/details';
+import DetectFaces from './Components/Home/detectface';
+import DetectFaceImage from './Components/Home/detectfaceimage';
 
 import { Amplify,Auth, Hub } from 'aws-amplify';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
@@ -88,22 +90,24 @@ export default function App() {
         config
       }}>
       <Stack.Navigator screenOptions={{headerShown:false}}>
-        { user? <Stack.Screen name="profilescreen" component={Profile}/> : 
+        { user? <Stack.Screen name="homescreen" component={Home}/> : 
         ( <>
-        <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
-        <Stack.Screen name="signin" component={Signin}/>
         <Stack.Screen name="homescreen" component={Home}/>
+        <Stack.Screen name="profilescreen" component={Profile}/> 
         <Stack.Screen name="signup" component={Signup}/>
+        <Stack.Screen name="signin" component={Signin}/>
+        <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
         <Stack.Screen name="confirmemail" component={Confirmemail}/>
         <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
         <Stack.Screen name="resetpassword" component={Resetpassword}/>
-        <Stack.Screen name="profilescreen" component={Profile}/> 
         <Stack.Screen name="shopscreen" component={Shop}/>
         <Stack.Screen name="servicescreen" component={Customercare}/>
         <Stack.Screen name="consultscreen" component={Consult}/>
         <Stack.Screen name="dietscreen" component={Diet}/>
         <Stack.Screen name="statisticsscreen" component={Statistics}/>
         <Stack.Screen name="scanscreen" component={Scanimage}/>
+        <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
+        <Stack.Screen name="imagescreen" component={DetectFaceImage}/>
         </>)
     }
       </Stack.Navigator>
