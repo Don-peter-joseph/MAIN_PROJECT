@@ -1,5 +1,5 @@
 import React, { useRef,useState } from 'react';
-import { View, Text, Image, StyleSheet,  TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
 import {Dimensions} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 
 const names = [
     {name: 'Andhra Pradesh'},
@@ -53,9 +54,13 @@ const Detailsfirst = () => {
   const [data, setData] = useState(names);
   const [selectedname, setSelectedname] = useState('');
   const [textboxValue, setTextboxValue] = useState('');
+  const [addressLine1Completed, setAddressLine1Completed] = useState(false);
+  const [selected, setSelected] = useState(false);
+
 
   const handlenameChange = (name) => {
     setSelectedname(name);
+    setSelected(true);
   }
 
   const handleTextboxChange = (text) => {
@@ -116,7 +121,7 @@ const Detailsfirst = () => {
                   style={styles.items}
                   onPress={() => {
                     setSelectedname(item.name);
-                    setClicked(!clicked);
+                    setClicked(!clicked); 
                     onSearch('');
                     setSearch('');
                   }}>
@@ -130,16 +135,43 @@ const Detailsfirst = () => {
         }
         </View>  
         <View style={styles.form2}>
+        
+
         <Text style={styles.heading1}>
         Enter your details :
       </Text>
       <View style={{marginVertical: 10, marginLeft: 10,}}>
         <Text style={styles.Adress1}>Address Line 1:</Text>
         <TextInput 
-          style={styles.text1}
+           style={styles.text1}
+           onBlur={() => {
+             if (textboxValue.trim() !== '') {
+               setAddressLine1Completed(true);
+             } else {
+               setAddressLine1Completed(false);
+             }
+           }}
+        />
+      {!addressLine1Completed && (
+      <Text style={styles.error}>Please enter your address line 1</Text>)}
+      </View>
+      <View style={{marginVertical: 10, marginLeft: 10,}}>
+        <Text style={styles.Adress1}>Address Line 2:</Text>
+        <TextInput 
+           style={styles.text1}
         />
       </View>
-        </View>
+      <View style={{marginVertical: 10, marginLeft: 10,}}>
+        <Text style={styles.Adress1}>City:</Text>
+        <TextInput 
+           style={styles.text1}/>
+      </View>
+      <View style={{marginVertical: 10, marginLeft: 10,}}>
+        <Text style={styles.Adress1}>Pin Code:</Text>
+        <TextInput 
+           style={styles.text1}/>
+      </View>
+      </View>
       </View>
 
     );
@@ -153,7 +185,14 @@ const styles=StyleSheet.create({
         // borderWidth:2,
         // borderColor:'red'
     },
-    select:{fontWeight: 'bold', marginVertical: 10, marginLeft: 30,marginTop: 100, fontSize:18, color:'#810CA8'},
+    select:{
+        fontWeight: 'bold', 
+        marginVertical: 10,
+        marginLeft: 30,
+        marginTop: 100, 
+        fontSize:18, 
+        color:'#810CA8'
+      },
     box:{
             width: '90%',
             height: 50,
@@ -166,7 +205,7 @@ const styles=StyleSheet.create({
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingLeft: 15,
-            paddingRight: 15,
+            paddingRight: 15
     },
     downl:{
         elevation: 5,
@@ -176,6 +215,7 @@ const styles=StyleSheet.create({
         width: '90%',
         backgroundColor: '#fff',
         borderRadius: 10,
+        zIndex: 2, 
       },
     searchlist:{
         width: '90%',
@@ -232,5 +272,10 @@ const styles=StyleSheet.create({
         // bottom: 0,
         // left: 0,
         // right: 0,
+      },
+      error: {
+        color: 'red',
+        marginLeft: 20,
+        marginTop: 5,
       }
 })
