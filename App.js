@@ -18,6 +18,7 @@ import Customercare from './Components/Home/customercare';
 import Detailsfirst from './Components/Home/details';
 import DetectFaces from './Components/Home/detectface';
 import DetectFaceImage from './Components/Home/detectfaceimage';
+import TextRecogniser from './Components/Home/textrecognition';
 
 import { Amplify,Auth, Hub } from 'aws-amplify';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
@@ -108,6 +109,7 @@ export default function App() {
         <Stack.Screen name="scanscreen" component={Scanimage}/>
         <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
         <Stack.Screen name="imagescreen" component={DetectFaceImage}/>
+        <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
         </>)
     }
       </Stack.Navigator>

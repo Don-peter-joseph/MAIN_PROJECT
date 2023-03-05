@@ -128,7 +128,7 @@ import {Dimensions} from 'react-native';
                 </Pressable>
         </View>
         <View style={styles.face}>
-                <Pressable style={styles.Button1} onPress={()=>navigation.navigate("detectfacescreen")}>
+                <Pressable style={styles.Button1} onPress={()=>navigation.navigate("textrecognitionscreen")}>
                   <Text>Detect Packaged food</Text>
                 </Pressable>
         </View>

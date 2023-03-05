@@ -22,6 +22,10 @@
         "detectfaceshealthpad": {
           "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
           "s3Key": "amplify-builds/detectfaceshealthpad-32656145334b6d755832-build.zip"
+        },
+        "healthpadtextrecognition": {
+          "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
+          "s3Key": "amplify-builds/healthpadtextrecognition-48554a696453736d7578-build.zip"
         }
       },
       "api": {
