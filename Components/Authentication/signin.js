@@ -45,7 +45,7 @@ const Signin = ({ navigation,route}) => {
         try{
             const response=await Auth.signIn(email,password);
             console.log(response);
-            navigation.navigate("profilescreen");
+            navigation.navigate("detailsScreen");
         }
         catch(e){
             Alert.alert('Invalid Input',e.message);

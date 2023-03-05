@@ -12,7 +12,7 @@ const windowHeight = Dimensions.get('window').height;
 const Profile=({navigation,route})=>{
 
     const redirectUrl = Linking.createURL('profile');
-    console.log(redirectUrl);
+    console.log(redirectUrl);   
 
     const signOut=async()=>{
         try{
@@ -32,6 +32,9 @@ const Profile=({navigation,route})=>{
             <Pressable style={({pressed})=>[styles.signout,{width:pressed?'52%':'50%'}] } onPress={signOut}>
                 <Text>Sign out</Text>
             </Pressable>
+            <Pressable style={({pressed})=>[styles.signout,{width:pressed?'52%':'50%'}] } onPress={signOut}>
+                <Text>Update</Text>
+            </Pressable>
         </View>
     )
 }
@@ -49,7 +52,7 @@ const styles=StyleSheet.create({
     content:{
         justifyContent:'center',
         alignItems:"center"
-    }   ,
+    },
     signout:{
         borderWidth:1,
         borderColor:'black',
