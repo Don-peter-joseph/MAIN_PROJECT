@@ -84,7 +84,7 @@ const Detailsfirst = () => {
        <View style={styles.form1}>
       <Text style={styles.select}>Select your State or UT :</Text>
       <TouchableOpacity style={styles.box} onPress={() => {setClicked(!clicked); }}>
-        <Text style={{fontWeight:'600', color:'#810CA8+'}}>
+        <Text style={{fontWeight:'600', color:'#810CA8'}}>
           {selectedname == '' ? 'Select one' : selectedname}
         </Text>
         {clicked ? (
@@ -211,12 +211,11 @@ const styles=StyleSheet.create({
         elevation: 5,
         marginTop: 20,
         height: 400,  
-        
         alignSelf: 'center',    
         width: '90%',
         backgroundColor: '#fff',
         borderRadius: 10,
-        zIndex: 2, 
+        zIndex: 2,
       },
     searchlist:{
         width: '90%',
