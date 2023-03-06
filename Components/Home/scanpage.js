@@ -1,5 +1,5 @@
 import React, { useRef,useState } from 'react';
-import { View, Text, Image, StyleSheet,  TouchableOpacity, TextInput, FlatList, Pressable} from 'react-native';
+import { View, Text, Image, StyleSheet,  TouchableOpacity, TextInput, FlatList, Pressable,ImageBackground} from 'react-native';
 import {Dimensions} from 'react-native';
 
 
@@ -84,7 +84,7 @@ import {Dimensions} from 'react-native';
             {clicked ? 
             (<Image source={require('./assets/upload.png')} style={{width: 20, height: 20}}/>) 
             :
-            (<Image source={require('./assets/dropdown.png')} style={{width: 20, height: 20}}/>)}
+            (<Text style={{color:'#810CA8'}}>◢</Text>)}
           </TouchableOpacity>
           
           {clicked ? (
@@ -117,19 +117,28 @@ import {Dimensions} from 'react-native';
           ) : null}
         </View>
 
-        <View style={styles.face}>
-                <Pressable style={styles.Button1} onPress={()=>navigation.navigate("detectfacescreen")}>
-                  <Text>DetectFaces</Text>
+        <View style={styles.features}>
+                <Pressable onPress={()=>navigation.navigate("detectfacescreen")} 
+                style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
+                  <ImageBackground source={require('./assets/detectface.png')} style={styles.image} imageStyle={{ borderRadius: 30 }} >
+                      <Text style={styles.label}>Detect Faces</Text>
+                  </ImageBackground>
                 </Pressable>
         </View>
-        <View style={styles.face}>
-                <Pressable style={styles.Button1} onPress={()=>navigation.navigate("detectfacescreen")}>
-                  <Text>Detect Food</Text>
+        <View style={styles.features}>
+                <Pressable onPress={()=>navigation.navigate("fooddetectionscreen")}
+                style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
+                  <ImageBackground source={require('./assets/detectfood.png')} style={styles.image} imageStyle={{ borderRadius: 20 }} >
+                      <Text style={styles.label}>Detect Food</Text>
+                  </ImageBackground>
                 </Pressable>
         </View>
-        <View style={styles.face}>
-                <Pressable style={styles.Button1} onPress={()=>navigation.navigate("textrecognitionscreen")}>
-                  <Text>Detect Packaged food</Text>
+        <View style={styles.features}>
+                <Pressable onPress={()=>navigation.navigate("textrecognitionscreen")}
+                style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
+                  <ImageBackground source={require('./assets/detecttext.png')} style={styles.image} imageStyle={{ borderRadius: 20 }} >
+                      <Text style={styles.label}>Detect Text</Text>
+                  </ImageBackground>
                 </Pressable>
         </View>
 
@@ -141,13 +150,16 @@ export default Scanimage;
 const styles=StyleSheet.create({
   outline:{
     flex:1,
-    borderWidth:2,
-    borderColor:'red'
+    // borderWidth:2,
+    // borderColor:'red',
+    // backgroundColor:'black'
   },
   dropdown:{
-    borderWidth:2,
-    borderColor:'black',
-    flex:2,
+    // borderWidth:2,
+    // borderColor:'yellow',
+    justifyContent:'center',
+    alignItems:'center',
+    flex:1,
   },
   first:{
     width: '90%',
@@ -166,21 +178,19 @@ const styles=StyleSheet.create({
   },
   heading:{
     fontWeight: 'bold',
-    marginVertical: 10,
-    marginLeft: 30,
-    marginTop: 180,
     fontSize:18,  
-    color:'#810CA8'
+    color:'#810CA8',
   },
   second:{
-    elevation: 5,
-    marginTop: 20,
-    height: 300,
+    position:'absolute',
+    // elevation: 5,
+    // marginTop: 20,
+    height: 200,
     alignSelf: 'center',
     width: '90%',
     backgroundColor: '#fff',
     borderRadius: 10,
-    zIndex: 2,
+    // zIndex: 999,
 
   },
   input:{
@@ -194,24 +204,46 @@ const styles=StyleSheet.create({
     paddingLeft: 20,
   },
   third:{
+    // position:'absolute',
     width: '85%',
     alignSelf: 'center',
     height: 50,
     justifyContent: 'center',
     borderBottomWidth: 0.5,
     borderColor: '#8e8e8e',
+    zIndex:4
   },
-  face:{
+  features:{
     flex:1,
-    borderWidth:2,
-    borderColor:'blue',
+    // borderWidth:2,
+    // borderColor:'blue',
     justifyContent:'center',
     alignItems:'center'
   },
   Button1:{
-    borderWidth:4,
-    borderColor:'green',
-    borderRadius:10,
-    padding:20
-  }
+    borderWidth:1,
+    borderColor:'black',
+    width:'93%',
+    height:'90%',
+    borderRadius:30,
+    zIndex:0
+  },
+  Button1pressed:{
+    width:'95%',
+    height:'92%',
+    borderRadius:30
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // borderWidth:2,
+    // borderColor:'white'
+},
+label:{
+  color:'white',
+  fontSize:25
+}
 })
