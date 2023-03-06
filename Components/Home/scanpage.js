@@ -47,7 +47,7 @@
     {name: 'Watermelon'}
   ];
 
-  const App = () => {
+  const ScanPage = () => {
     const [search, setSearch] = useState('');
     const [clicked, setClicked] = useState(false);
     const [data, setData] = useState(names);
@@ -165,4 +165,4 @@
       </View>
     );
   };
-export default App;
+export default ScanPage;
