@@ -210,7 +210,8 @@ const styles=StyleSheet.create({
     downl:{
         elevation: 5,
         marginTop: 20,
-        height: 400,
+        height: 400,  
+        
         alignSelf: 'center',    
         width: '90%',
         backgroundColor: '#fff',
