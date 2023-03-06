@@ -205,7 +205,8 @@ const styles=StyleSheet.create({
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingLeft: 15,
-            paddingRight: 15
+            paddingRight: 15,
+            // zIndex:2,
     },
     downl:{
         elevation: 5,
@@ -215,7 +216,7 @@ const styles=StyleSheet.create({
         width: '90%',
         backgroundColor: '#fff',
         borderRadius: 10,
-        zIndex: 2,
+        zIndex: 2
       },
     searchlist:{
         width: '90%',
@@ -236,7 +237,7 @@ const styles=StyleSheet.create({
         borderColor: '#8e8e8e',
       },
       form1:{
-        flex:1,
+        flex:1
         // borderWidth:2,
         // borderColor:'black'
       },
