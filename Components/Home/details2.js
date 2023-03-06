@@ -48,7 +48,7 @@ const names = [
     {name: 'Ladakh'}
   ];
 
-const Detailsfirst = ({navigation,route}) => {
+const Detailssecond = () => {
   const [search, setSearch] = useState('');
   const [clicked, setClicked] = useState(false);
   const [data, setData] = useState(names);
@@ -82,7 +82,7 @@ const Detailsfirst = ({navigation,route}) => {
     
     <View style={styles.outline}>
        <View style={styles.form1}>
-              <Text style={styles.select}>Select your State or UT :</Text>
+              <Text style={styles.select}>Personal Details:</Text>
               <TouchableOpacity style={styles.box} onPress={() => {setClicked(!clicked); }}>
                 <Text style={{fontWeight:'600', color:'#810CA8'}}>
                   {selectedname == '' ? 'Select one' : selectedname}
@@ -173,7 +173,7 @@ const Detailsfirst = ({navigation,route}) => {
           </View>
         </View>
         <View style={{flex:.5,justifyContent:'center',alignItems:'center'}}>
-          <Pressable style={styles.button} onPress={()=>navigation.navigate("details2screen")}>
+          <Pressable style={styles.button}>
               <Text>Next</Text>
           </Pressable>
         </View>
@@ -182,7 +182,7 @@ const Detailsfirst = ({navigation,route}) => {
     );
   };
 
-export default Detailsfirst;
+export default Detailssecond;
 
 const styles=StyleSheet.create({
     outline:{
@@ -210,15 +210,14 @@ const styles=StyleSheet.create({
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingLeft: 15,
-            paddingRight: 15,
-            // zIndex:2,
+            paddingRight: 15
     },
     downl:{
         elevation: 5,
         marginTop: 20,
-        height: 400,  
+        height: 400,
         alignSelf: 'center',    
-        borderWidth:1,
+        borderWidth:2,
         borderColor:'black',
         width: '90%',
         backgroundColor: '#ffffff',
@@ -247,14 +246,15 @@ const styles=StyleSheet.create({
       form1:{
         flex:1,
         zIndex:2,
+  
 
         // borderWidth:2,
         // borderColor:'black'
       },
       form2:{
         flex:3,
-        // borderWidth:2,
-        // borderColor:'red',
+        borderWidth:2,
+        borderColor:'red',
         pointerEvents: 'none'
         // borderWidth:2,
         // borderColor:"green"

@@ -162,6 +162,7 @@ const styles=StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
+    
   },
   heading:{
     fontWeight: 'bold',
@@ -179,6 +180,8 @@ const styles=StyleSheet.create({
     width: '90%',
     backgroundColor: '#fff',
     borderRadius: 10,
+    zIndex: 2,
+
   },
   input:{
     width: '90%',

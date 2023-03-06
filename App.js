@@ -19,6 +19,7 @@ import Detailsfirst from './Components/Home/details';
 import DetectFaces from './Components/Home/detectface';
 import DetectFaceImage from './Components/Home/detectfaceimage';
 import TextRecogniser from './Components/Home/textrecognition';
+import Detailssecond from './Components/Home/details2';
 
 import { Amplify,Auth, Hub } from 'aws-amplify';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
@@ -110,6 +111,7 @@ export default function App() {
         <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
         <Stack.Screen name="imagescreen" component={DetectFaceImage}/>
         <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
+        <Stack.Screen name="details2screen" component={Detailssecond}/>
         </>)
     }
       </Stack.Navigator>
