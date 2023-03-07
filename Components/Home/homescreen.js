@@ -72,7 +72,7 @@ const Home=({navigation,route})=>{
                 <View style={styles.logo}>
                    <Image style={[styles.inputlogo]} source={require('./assets/adaptiveicon.png')}/>
                 </View>
-                <Pressable style={styles.profile}>
+                <Pressable style={styles.profile} onPress={()=>navigation.navigate("profilescreen")}>
                     <Image style={{width:50,height:50,borderRadius:30}} source={require('./assets/scan.jpg')}/>
                 </Pressable>
             </View>

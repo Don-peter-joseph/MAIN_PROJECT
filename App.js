@@ -17,7 +17,6 @@ import Diet from './Components/Home/dietpage';
 import Customercare from './Components/Home/customercare';
 import Detailsfirst from './Components/Home/details';
 import DetectFaces from './Components/Home/detectface';
-import DetectFaceImage from './Components/Home/detectfaceimage';
 import TextRecogniser from './Components/Home/textrecognition';
 import Detailssecond from './Components/Home/details2';
 import FoodDetector from './Components/Home/fooddetection';
@@ -93,13 +92,16 @@ export default function App() {
         config
       }}>
       <Stack.Navigator screenOptions={{headerShown:false}}>
-        { user? <Stack.Screen name="homescreen" component={Home}/> : 
+        { user? 
+        // <Stack.Screen name="homescreen" component={Home}
+        <Stack.Screen name="profilescreen" component={Profile}/> 
+         : 
         ( <>
         <Stack.Screen name="homescreen" component={Home}/>
+        <Stack.Screen name="signin" component={Signin}/>
         <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
         <Stack.Screen name="profilescreen" component={Profile}/> 
         <Stack.Screen name="signup" component={Signup}/>
-        <Stack.Screen name="signin" component={Signin}/>
         <Stack.Screen name="confirmemail" component={Confirmemail}/>
         <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
         <Stack.Screen name="resetpassword" component={Resetpassword}/>
@@ -110,7 +112,6 @@ export default function App() {
         <Stack.Screen name="statisticsscreen" component={Statistics}/>
         <Stack.Screen name="scanscreen" component={Scanimage}/>
         <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
-        <Stack.Screen name="imagescreen" component={DetectFaceImage}/>
         <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
         <Stack.Screen name="details2screen" component={Detailssecond}/>
         <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
