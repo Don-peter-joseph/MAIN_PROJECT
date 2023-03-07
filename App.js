@@ -20,6 +20,7 @@ import DetectFaces from './Components/Home/detectface';
 import DetectFaceImage from './Components/Home/detectfaceimage';
 import TextRecogniser from './Components/Home/textrecognition';
 import Detailssecond from './Components/Home/details2';
+import FoodDetector from './Components/Home/fooddetection';
 
 import { Amplify,Auth, Hub } from 'aws-amplify';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
@@ -94,8 +95,8 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown:false}}>
         { user? <Stack.Screen name="homescreen" component={Home}/> : 
         ( <>
-        <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
         <Stack.Screen name="homescreen" component={Home}/>
+        <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
         <Stack.Screen name="profilescreen" component={Profile}/> 
         <Stack.Screen name="signup" component={Signup}/>
         <Stack.Screen name="signin" component={Signin}/>
@@ -112,6 +113,7 @@ export default function App() {
         <Stack.Screen name="imagescreen" component={DetectFaceImage}/>
         <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
         <Stack.Screen name="details2screen" component={Detailssecond}/>
+        <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
         </>)
     }
       </Stack.Navigator>

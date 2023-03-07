@@ -26,6 +26,10 @@
         "healthpadtextrecognition": {
           "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
           "s3Key": "amplify-builds/healthpadtextrecognition-48554a696453736d7578-build.zip"
+        },
+        "healthpadfooddetectionlambda": {
+          "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
+          "s3Key": "amplify-builds/healthpadfooddetectionlambda-31616a666e4c47577a61-build.zip"
         }
       },
       "api": {
