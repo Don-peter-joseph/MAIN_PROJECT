@@ -8,9 +8,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import {launchCameraAsync} from 'expo-image-picker';
 
 
-const DetectFaces = ({navigation,route}) => {
+const FoodDetector = ({navigation,route}) => {
   let imgname='';  
-  const [text,settext]=useState("No response")
+  const [text,settext]=useState("No Response")
   const[hasCameraPermission,sethasCameraPermission]=useState(null);
   const [takenImage, setTakenImage] = useState();
   const [type,settype]=useState(Camera.Constants.Type.back);
@@ -23,7 +23,6 @@ const DetectFaces = ({navigation,route}) => {
           const camerastatus=await Camera.requestCameraPermissionsAsync();
           sethasCameraPermission(camerastatus.status==='granted');
       })();
-
       takePicture();
   },[])
 
@@ -64,7 +63,7 @@ const DetectFaces = ({navigation,route}) => {
 
     const invokeLambda=async(imgname)=> {
         try {
-            const response = await API.post('healthpadrestapi', '/images', {
+            const response = await API.post('healthpadrestapi', '/healthpadfooddetectionlambda-staging', {
             body: {
                 imgname
             }
@@ -107,12 +106,12 @@ return(
       <View style={styles.outline}>
           {!takenImage?
           <>
-              <View >
+            <View style={styles.loadingscreen}>
                 <Text style={{fontSize:30,color:'black'}}>Loading...</Text>
-              <Pressable onPress={takePicture}>
+              <Pressable style={styles.imagebutton} onPress={takePicture}>
                 <Text>Taking too long? Capture another image</Text>
               </Pressable>
-              </View>
+            </View>
           </>
           :
           <>
@@ -129,7 +128,7 @@ return(
   )
 }
 
-export default DetectFaces;
+export default FoodDetector;
 
 const styles=StyleSheet.create({
   outline:{
@@ -178,24 +177,5 @@ const styles=StyleSheet.create({
     borderColor:'blue',
     width:'100%',
     flex:1,
-  },
-  loadingscreen:{
-    flex:1,
-    backgroundColor:'#f0f0f0',
-    width:'100%',
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  imagebutton:{
-    marginTop:300,
-    borderWidth:1,
-    borderColor:'black',
-    borderRadius:10,
-    height:50,
-    justifyContent:'center',
-    alignItems:'center',
-    paddingLeft:10,
-    paddingRight:10,
-    backgroundColor:"#D5D5EF"
   }
 })

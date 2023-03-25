@@ -5,10 +5,12 @@ import * as MediaLibrary from 'expo-media-library';
 import { useEffect, useRef, useState } from "react";
 import { API } from 'aws-amplify';
 import { ScrollView } from 'react-native-gesture-handler';
+import {launchCameraAsync} from 'expo-image-picker';
+
 
 const TextRecogniser = ({navigation,route}) => {
   let imgname='';  
-  const [text,settext]=useState("Take Picture")
+  const [text,settext]=useState("No Response")
   const[hasCameraPermission,sethasCameraPermission]=useState(null);
   const [takenImage, setTakenImage] = useState();
   const [type,settype]=useState(Camera.Constants.Type.back);
@@ -21,6 +23,7 @@ const TextRecogniser = ({navigation,route}) => {
           const camerastatus=await Camera.requestCameraPermissionsAsync();
           sethasCameraPermission(camerastatus.status==='granted');
       })();
+      takePicture();
   },[])
 
   if(hasCameraPermission===false){
@@ -75,9 +78,13 @@ const TextRecogniser = ({navigation,route}) => {
   const takePicture=async()=>{
     if(cameraRef){
         try{
-            const options={quality:0.5,base64:true,skipProcessing:true};
-            const data=await cameraRef.current.takePictureAsync(options);   
-            console.log(data.base64);       
+            // const options={quality:0.5,base64:true,skipProcessing:true};
+            // const data=await cameraRef.current.takePictureAsync(options);   
+            // console.log(data.base64);       
+            const data=await launchCameraAsync({
+                allowsEditing:true,
+                quality:0.5,
+             });
             await uploadimage(data);
             console.log(imgname);
             imgname="public/"+imgname;
@@ -99,22 +106,16 @@ return(
       <View style={styles.outline}>
           {!takenImage?
           <>
-          <Text>Text Recognition</Text>
-              <Camera 
-              style={styles.camera}
-              type={type}
-              flashMode={flash}
-              ref={cameraRef}
-              
-              >
-              </Camera>
-              <Pressable style={styles.button} onPress={takePicture}>
-              <Text>{text}</Text>
+            <View style={styles.loadingscreen}>
+                <Text style={{fontSize:30,color:'black'}}>Loading...</Text>
+              <Pressable style={styles.imagebutton} onPress={takePicture}>
+                <Text>Taking too long? Capture another image</Text>
               </Pressable>
+            </View>
           </>
           :
           <>
-              <Button title='Open cam' onPress={()=>setTakenImage('')}></Button>
+              <Button title='Open cam' onPress={takePicture}></Button>
               <Image source={{uri:takenImage}} style={styles.camera}/>
               <ScrollView style={styles.textarea}>
                 <Text style={{borderWidth:2,borderColor:'red',flex:1,}}>{text}</Text>

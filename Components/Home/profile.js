@@ -1,6 +1,7 @@
 import { Auth } from "aws-amplify";
+import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert,ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
 
 
@@ -9,6 +10,12 @@ const windowHeight = Dimensions.get('window').height;
 
 const Profile = ({navigation,route}) => {
     
+    const [flag,setflag]=useState("");
+    let fullname="Don Peter Joseph";
+    let Phoneno="8495834950";
+    let Age="21";
+    let emailid="peterdon484@gmail.com"
+
     const SignOut=async()=>{
         try{
             await Auth.signOut();
@@ -20,32 +27,206 @@ const Profile = ({navigation,route}) => {
     
 
     return (
-        <View style={styles.outline}>
+        <ImageBackground source={require('./assets/profilescreen.png')}  style={{flex:1}}>
+            <View style={styles.outline}>
+                {!flag?
+                <>
+                    <View style={styles.profileimage}>
+                            <Text>Here comes profile image</Text>
+                    </View>
+                    <View style={styles.content}>
+                        <View style={styles.userdetails}>
+                        <Text style={styles.label}>Full Name</Text>
+                            <Text style={styles.item}>{fullname}</Text>
+                        <Text style={styles.label}>Email Id</Text>
+                            <Text style={styles.item}>{emailid}</Text>
+                        <Text style={styles.label}>Phone no</Text>
+                            <Text style={styles.item}>{Phoneno}</Text>
+                        <Text style={styles.label}>Age</Text>
+                            <Text style={styles.item}>{Age}</Text>
+                        </View>
+                        <View style={styles.contentfooter}>
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            onPress={()=>setflag("1")}>
+                                    <Text style={{fontSize:15,color:'#000000'}}>Expand Profile</Text>
+                            </Pressable>
 
-                <Pressable style={({pressed})=>[styles.login,{backgroundColor:pressed?'#6A8AFF':'#8A8AFF',width:pressed?'72%':'70%'}]}
-                onPress={SignOut}>
-                        <Text style={{fontSize:20,color:'white'}}>SignOut</Text>
-                </Pressable>
-        </View>
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            onPress={SignOut}>
+                                    <Text style={{fontSize:15,color:'#000000'}}>SignOut</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </>
+                :
+                <>
+                  <StatusBar hidden={true}/>
+                    <ScrollView style={{width:'100%'}} contentContainerStyle={{justifyContent:'center',alignItems:'center'}}>
+                        <View style={styles.expandedprofileimage}>
+                                <Text>Here comes profile image</Text>
+                        </View>
+                        <View style={styles.expandedcontent}>
+                            <Text style={styles.label}>Full Name</Text>
+                            <Text style={styles.item}>{fullname}</Text>
+                            <Text style={styles.label}>Email Id</Text>
+                            <Text style={styles.item}>{emailid}</Text>
+                            <Text style={styles.label}>Phone no</Text>
+                            <Text style={styles.item}>{Phoneno}</Text>
+                            <Text style={styles.label}>Age</Text>
+                            <Text style={styles.item}>{Age}</Text>
+                            <Text style={styles.label}>Gender</Text>
+                            <Text style={styles.item}>Male</Text>
+                            <Text style={styles.label}>Address</Text>
+                            <Text style={styles.item}>fasdfsodvjasidvfasjdfj</Text>
+                            <Text style={styles.label}>Type</Text>
+                            <Text style={styles.item}>Non Veg</Text>
+                            <Text style={styles.label}>Diabetic</Text>
+                            <Text style={styles.item}>No</Text>
+                            <Text style={styles.label}>Height</Text>
+                            <Text style={styles.item}>181</Text>
+                            <Text style={styles.label}>Weight</Text>
+                            <Text style={styles.item}>78</Text>
+                            <Text style={styles.label}>BMI</Text>
+                            <Text style={styles.item}>24.5</Text>
+                        </View>
+                        <View style={styles.expandedcontentfooter}>
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            >
+                                    <Text style={{fontSize:15,color:'#000000'}}>Edit Profile</Text>
+                            </Pressable>
+
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            onPress={()=>setflag("")}>
+                                    <Text style={{fontSize:15,color:'#000000'}}>Minimize Profile</Text>
+                            </Pressable>
+
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            onPress={SignOut}>
+                                    <Text style={{fontSize:15,color:'#000000'}}>SignOut</Text>
+                            </Pressable>
+                        </View>
+                    </ScrollView>
+                </>
+                }
+            </View>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     outline: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         backgroundColor:' #f5f5f5',
         position:'absolute',
         width:windowWidth,
         height:windowHeight,
+        
     },
-    login:{
-        borderRadius:25,
-        height:'8%',
+    button:{
+        borderRadius:10,
+        height:50,
         justifyContent:'center',
         alignItems:'center',
-        marginTop:13
+        marginTop:13,
+        flex:1,
+        marginLeft:5,
+        marginRight:5,
+        borderWidth:1,
+        borderColor:"#000000",
+
+    },
+    profileimage:{
+        position:"absolute",
+        top:'22%',
+        borderWidth:2,
+        borderColor:'black',
+        width:200,
+        height:200,
+        borderRadius:30,
+        backgroundColor:'#f0f0f0',
+        zIndex:2,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    content:{
+        height:'50%',
+        width:'90%',
+        borderWidth:2,
+        borderColor:'#FFBA2A',
+        borderRadius:30,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'#FFFFF0',
+        marginBottom:20
+    },
+    userdetails:{
+        width:'100%',
+        height:"80%",
+        // borderWidth:2,
+        // borderColor:'red',
+        paddingLeft:10,
+        paddingRight:10,
+    },
+    label:{
+        height:25,
+        width:'100%',
+        color:"grey",
+        marginTop:10,
+        // borderWidth:2,
+        // borderColor:'black'
+        // marginBottom:10
+    },
+    item:{
+        height:40,
+        width:'100%',
+        backgroundColor:'#FAF9F6',
+        paddingTop:7,
+        paddingLeft:10,
+        fontSize:15,
+        marginTop:5
+    },
+    contentfooter:{
+        // borderWidth:2,
+        // borderColor:'red',
+        width:'96%',
+        flexDirection:'row',
+        paddingBottom:10
+    },
+    expandedcontentfooter:{
+        // borderWidth:2,
+        height:100,
+        // borderColor:'red',
+        width:'96%',
+        flexDirection:'row',
+        paddingBottom:10
+    },
+    expandedcontent:{
+        borderWidth:2,
+        borderColor:'#FFBA2A',
+        width:"95%",
+        marginTop:10,
+        backgroundColor:'#FFFFF0',
+        borderRadius:30,
+        paddingLeft:10,
+        paddingTop:10   ,
+        paddingBottom:20,
+        paddingRight:10    
+    },
+    expandedprofileimage:{
+        // position:"absolute",
+        // top:'22%',
+        borderWidth:2,
+        borderColor:'black',
+        width:200,
+        height:200,
+        borderRadius:30,
+        backgroundColor:'#f0f0f0',
+        zIndex:2,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:10
     },
 
 });
