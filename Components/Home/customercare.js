@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Aler
 import {Dimensions} from 'react-native';
 import * as Linking from 'expo-linking';
 import * as webbrower from 'expo-web-browser';
+import Lottie from 'lottie-react-native';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -14,7 +15,8 @@ const Customercare=({navigation,route})=>{
     return(
         <View style={styles.outline}>
             <View style={styles.content}>
-                <Text>This is customercare screen</Text>
+                <Text >This is customercare screen hi</Text>
+                <Lottie style={styles.animation} source={require('../animatedscreen/loading.json')} autoPlay loop />
             </View>
         </View>
     )
@@ -28,9 +30,11 @@ const styles=StyleSheet.create({
         height:windowHeight,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor:' #f5f5f5'
+        backgroundColor:'#ffffff'
     },
     content:{
+        flex:1,
+        width:'100%',
         justifyContent:'center',
         alignItems:"center"
     }   ,
@@ -44,6 +48,11 @@ const styles=StyleSheet.create({
         alignItems:'center',
         marginTop:13,
         width:'50%'
+    },
+    animation:{
+        borderWidth:2,
+        borderColor:'black',
+        height:500,
     }
 })
 

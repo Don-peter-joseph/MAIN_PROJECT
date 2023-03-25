@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { API } from 'aws-amplify';
 import { ScrollView } from 'react-native-gesture-handler';
 import {launchCameraAsync} from 'expo-image-picker';
+import Lottie from 'lottie-react-native';
 
 
 const TextRecogniser = ({navigation,route}) => {
@@ -76,6 +77,7 @@ const TextRecogniser = ({navigation,route}) => {
     }
 
   const takePicture=async()=>{
+    setTakenImage();
     if(cameraRef){
         try{
             // const options={quality:0.5,base64:true,skipProcessing:true};
@@ -106,8 +108,8 @@ return(
       <View style={styles.outline}>
           {!takenImage?
           <>
-            <View style={styles.loadingscreen}>
-                <Text style={{fontSize:30,color:'black'}}>Loading...</Text>
+            <View style={styles.content}>
+               <Lottie style={styles.animation} source={require('../animatedscreen/loading.json')} autoPlay loop />
               <Pressable style={styles.imagebutton} onPress={takePicture}>
                 <Text>Taking too long? Capture another image</Text>
               </Pressable>
@@ -138,14 +140,16 @@ const styles=StyleSheet.create({
       height:1000,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor:' #f5f5f5',
+      backgroundColor:'#ffffff',
       // borderWidth:2,
       // borderColor:'red'
   },
   content:{
-      justifyContent:'center',
-      alignItems:"center"
-  }   ,
+    flex:1,
+    width:'100%',
+    justifyContent:'center',
+    alignItems:"center"
+}   ,
   signout:{
       borderWidth:1,
       borderColor:'black',
@@ -177,5 +181,11 @@ const styles=StyleSheet.create({
     borderColor:'blue',
     width:'100%',
     flex:1,
-  }
+  },
+  animation:{
+    // borderWidth:2,
+    // borderColor:'black',
+    height:500,
+    marginBottom:100
+},
 })
