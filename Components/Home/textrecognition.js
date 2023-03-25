@@ -109,7 +109,7 @@ return(
           {!takenImage?
           <>
             <View style={styles.content}>
-               <Lottie style={styles.animation} source={require('../animatedscreen/loading.json')} autoPlay loop />
+               <Lottie style={styles.animation} source={require('../animatedscreen/loading.json')} autoPlay loop speed={0.8} />
               <Pressable style={styles.imagebutton} onPress={takePicture}>
                 <Text>Taking too long? Capture another image</Text>
               </Pressable>

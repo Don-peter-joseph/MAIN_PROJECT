@@ -16,7 +16,7 @@ const Customercare=({navigation,route})=>{
         <View style={styles.outline}>
             <View style={styles.content}>
                 <Text >This is customercare screen hi</Text>
-                <Lottie style={styles.animation} source={require('../animatedscreen/loading.json')} autoPlay loop />
+                <Lottie style={styles.animation} source={require('../animatedscreen/loading.json')} autoPlay loop speed={0.8} />
             </View>
         </View>
     )
