@@ -21,17 +21,6 @@ const Detailsthird = ({navigation,route}) => {
   const [diabetesCount, setDiabetesCount] = useState(0);
   const [hbpCount, setHbpCount] = useState(0);
   const [obesityCount, setObesityCount] = useState(0);    
-  // add more state variables for each disease as needed
-  
-  // const handleDiseaseSelect = (id) => {
-  //   setSelectedDiseases((prevSelectedDiseases) => {
-  //     if (prevSelectedDiseases.includes(id)) {
-  //       return prevSelectedDiseases.filter((d) => d !== id);
-  //     } else {
-  //       return [...prevSelectedDiseases, id];
-  //     }
-  //   });
-  // };
 
   const handleDiseaseSelect = (id) => {
     setSelectedDiseases((prevSelectedDiseases) => {

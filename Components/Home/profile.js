@@ -11,18 +11,18 @@ const windowHeight = Dimensions.get('window').height;
 const Profile = ({navigation,route}) => {
     
     const [flag,setflag]=useState("");
-    let fullname="Don Peter Joseph";
-    let Phoneno="8495834950";
-    let Age="21";
-    let emailid="peterdon484@gmail.com"
+    const {user} =route.params;
+    // console.log(user.Item.city)
 
     const SignOut=async()=>{
         try{
             await Auth.signOut();
+            navigation.navigate("signin");
         }
         catch(e){
             Alert.alert(e.message);
         }
+    // console.log("singout out")
     }
     
 
@@ -37,13 +37,13 @@ const Profile = ({navigation,route}) => {
                     <View style={styles.content}>
                         <View style={styles.userdetails}>
                         <Text style={styles.label}>Full Name</Text>
-                            <Text style={styles.item}>{fullname}</Text>
+                            <Text style={styles.item}>{user.Item.name}</Text>
                         <Text style={styles.label}>Email Id</Text>
-                            <Text style={styles.item}>{emailid}</Text>
+                            <Text style={styles.item}>{user.Item.email}</Text>
                         <Text style={styles.label}>Phone no</Text>
-                            <Text style={styles.item}>{Phoneno}</Text>
+                            <Text style={styles.item}>{user.Item.phoneno}</Text>
                         <Text style={styles.label}>Age</Text>
-                            <Text style={styles.item}>{Age}</Text>
+                            <Text style={styles.item}>{user.Item.age}</Text>
                         </View>
                         <View style={styles.contentfooter}>
                             <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
@@ -67,40 +67,46 @@ const Profile = ({navigation,route}) => {
                         </View>
                         <View style={styles.expandedcontent}>
                             <Text style={styles.label}>Full Name</Text>
-                            <Text style={styles.item}>{fullname}</Text>
+                            <Text style={styles.item}>{user.Item.name}</Text>
                             <Text style={styles.label}>Email Id</Text>
-                            <Text style={styles.item}>{emailid}</Text>
+                            <Text style={styles.item}>{user.Item.email}</Text>
                             <Text style={styles.label}>Phone no</Text>
-                            <Text style={styles.item}>{Phoneno}</Text>
+                            <Text style={styles.item}>{user.Item.phoneno}</Text>
                             <Text style={styles.label}>Age</Text>
-                            <Text style={styles.item}>{Age}</Text>
+                            <Text style={styles.item}>{user.Item.age}</Text>
                             <Text style={styles.label}>Gender</Text>
-                            <Text style={styles.item}>Male</Text>
+                            <Text style={styles.item}>{user.Item.selectedSex}</Text>
                             <Text style={styles.label}>Address</Text>
-                            <Text style={styles.item}>fasdfsodvjasidvfasjdfj</Text>
+                            <Text style={styles.item}>{user.Item.address}</Text>
                             <Text style={styles.label}>Type</Text>
-                            <Text style={styles.item}>Non Veg</Text>
+                            <Text style={styles.item}></Text>
                             <Text style={styles.label}>Diabetic</Text>
-                            <Text style={styles.item}>No</Text>
+                            <Text style={styles.item}></Text>
                             <Text style={styles.label}>Height</Text>
-                            <Text style={styles.item}>181</Text>
+                            <Text style={styles.item}>{user.Item.height}</Text>
                             <Text style={styles.label}>Weight</Text>
-                            <Text style={styles.item}>78</Text>
+                            <Text style={styles.item}>{user.Item.weight}</Text>
                             <Text style={styles.label}>BMI</Text>
-                            <Text style={styles.item}>24.5</Text>
+                            <Text style={styles.item}>{user.Item.bmi}</Text>
+                            <Text style={styles.label}>City</Text>
+                            <Text style={styles.item}>{user.Item.city}</Text>
+                            <Text style={styles.label}>State</Text>
+                            <Text style={styles.item}>{user.Item.state}</Text>
+                            <Text style={styles.label}>Zip code</Text>
+                            <Text style={styles.item}>{user.Item.pincode}</Text>
                         </View>
                         <View style={styles.expandedcontentfooter}>
-                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
-                            >
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            onPress={()=>navigation.navigate("detailsScreen",{user})}>
                                     <Text style={{fontSize:15,color:'#000000'}}>Edit Profile</Text>
                             </Pressable>
 
-                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFBA2A',width:pressed?'72%':'70%'}]}
                             onPress={()=>setflag("")}>
-                                    <Text style={{fontSize:15,color:'#000000'}}>Minimize Profile</Text>
+                                    <Text style={{fontSize:15,color:'#000000',textAlign:'center'}}>Minimize Profile</Text>
                             </Pressable>
 
-                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFBA2A',width:pressed?'72%':'70%'}]}
                             onPress={SignOut}>
                                     <Text style={{fontSize:15,color:'#000000'}}>SignOut</Text>
                             </Pressable>
@@ -141,7 +147,7 @@ const styles = StyleSheet.create({
         position:"absolute",
         top:'22%',
         borderWidth:2,
-        borderColor:'black',
+        borderColor:'#AB46D2',
         width:200,
         height:200,
         borderRadius:30,
@@ -154,7 +160,7 @@ const styles = StyleSheet.create({
         height:'50%',
         width:'90%',
         borderWidth:2,
-        borderColor:'#FFBA2A',
+        borderColor:'#AB46D2',
         borderRadius:30,
         alignItems:'center',
         justifyContent:'center',
@@ -204,7 +210,7 @@ const styles = StyleSheet.create({
     },
     expandedcontent:{
         borderWidth:2,
-        borderColor:'#FFBA2A',
+        borderColor:'#AB46D2',
         width:"95%",
         marginTop:10,
         backgroundColor:'#FFFFF0',
@@ -218,7 +224,7 @@ const styles = StyleSheet.create({
         // position:"absolute",
         // top:'22%',
         borderWidth:2,
-        borderColor:'black',
+        borderColor:'#AB46D2',
         width:200,
         height:200,
         borderRadius:30,

@@ -37,11 +37,25 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "healthpaddynamodbTriggerd96984dd": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     },
     "storage": {
         "foodlabels": {
             "BucketName": "string",
+            "Region": "string"
+        },
+        "healthpaddynamodb": {
+            "Name": "string",
+            "Arn": "string",
+            "StreamArn": "string",
+            "PartitionKeyName": "string",
+            "PartitionKeyType": "string",
             "Region": "string"
         }
     }

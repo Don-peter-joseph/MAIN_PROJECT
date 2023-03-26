@@ -16,7 +16,8 @@
         "HealthPad": {}
       },
       "storage": {
-        "foodlabels": {}
+        "foodlabels": {},
+        "healthpaddynamodb": {}
       },
       "function": {
         "detectfaceshealthpad": {
@@ -30,6 +31,10 @@
         "healthpadfooddetectionlambda": {
           "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
           "s3Key": "amplify-builds/healthpadfooddetectionlambda-31616a666e4c47577a61-build.zip"
+        },
+        "healthpaddynamodbTriggerd96984dd": {
+          "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
+          "s3Key": "amplify-builds/healthpaddynamodbTriggerd96984dd-552b304b6b545342526a-build.zip"
         }
       },
       "api": {

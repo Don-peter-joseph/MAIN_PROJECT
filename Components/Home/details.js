@@ -2,7 +2,7 @@ import React, { useRef,useState } from 'react';
 import { View, Text, Image, StyleSheet, Pressable, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
 import {Dimensions} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-
+import { Auth } from 'aws-amplify';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -52,9 +52,9 @@ const Detailsfirst = ({navigation,route}) => {
   const [search, setSearch] = useState('');
   const [clicked, setClicked] = useState(false);
   const [data, setData] = useState(names);
-  const [selectedname, setSelectedname] = useState('');
   const [textboxValue, setTextboxValue] = useState('');
   const [selected, setSelected] = useState(false);
+  const [selectedname, setSelectedname] = useState('');
   const [textInputValueAddress, setTextInputValueAddress] = useState('');
   const [textInputValueCity, setTextInputValueCity] = useState('');
   const [textInputValuePin, setTextInputValuePin] = useState('');
@@ -63,7 +63,6 @@ const Detailsfirst = ({navigation,route}) => {
   const [error2, setErrorCity] = useState('')
   const [error3, setErrorPin] = useState('')
   const [error4, setErrorPhone] = useState('')
-
 
   const handlenameChange = (name) => {
     setSelectedname(name);
@@ -118,7 +117,8 @@ const Detailsfirst = ({navigation,route}) => {
     }
   }
   else{
-    navigation.navigate("details2screen")
+    navigation.navigate("details2screen",{state:selectedname,address:textInputValueAddress,
+                        city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin})
     console.log(selectedname);
   }
   };

@@ -1,4 +1,4 @@
-import Amplify,{ Auth,Hub } from "aws-amplify";
+import Amplify,{ Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
 import {Dimensions} from 'react-native';
@@ -44,8 +44,22 @@ const Signin = ({ navigation,route}) => {
         setloading(true);
         try{
             const response=await Auth.signIn(email,password);
-            console.log(response);
-            navigation.navigate("detailsScreen");
+            const data = {
+                operation: 'retrieve',
+                payload: response.attributes.sub,
+              };
+              
+
+            const user=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+            body: {
+                    data
+            } 
+            });
+            console.log("This is retrieved ",user.Item)
+            if(user.Item)
+                navigation.navigate("homescreen",{user})
+            else
+                navigation.navigate("detailsScreen")
         }
         catch(e){
             Alert.alert('Invalid Input',e.message);
