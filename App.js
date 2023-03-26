@@ -97,8 +97,8 @@ export default function App() {
         <Stack.Screen name="profilescreen" component={Profile}/> 
          : 
          ( <>
-        <Stack.Screen name="profilescreen" component={Profile}/> 
         <Stack.Screen name="homescreen" component={Home}/>
+        <Stack.Screen name="profilescreen" component={Profile}/> 
         <Stack.Screen name="signin" component={Signin}/>
         <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
         <Stack.Screen name="signup" component={Signup}/>
