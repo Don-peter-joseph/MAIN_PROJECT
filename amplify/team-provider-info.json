@@ -35,6 +35,10 @@
         "healthpaddynamodbTriggerd96984dd": {
           "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
           "s3Key": "amplify-builds/healthpaddynamodbTriggerd96984dd-552b304b6b545342526a-build.zip"
+        },
+        "imageretriever": {
+          "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
+          "s3Key": "amplify-builds/imageretriever-6b4d514e34444b587a79-build.zip"
         }
       },
       "api": {

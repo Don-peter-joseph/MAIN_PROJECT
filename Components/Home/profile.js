@@ -1,6 +1,6 @@
-import { Auth } from "aws-amplify";
+import { Auth,API } from "aws-amplify";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert,ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
 
@@ -10,6 +10,28 @@ const windowHeight = Dimensions.get('window').height;
 
 const Profile = ({navigation,route}) => {
     
+    useEffect(()=>{
+        getImage();
+    },[])
+
+    const [profileData, setprofileData] = useState(null);
+
+    const getImage=async()=>{
+        try {
+            const imgname="hihih";
+            const response = await API.post('healthpadrestapi', '/imageretriever-staging', {
+                body: {
+                    imgname,
+                }
+                });
+            setprofileData(`data:image/jpeg;base64,${response}`);
+            console.log('Lambda response:', response);
+        } catch (error) {
+            console.log('Lambda error:', error);
+        }        
+    }
+
+
     const [flag,setflag]=useState("");
     const {user} =route.params;
     // console.log(user.Item.city)
@@ -32,7 +54,7 @@ const Profile = ({navigation,route}) => {
                 {!flag?
                 <>
                     <View style={styles.profileimage}>
-                            <Text>Here comes profile image</Text>
+                        <Image source={{uri:profileData}} style={styles.image}/>
                     </View>
                     <View style={styles.content}>
                         <View style={styles.userdetails}>
@@ -63,7 +85,7 @@ const Profile = ({navigation,route}) => {
                   <StatusBar hidden={true}/>
                     <ScrollView style={{width:'100%'}} contentContainerStyle={{justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.expandedprofileimage}>
-                                <Text>Here comes profile image</Text>
+                            <Image source={{uri:profileData}} style={styles.image}/>         
                         </View>
                         <View style={styles.expandedcontent}>
                             <Text style={styles.label}>Full Name</Text>
@@ -146,7 +168,7 @@ const styles = StyleSheet.create({
     profileimage:{
         position:"absolute",
         top:'22%',
-        borderWidth:2,
+        borderWidth:3,
         borderColor:'#AB46D2',
         width:200,
         height:200,
@@ -223,7 +245,7 @@ const styles = StyleSheet.create({
     expandedprofileimage:{
         // position:"absolute",
         // top:'22%',
-        borderWidth:2,
+        borderWidth:3,
         borderColor:'#AB46D2',
         width:200,
         height:200,
@@ -234,7 +256,13 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:10
     },
-
+    image: {
+        width: '100%',
+        height: '100%',
+        // borderWidth:1,
+        // borderColor:'green',
+        borderRadius:25
+      },
 });
 
 export default Profile
