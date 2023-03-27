@@ -1,3 +1,7 @@
+import { Amplify,Auth, Hub } from 'aws-amplify';
+import awsconfig from './src/aws-exports';
+Amplify.configure(awsconfig);
+
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
@@ -15,20 +19,18 @@ import Statistics from './Components/Home/statistics';
 import Consult from './Components/Home/consultpage';
 import Diet from './Components/Home/dietpage';
 import Customercare from './Components/Home/customercare';
-import Detailsfirst from './Components/Home/details';
 import DetectFaces from './Components/Home/detectface';
 import TextRecogniser from './Components/Home/textrecognition';
-import Detailssecond from './Components/Home/details2';
 import FoodDetector from './Components/Home/fooddetection';
+import Detailsfirst from './Components/Home/details';
+import Detailssecond from './Components/Home/details2';
+import Detailsthird from './Components/Home/details3';
 
-import { Amplify,Auth, Hub } from 'aws-amplify';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
-import awsconfig from './src/aws-exports';
 import * as Linking from 'expo-linking';
 import { useEffect, useState } from 'react';
 
-Amplify.configure(awsconfig);
 
 const Stack = createNativeStackNavigator();
 
@@ -93,28 +95,48 @@ export default function App() {
       }}>
       <Stack.Navigator screenOptions={{headerShown:false}}>
         { user? 
-        // <Stack.Screen name="homescreen" component={Home}
-        <Stack.Screen name="profilescreen" component={Profile}/> 
+        <>
+            <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="profilescreen" component={Profile}/> 
+            <Stack.Screen name="confirmemail" component={Confirmemail}/>
+            <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
+            <Stack.Screen name="resetpassword" component={Resetpassword}/>
+            <Stack.Screen name="shopscreen" component={Shop}/>
+            <Stack.Screen name="servicescreen" component={Customercare}/>
+            <Stack.Screen name="consultscreen" component={Consult}/>
+            <Stack.Screen name="dietscreen" component={Diet}/>
+            <Stack.Screen name="statisticsscreen" component={Statistics}/>
+            <Stack.Screen name="scanscreen" component={Scanimage}/>
+            <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
+            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
+            <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
+            <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
+            <Stack.Screen name="details2screen" component={Detailssecond}/>
+            <Stack.Screen name="details3screen" component={Detailsthird}/>
+            <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="signup" component={Signup}/>
+        </>
          : 
          ( <>
-        <Stack.Screen name="profilescreen" component={Profile}/> 
-        <Stack.Screen name="homescreen" component={Home}/>
-        <Stack.Screen name="signin" component={Signin}/>
-        <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
-        <Stack.Screen name="signup" component={Signup}/>
-        <Stack.Screen name="confirmemail" component={Confirmemail}/>
-        <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
-        <Stack.Screen name="resetpassword" component={Resetpassword}/>
-        <Stack.Screen name="shopscreen" component={Shop}/>
-        <Stack.Screen name="servicescreen" component={Customercare}/>
-        <Stack.Screen name="consultscreen" component={Consult}/>
-        <Stack.Screen name="dietscreen" component={Diet}/>
-        <Stack.Screen name="statisticsscreen" component={Statistics}/>
-        <Stack.Screen name="scanscreen" component={Scanimage}/>
-        <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
-        <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
-        <Stack.Screen name="details2screen" component={Detailssecond}/>
-        <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
+            <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="profilescreen" component={Profile}/> 
+            <Stack.Screen name="signup" component={Signup}/>
+            <Stack.Screen name="confirmemail" component={Confirmemail}/>
+            <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
+            <Stack.Screen name="resetpassword" component={Resetpassword}/>
+            <Stack.Screen name="shopscreen" component={Shop}/>
+            <Stack.Screen name="servicescreen" component={Customercare}/>
+            <Stack.Screen name="consultscreen" component={Consult}/>
+            <Stack.Screen name="dietscreen" component={Diet}/>
+            <Stack.Screen name="statisticsscreen" component={Statistics}/>
+            <Stack.Screen name="scanscreen" component={Scanimage}/>
+            <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
+            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
+            <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
+            <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
+            <Stack.Screen name="details2screen" component={Detailssecond}/>
+            <Stack.Screen name="details3screen" component={Detailsthird}/>
         </>)
     }
       </Stack.Navigator>

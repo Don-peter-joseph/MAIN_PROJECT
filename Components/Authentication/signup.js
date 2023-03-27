@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Pressable,Image,ImageBackground,Alert } from "react-native";
 import {Auth} from "aws-amplify";
 import {Dimensions} from 'react-native';
+import Lottie from 'lottie-react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -83,7 +84,16 @@ const Signin = ({ navigation }) => {
                 </Pressable>
                 <Pressable style={({pressed})=>[styles.login,{backgroundColor:pressed?'#6A8AFF':'#8A8AFF',width:pressed?'72%':'70%'}]}
                 onPress={Signuppress}>
-                        <Text style={{fontSize:20,color:'white'}}>{loading?"Loading...":"Register"}</Text>
+                        {loading ? (
+                            <Lottie
+                            source={require('../animatedscreen/loadingmain.json')}
+                            autoPlay
+                            loop
+                            style={{width: 100, height: 100}}
+                            />
+                        ) : (
+                            <Text style={{fontSize:20,color:'white'}}>Login</Text>
+                        )}
                 </Pressable>
             </View>
             <Text style={{marginBottom:5}}>or Signup via</Text>

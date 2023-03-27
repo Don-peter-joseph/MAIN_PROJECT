@@ -64,6 +64,27 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "healthpaddynamodbTriggerd96984dd": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "healthpaddynamodb",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        }
+      ]
+    },
+    "imageretriever": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -89,6 +110,10 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
+    },
+    "healthpaddynamodb": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
     }
   },
   "predictions": {}

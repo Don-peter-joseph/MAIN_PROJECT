@@ -1,0 +1,12 @@
+{
+  "resourceName": "healthpaddynamodb",
+  "tableName": "heathpaduserdetails",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": [
+    "healthpaddynamodbTriggerd96984dd"
+  ]
+}

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { API } from 'aws-amplify';
 import { ScrollView } from 'react-native-gesture-handler';
 import {launchCameraAsync} from 'expo-image-picker';
+import Lottie from 'lottie-react-native';
 
 
 const DetectFaces = ({navigation,route}) => {
@@ -35,7 +36,7 @@ const DetectFaces = ({navigation,route}) => {
     const response=await fetch(imageuri);
     const blob=await response.blob();
     return blob;
-  }
+    }
     const uploadimage=async(image)=>{
         const img=await fetchimage(image.uri)
         imgname=`demo${Math.random()}.jpg`;
@@ -77,6 +78,7 @@ const DetectFaces = ({navigation,route}) => {
     }
 
   const takePicture=async()=>{
+    setTakenImage();
     if(cameraRef){
         try{
             // const options={quality:0.5,base64:true,skipProcessing:true};
@@ -107,9 +109,9 @@ return(
       <View style={styles.outline}>
           {!takenImage?
           <>
-              <View >
-                <Text style={{fontSize:30,color:'black'}}>Loading...</Text>
-              <Pressable onPress={takePicture}>
+              <View style={styles.content}>
+              <Lottie style={styles.animation} source={require('../animatedscreen/face.json')} autoPlay loop />
+              <Pressable onPress={takePicture} style={{alignItems:'center'}}>
                 <Text>Taking too long? Capture another image</Text>
               </Pressable>
               </View>
@@ -139,7 +141,7 @@ const styles=StyleSheet.create({
       height:1000,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor:' #f5f5f5',
+      backgroundColor:'#ffffff',
       // borderWidth:2,
       // borderColor:'red'
   },
@@ -147,17 +149,6 @@ const styles=StyleSheet.create({
       justifyContent:'center',
       alignItems:"center"
   }   ,
-  signout:{
-      borderWidth:1,
-      borderColor:'black',
-      borderRadius:25,
-      backgroundColor:'#8A8AFF',
-      height:'13%',
-      justifyContent:'center',
-      alignItems:'center',
-      marginTop:13,
-      width:'50%'
-  },
   camera:{
       // flex:1,
       width:'100%',
@@ -197,5 +188,18 @@ const styles=StyleSheet.create({
     paddingLeft:10,
     paddingRight:10,
     backgroundColor:"#D5D5EF"
-  }
+  },
+  animation:{
+    // borderWidth:2,
+    // borderColor:'black',
+    height:500,
+    marginBottom:100
+
+},
+  content:{
+    flex:1,
+    width:'100%',
+    justifyContent:'center',
+    alignItems:"center"
+}   ,
 })

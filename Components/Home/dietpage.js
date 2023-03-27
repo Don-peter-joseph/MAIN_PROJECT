@@ -34,7 +34,7 @@ const styles=StyleSheet.create({
     content:{
         justifyContent:'center',
         alignItems:"center"
-    }   ,
+    },
     signout:{
         borderWidth:1,
         borderColor:'black',
