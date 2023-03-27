@@ -14,6 +14,8 @@ const windowHeight = Dimensions.get('window').height;
 
 const Home=({navigation,route})=>{
     
+    const {user}=route.params;
+
     const redirectUrl = Linking.createURL('home');
       console.log(redirectUrl);
     return(
@@ -25,7 +27,7 @@ const Home=({navigation,route})=>{
                 <View style={styles.logo}>
                    <Image style={[styles.inputlogo]} source={require('./assets/adaptiveicon.png')}/>
                 </View>
-                <Pressable style={styles.profile} onPress={()=>navigation.navigate("profilescreen")}>
+                <Pressable style={styles.profile} onPress={()=>navigation.navigate("profilescreen",{user})}>
                     <Image style={{width:50,height:50,borderRadius:30}} source={require('./assets/scan.jpg')}/>
                 </Pressable>
             </View>
@@ -80,11 +82,13 @@ const styles=StyleSheet.create({
         padding:10,
         paddingTop:50,
         paddingBottom:30,
-        // borderWidth:1,
+        borderWidth:.5,
         // borderColor:'red',
+        borderRadius:25,
         alignItems:'center',
         width:'100%',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        backgroundColor:'#F7EBFE'
     },
     features:{
         // borderWidth:2,
@@ -118,7 +122,7 @@ const styles=StyleSheet.create({
     },
     box:{
         borderColor:'black',
-        borderWidth:2,
+        borderWidth:1,
         width:'40%',
         padding:5,
         marginTop:30,

@@ -36,7 +36,7 @@ const DetectFaces = ({navigation,route}) => {
     const response=await fetch(imageuri);
     const blob=await response.blob();
     return blob;
-  }
+    }
     const uploadimage=async(image)=>{
         const img=await fetchimage(image.uri)
         imgname=`demo${Math.random()}.jpg`;
