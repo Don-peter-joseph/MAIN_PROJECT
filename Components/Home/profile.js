@@ -114,7 +114,7 @@ const Profile = ({navigation,route}) => {
                             <Text style={styles.item}>{user.Item.city}</Text>
                             <Text style={styles.label}>State</Text>
                             <Text style={styles.item}>{user.Item.state}</Text>
-                            <Text style={styles.label}>Zip code</Text>
+                            <Text style={styles.label}>Zip Code</Text>
                             <Text style={styles.item}>{user.Item.pincode}</Text>
                         </View>
                         <View style={styles.expandedcontentfooter}>
