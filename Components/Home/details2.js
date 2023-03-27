@@ -4,7 +4,7 @@ import {Dimensions} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
-
+import { API,Auth } from 'aws-amplify';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -29,9 +29,6 @@ const Detailssecond = ({navigation,route}) => {
   const [selectedname, setSelectedname] = useState('');
   const [textboxValue, setTextboxValue] = useState('');
   const [selected, setSelected] = useState(false);
-  const [textInputValueCity, setTextInputValueCity] = useState('');
-  const [textInputValuePin, setTextInputValuePin] = useState('');
-  const [textInputValuePhone, setTextInputValuePhone] = useState('');
   const [error1, setErrorAddress] = useState('')
   const [error2, setErrorCity] = useState('')
   const [error3, setErrorPin] = useState('')
@@ -47,6 +44,9 @@ const Detailssecond = ({navigation,route}) => {
   const [age, setAge] = useState(null);
 
   const [selectedSex, setSelectedSex] = useState(null);
+
+
+  const {state,city,phoneno,pincode,address}=route.params;
 
   const handleSexSelection = (sex) => {
     setSelectedSex(sex);
@@ -97,8 +97,49 @@ const Detailssecond = ({navigation,route}) => {
     setDatePickerVisibility(false);
   };
 
-  const handleSubmit = () => {
-    navigation.navigate("details3screen")
+  const handleSubmit = async() => {
+    const currentUser = await Auth.currentAuthenticatedUser();
+    const Id = currentUser.attributes.sub;
+    const Name=currentUser.attributes.name;
+    const Email=currentUser.attributes.email;
+
+    // user creation
+    const newUser ={
+      id:Id,
+      name: Name,
+      email:Email,
+      phoneno,
+      address,
+      pincode,
+      city,
+      state,
+      height,
+      weight,
+      bmi,
+      selectedSex,
+      selectedDate,
+      age
+  };
+  
+  const data = {
+    operation: 'create',
+    payload: newUser,
+  };
+
+
+  try{
+    const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+                  body: {
+                        data
+                  } 
+    });
+    console.log("user saved successfully")
+    console.log(response)
+  }
+  catch(e){
+    console.log('Error saving user', e);
+  }
+    // navigation.navigate("details3screen")
   };
 
   const searchRef = useRef();
