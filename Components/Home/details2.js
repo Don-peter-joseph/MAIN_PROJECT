@@ -139,7 +139,7 @@ const Detailssecond = ({navigation,route}) => {
   catch(e){
     console.log('Error saving user', e);
   }
-    // navigation.navigate("details3screen")
+    navigation.navigate("details3screen")
   };
 
   const searchRef = useRef();
