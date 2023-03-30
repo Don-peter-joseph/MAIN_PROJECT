@@ -46,7 +46,7 @@ const Detailssecond = ({navigation,route}) => {
   const [selectedSex, setSelectedSex] = useState(null);
 
 
-  const {state,city,phoneno,pincode,address}=route.params;
+  const {state,city,phoneno,pincode,address,imgname}=route.params;
 
   const handleSexSelection = (sex) => {
     setSelectedSex(sex);
@@ -100,7 +100,7 @@ const Detailssecond = ({navigation,route}) => {
   const handleSubmit = async() => {
   
     navigation.navigate("details3screen",{state,city,phoneno,pincode,address,weight,height,bmi,date:selectedDate,
-                        gender:selectedSex,bloodgroup:selectedname})
+                        gender:selectedSex,bloodgroup:selectedname,age,imgname})
   };
 
   const searchRef = useRef();

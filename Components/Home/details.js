@@ -2,10 +2,13 @@ import React, { useEffect, useRef,useState } from 'react';
 import { View, Text, Image, StyleSheet, Pressable,ScrollView,TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
 import {Dimensions} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-import { Auth } from 'aws-amplify';
+import { Auth,Storage } from 'aws-amplify';
 import * as ImagePicker from 'expo-image-picker';
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
+import {launchCameraAsync} from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
+import { Camera,CameraType} from "expo-camera";
 
 
 
@@ -68,6 +71,9 @@ const Detailsfirst = ({navigation,route}) => {
   const [error3, setErrorPin] = useState('')
   const [error4, setErrorPhone] = useState('')
   const [image,setImage] = useState(null);
+  const[hasCameraPermission,sethasCameraPermission]=useState(null);
+  const cameraRef=useRef(null);
+  let imgname='';  
 
   useEffect( async () =>{
     if(Platform.OS !== 'web'){
@@ -84,11 +90,66 @@ const Detailsfirst = ({navigation,route}) => {
       allowsEditing: true,
       quality: 1
     })
-    console.log(result)
-    if(!result.cancelled) {
-      setImage(result.uri)
+    console.log(result.uri)
+    await uploadimage(result);
+    imgname="public/"+imgname;
+    console.log(imgname);
+  }
+
+  const fetchimage=async(imageuri)=>{
+    const response=await fetch(imageuri);
+    const blob=await response.blob();
+    return blob;
+  }
+
+  const uploadimage=async(image)=>{
+    const img=await fetchimage(image.uri)
+    imgname=`demo${Math.random()}.jpg`;
+    // console.log(imgname);
+    return Storage.put(imgname,img,{
+        level:'public',
+        contentType:image.type,
+        progressCallback(uploadProgress){
+        console.log('PROGRESS-- ',uploadProgress.loaded+'/'+uploadProgress.total);
+        }
+    })
+    .then((res)=>{
+        Storage.get(res.key)
+        .then((result)=>{
+                console.log("RESULT-- ",result);
+            })
+            .catch(e=>{
+                console.log(error);
+            });
+        })
+    .catch(error=>{
+        console.log(error);
+    })
+}
+
+
+  const takePicture=async()=>{
+    MediaLibrary.requestPermissionsAsync();
+    const camerastatus=await Camera.requestCameraPermissionsAsync();
+    sethasCameraPermission(camerastatus.status==='granted');
+    if(cameraRef){
+        try{ 
+            const data=await launchCameraAsync({
+                allowsEditing:true,
+                quality:0.5,
+             });
+             await uploadimage(data);
+             imgname="public/"+imgname;
+             console.log(imgname);
+        }catch(e){
+            console.log(e);
+        }
     }
   }
+
+  if(hasCameraPermission===false){
+    return <Text>No camera permission</Text>
+    }
 
   const handlenameChange = (name) => {
     setSelectedname(name);
@@ -149,7 +210,7 @@ const Detailsfirst = ({navigation,route}) => {
     } else {
       setErrorPhone('');
     navigation.navigate("details2screen",{state:selectedname,address:textInputValueAddress,
-                        city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin})
+                        city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin,imgname})
     console.log(selectedname);
   }
 }
@@ -291,7 +352,7 @@ const Detailsfirst = ({navigation,route}) => {
         <Text style={styles.buttonText1}>Gallery</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button1} >
+      <TouchableOpacity style={styles.button1} onPress={takePicture} >
         <Text style={styles.buttonText1}>Open Camera</Text>
       </TouchableOpacity>
       </View>

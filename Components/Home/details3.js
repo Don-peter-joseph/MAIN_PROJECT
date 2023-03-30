@@ -39,18 +39,21 @@ const Detailsthird = ({navigation,route}) => {
   };
   
 
-  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup}=route.params;
+  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imgname,age}=route.params;
 
   const handleSubmit = async() => {
+    let Id='';
+    let Name='';
+    let Email='';
     if(loading)
     return;
     setloading(true);
         console.log('saving....')
         try{
           const currentUser = await Auth.currentAuthenticatedUser();
-          const Id = currentUser.attributes.sub;
-          const Name=currentUser.attributes.name;
-          const Email=currentUser.attributes.email;
+          Id = currentUser.attributes.sub;
+          Name=currentUser.attributes.name;
+          Email=currentUser.attributes.email;
         }
         catch(e){
           console.log(e);
@@ -74,7 +77,9 @@ const Detailsthird = ({navigation,route}) => {
           disease:selectedDiseases,
           rbs,
           fbs,
-          hba1c
+          hba1c,
+          imgname,
+          age
       };
       
       const data = {

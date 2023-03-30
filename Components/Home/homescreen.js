@@ -15,7 +15,6 @@ const windowHeight = Dimensions.get('window').height;
 const Home=({navigation,route})=>{
     const [user,setuser]=useState('');
     let userid='';
-    const [loading,setloading]=useState("");
 
 
     useEffect(async()=>{
@@ -25,7 +24,8 @@ const Home=({navigation,route})=>{
     const currentUser=async()=> {
         try{
           const authuser=await Auth.currentAuthenticatedUser({bypassCache:'True'});
-          userid=JSON.stringify(authuser.username, null, 2)
+          userid=authuser.username;
+        //   userid=JSON.stringify(authuser.username, null, 2)
           const data = {
             operation: 'retrieve',
             payload: userid,
@@ -44,9 +44,6 @@ const Home=({navigation,route})=>{
     };
 
       const redirectProfile=async()=>{
-            setloading(true)
-            console.log("loading...");
-            // await currentUser()
             navigation.navigate("profilescreen",{user})
     }
 
