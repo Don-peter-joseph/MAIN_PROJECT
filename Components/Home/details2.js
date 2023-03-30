@@ -98,47 +98,47 @@ const Detailssecond = ({navigation,route}) => {
   };
 
   const handleSubmit = async() => {
-    const currentUser = await Auth.currentAuthenticatedUser();
-    const Id = currentUser.attributes.sub;
-    const Name=currentUser.attributes.name;
-    const Email=currentUser.attributes.email;
+  //   const currentUser = await Auth.currentAuthenticatedUser();
+  //   const Id = currentUser.attributes.sub;
+  //   const Name=currentUser.attributes.name;
+  //   const Email=currentUser.attributes.email;
 
-    // user creation
-    const newUser ={
-      id:Id,
-      name: Name,
-      email:Email,
-      phoneno,
-      address,
-      pincode,
-      city,
-      state,
-      height,
-      weight,
-      bmi,
-      selectedSex,
-      selectedDate,
-      age
-  };
+  //   // user creation
+  //   const newUser ={
+  //     id:Id,
+  //     name: Name,
+  //     email:Email,
+  //     phoneno,
+  //     address,
+  //     pincode,
+  //     city,
+  //     state,
+  //     height,
+  //     weight,
+  //     bmi,
+  //     selectedSex,
+  //     selectedDate,
+  //     age
+  // };
   
-  const data = {
-    operation: 'create',
-    payload: newUser,
-  };
+  // const data = {
+  //   operation: 'create',
+  //   payload: newUser,
+  // };
 
 
-  try{
-    const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
-                  body: {
-                        data
-                  } 
-    });
-    console.log("user saved successfully")
-    console.log(response)
-  }
-  catch(e){
-    console.log('Error saving user', e);
-  }
+  // try{
+  //   const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+  //                 body: {
+  //                       data
+  //                 } 
+  //   });
+  //   console.log("user saved successfully")
+  //   console.log(response)
+  // }
+  // catch(e){
+  //   console.log('Error saving user', e);
+  // }
     navigation.navigate("details3screen")
   };
 
