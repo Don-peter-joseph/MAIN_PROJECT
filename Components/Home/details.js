@@ -1,8 +1,12 @@
-import React, { useRef,useState } from 'react';
-import { View, Text, Image, StyleSheet, Pressable, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
+import React, { useEffect, useRef,useState } from 'react';
+import { View, Text, Image, StyleSheet, Pressable,ScrollView,TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
 import {Dimensions} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { Auth } from 'aws-amplify';
+import * as ImagePicker from 'expo-image-picker';
+import { Platform } from 'react-native';
+import Constants from 'expo-constants';
+
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -63,6 +67,28 @@ const Detailsfirst = ({navigation,route}) => {
   const [error2, setErrorCity] = useState('')
   const [error3, setErrorPin] = useState('')
   const [error4, setErrorPhone] = useState('')
+  const [image,setImage] = useState(null);
+
+  useEffect( async () =>{
+    if(Platform.OS !== 'web'){
+      const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      if (status !== 'granted') {
+        alert('Permission denied!')
+      }
+    }
+  },[])
+
+  const PickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1
+    })
+    console.log(result)
+    if(!result.cancelled) {
+      setImage(result.uri)
+    }
+  }
 
   const handlenameChange = (name) => {
     setSelectedname(name);
@@ -117,10 +143,16 @@ const Detailsfirst = ({navigation,route}) => {
     }
   }
   else{
+    const isValidPhone = /^(?:(?:(?:\+|00)?(91))[\s-]?)?(?:\d{10})$/.test(textInputValuePhone);
+    if (!isValidPhone) {
+      setErrorPhone('Please enter a valid Indian phone number');
+    } else {
+      setErrorPhone('');
     navigation.navigate("details2screen",{state:selectedname,address:textInputValueAddress,
                         city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin})
     console.log(selectedname);
   }
+}
   };
 
   const searchRef = useRef();
@@ -134,6 +166,7 @@ const Detailsfirst = ({navigation,route}) => {
       setData(names);
     }
   };
+
   return (
     
     <View style={styles.outline}>
@@ -199,7 +232,7 @@ const Detailsfirst = ({navigation,route}) => {
             Enter your details :
           </Text>
           <View style={{marginVertical: 10, marginLeft: 10,}}>
-            <Text style={styles.Adress1}>Address Line 1:</Text>
+            <Text style={styles.Adress1}>Address :</Text>
             <TextInput 
               style={styles.text1}
               onChangeText={handleTextInputChangeAddress}
@@ -209,13 +242,13 @@ const Detailsfirst = ({navigation,route}) => {
             />
             {error1 ? <Text style={styles.error}>{error1}</Text> : null}
           </View>
-          <View style={{marginVertical: 10, marginLeft: 10,}}>
+          {/* <View style={{marginVertical: 10, marginLeft: 10,}}>
             <Text style={styles.Adress1}>Address Line 2:</Text>
             <TextInput 
               style={styles.text1}
               placeholder="Enter a value"
             />
-          </View>
+          </View> */}
           <View style={{marginVertical: 10, marginLeft: 10,}}>
             <Text style={styles.Adress1}>City:</Text>
             <TextInput 
@@ -250,6 +283,21 @@ const Detailsfirst = ({navigation,route}) => {
             {error4 ? <Text style={styles.error}>{error4}</Text> : null}
           </View>
         {/* </View> */}
+
+        <View style={{marginVertical: 10, marginLeft: 10}}>
+          <Text style={styles.Adress1}>Upload Profile Picture: </Text>
+          <View style={{flexDirection:'row',justifyContent: 'space-between',alignItems: 'flex-start', paddingLeft:20}}> 
+      <TouchableOpacity style={styles.button1} onPress={PickImage} >
+        <Text style={styles.buttonText1}>Gallery</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button1} >
+        <Text style={styles.buttonText1}>Open Camera</Text>
+      </TouchableOpacity>
+      </View>
+    </View>
+
+
         <View style={{flex:.5,justifyContent:'center',alignItems:'center'}}>
           <Pressable style={styles.button} onPress={handleSubmit}>
               <Text  style={styles.buttontext}>Next</Text>
@@ -379,11 +427,34 @@ const styles=StyleSheet.create({
         width:350,
         height:50,
         borderRadius:25,
-        marginTop:30
+        marginTop:20
       },
       buttontext:{
         fontWeight:'bold',
         fontSize:22,
         color:'white'
+      },
+      button1: {
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 5,
+        width:150,
+        padding: 10,
+        marginTop:10,
+        marginRight:30,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius: 10,
+        backgroundColor: '#ECF2FF'
+      },
+      buttonText1: {
+        color: 'black',
+        fontSize: 16,
+      },
+      avatar: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        marginTop: 20,
       },
 })

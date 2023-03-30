@@ -1,7 +1,7 @@
 import React, { useRef,useState } from 'react';
 import { View, Text, Image, StyleSheet, Pressable, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
 import {Dimensions} from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
+// import { NavigationContainer } from "@react-navigation/native";
 import { CheckBox } from 'react-native-elements';
 
 
@@ -19,8 +19,8 @@ const diseases = [
 const Detailsthird = ({navigation,route}) => {
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [diabetesCount, setDiabetesCount] = useState(0);
-  const [hbpCount, setHbpCount] = useState(0);
-  const [obesityCount, setObesityCount] = useState(0);    
+  // const [hbpCount, setHbpCount] = useState(0);
+  // const [obesityCount, setObesityCount] = useState(0);    
 
   const handleDiseaseSelect = (id) => {
     setSelectedDiseases((prevSelectedDiseases) => {
@@ -70,44 +70,10 @@ const Detailsthird = ({navigation,route}) => {
           style={styles.textb}
           placeholder="Enter a value"
           />
-
-          {[...Array(diabetesCount)].map((_, i) => (
-            <TextInput
-              key={i}
-              onChangeText={(text) => setDiabetesCount(i, text)}
-            />
-          ))}
-          
         </View>
       )}
-      
-      {/* {selectedDiseases.includes(2) && (
-        <View>
-          <Text>High blood pressure</Text>
-          {[...Array(hbpCount)].map((_, i) => (
-            <TextInput
-              key={i}
-              onChangeText={(text) => setHbpCount(i, text)}
-            />
-          ))}
-        </View>
-      )}
-      
-      {selectedDiseases.includes(3) && (
-        <View>
-          <Text>Obesity</Text>
-          {[...Array(obesityCount)].map((_, i) => (
-            <TextInput
-              key={i}
-              onChangeText={(text) => setObesityCount(i, text)}
-            />
-          ))}
-        </View>
-      )} */}
-      
-      {/* add more disease-specific textboxes as needed */}
 
-      <View style={{marginTop:680, marginLeft:20, justifyContent:'center',alignItems:'center', position:"fixed"}}>
+      <View style={styles.mainb}>
           <Pressable style={styles.button} onPress={handleSubmit}>
               <Text style={styles.buttontext}>Submit</Text>
           </Pressable>
@@ -120,10 +86,6 @@ const Detailsthird = ({navigation,route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // borderWidth: 5,
-    // borderColor:'green',
-    width:'100%',
-    height: '100%'
   },
   
   checkboxmain:{
@@ -149,9 +111,9 @@ const styles = StyleSheet.create({
     color: 'gray'
   },
   text1:{
-    marginTop: 20,
+    marginTop: 80,
     fontSize:18,
-    paddingLeft: 30
+    paddingLeft:20
   },
   textb:{
     width: '90%',
@@ -188,6 +150,14 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     fontSize:22,
     color:'white'
+  },
+  mainb:{
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf: 'center', 
+    position: 'absolute',
+    width: '100%',
+    bottom: 40
   }
 });
 
