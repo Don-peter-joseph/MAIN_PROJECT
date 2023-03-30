@@ -9,12 +9,15 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Profile = ({navigation,route}) => {
-    
+
     useEffect(()=>{
         getImage();
     },[])
 
     const [profileData, setprofileData] = useState(null);
+    const {user}=route.params;
+    const [flag,setflag]=useState("");
+    const [loading,setloading]=useState("");
 
     const getImage=async()=>{
         try {
@@ -32,8 +35,6 @@ const Profile = ({navigation,route}) => {
     }
 
 
-    const [flag,setflag]=useState("");
-    const {user} =route.params;
     // console.log(user.Item.city)
 
     const SignOut=async()=>{
