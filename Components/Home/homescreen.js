@@ -91,7 +91,7 @@ const Home=({navigation,route})=>{
                         <Image style={[styles.inputlogo]} source={require('./assets/adaptiveicon.png')}/>
                         </View>
                         <Pressable style={styles.profile} onPress={redirectProfile}>
-                            <Image style={{width:50,height:50,borderRadius:30}} source={require(profileData)}/>
+                            <Image style={{width:50,height:50,borderRadius:30}} source={{uri:profileData}}/>
                         </Pressable>
                     </View>
                     <View style={styles.features}>
