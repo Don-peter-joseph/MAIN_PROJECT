@@ -15,11 +15,28 @@ const windowHeight = Dimensions.get('window').height;
 const Home=({navigation,route})=>{
     const [user,setuser]=useState('');
     let userid='';
+    const [profileData, setprofileData] = useState(null);
 
 
     useEffect(async()=>{
             await currentUser() ;
+            getImage();
       },[]);
+
+      const getImage=async()=>{
+        try {
+            const imgname=user.Item.imgname;
+            console.log(imgname)
+            const response = await API.post('healthpadrestapi', '/imageretriever-staging', {
+                body: {
+                    imgname,
+                }
+                });
+            setprofileData(`data:image/jpeg;base64,${response}`);
+        } catch (error) {
+            console.log('Lambda error:', error);
+        }        
+    }
 
     const currentUser=async()=> {
         try{
@@ -74,7 +91,7 @@ const Home=({navigation,route})=>{
                         <Image style={[styles.inputlogo]} source={require('./assets/adaptiveicon.png')}/>
                         </View>
                         <Pressable style={styles.profile} onPress={redirectProfile}>
-                            <Image style={{width:50,height:50,borderRadius:30}} source={require('./assets/scan.jpg')}/>
+                            <Image style={{width:50,height:50,borderRadius:30}} source={require(profileData)}/>
                         </Pressable>
                     </View>
                     <View style={styles.features}>
