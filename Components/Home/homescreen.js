@@ -15,17 +15,16 @@ const windowHeight = Dimensions.get('window').height;
 const Home=({navigation,route})=>{
     const [user,setuser]=useState('');
     let userid='';
-    const [profileData, setprofileData] = useState(null);
+    const [profileData, setprofileData] = useState('');
 
 
     useEffect(async()=>{
             await currentUser() ;
-            getImage();
       },[]);
 
-      const getImage=async()=>{
+      const getImage=async(imagename)=>{
         try {
-            const imgname=user.Item.imgname;
+            const imgname=imagename;
             console.log(imgname)
             const response = await API.post('healthpadrestapi', '/imageretriever-staging', {
                 body: {
@@ -33,6 +32,7 @@ const Home=({navigation,route})=>{
                 }
                 });
             setprofileData(`data:image/jpeg;base64,${response}`);
+            console.log(profileData)
         } catch (error) {
             console.log('Lambda error:', error);
         }        
@@ -53,7 +53,9 @@ const Home=({navigation,route})=>{
                 } 
             });
             setuser(response);
-            console.log(user.Item.name)
+            console.log(response.Item)
+            await getImage(response.Item.imgname);
+
         }
         catch(e){
           console.log(e);
@@ -69,7 +71,7 @@ const Home=({navigation,route})=>{
     return(
         <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center'}}>
 
-        {!user?
+        {!profileData?
             <>
             <Lottie
                 source={require('../animatedscreen/loading2.json')}
@@ -91,7 +93,7 @@ const Home=({navigation,route})=>{
                         <Image style={[styles.inputlogo]} source={require('./assets/adaptiveicon.png')}/>
                         </View>
                         <Pressable style={styles.profile} onPress={redirectProfile}>
-                            <Image style={{width:50,height:50,borderRadius:30}} source={{uri:profileData}}/>
+                        <Image source={{uri:profileData}} style={{width:60,height:60,borderRadius:30,borderWidth:1,borderColor:'black'}}/>
                         </Pressable>
                     </View>
                     <View style={styles.features}>
@@ -154,7 +156,7 @@ const styles=StyleSheet.create({
         borderRadius:25,
         alignItems:'center',
         width:'100%',
-        justifyContent:'space-between',
+        justifyContent:'space-evenly',
         backgroundColor:'#F7EBFE'
     },
     features:{
@@ -206,6 +208,7 @@ const styles=StyleSheet.create({
         // borderWidth:2,
         // borderColor:'red',
         borderRadius:40,
+        marginRight:15,
         // height:50,
         // width:40
     },
