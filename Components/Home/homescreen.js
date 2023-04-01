@@ -54,7 +54,7 @@ const Home=({navigation,route})=>{
             });
             setuser(response);
             console.log(response.Item)
-            await getImage(response.Item.imgname);
+            await getImage(response.Item.imagename);
 
         }
         catch(e){

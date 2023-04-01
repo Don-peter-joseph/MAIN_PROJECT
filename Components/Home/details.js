@@ -9,6 +9,7 @@ import Constants from 'expo-constants';
 import {launchCameraAsync} from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import { Camera,CameraType} from "expo-camera";
+import Lottie from 'lottie-react-native';
 
 
 
@@ -59,7 +60,8 @@ const Detailsfirst = ({navigation,route}) => {
   const [search, setSearch] = useState('');
   const [clicked, setClicked] = useState(false);
   const [data, setData] = useState(names);
-  const [textboxValue, setTextboxValue] = useState('');
+  const [uploadstatus,setuploadstatus] = useState(false);
+  const [uploading,setuploading] = useState(false);
   const [selected, setSelected] = useState(false);
   const [selectedname, setSelectedname] = useState('');
   const [textInputValueAddress, setTextInputValueAddress] = useState('');
@@ -71,6 +73,7 @@ const Detailsfirst = ({navigation,route}) => {
   const [error3, setErrorPin] = useState('')
   const [error4, setErrorPhone] = useState('')
   const [image,setImage] = useState(null);
+  const [temp,settemp]=useState('');
   const[hasCameraPermission,sethasCameraPermission]=useState(null);
   const cameraRef=useRef(null);
   let imgname='';  
@@ -82,6 +85,8 @@ const Detailsfirst = ({navigation,route}) => {
         alert('Permission denied!')
       }
     }
+    setuploadstatus(false)
+    setuploading(false)
   },[])
 
   const PickImage = async () => {
@@ -91,9 +96,12 @@ const Detailsfirst = ({navigation,route}) => {
       quality: 1
     })
     console.log(result.uri)
-    await uploadimage(result);
-    imgname="public/"+imgname;
-    console.log(imgname);
+    if(result.uri){
+      await uploadimage(result);
+      imgname="public/"+imgname;
+      settemp(imgname);
+      console.log(imgname);
+    }
   }
 
   const fetchimage=async(imageuri)=>{
@@ -103,6 +111,8 @@ const Detailsfirst = ({navigation,route}) => {
   }
 
   const uploadimage=async(image)=>{
+    setuploadstatus(true);
+    setuploading(true)
     const img=await fetchimage(image.uri)
     imgname=`demo${Math.random()}.jpg`;
     // console.log(imgname);
@@ -121,6 +131,7 @@ const Detailsfirst = ({navigation,route}) => {
             .catch(e=>{
                 console.log(error);
             });
+          setuploading(false);
         })
     .catch(error=>{
         console.log(error);
@@ -138,9 +149,12 @@ const Detailsfirst = ({navigation,route}) => {
                 allowsEditing:true,
                 quality:0.5,
              });
-             await uploadimage(data);
-             imgname="public/"+imgname;
-             console.log(imgname);
+             if(data.uri){
+               await uploadimage(data);
+               imgname="public/"+imgname;
+                settemp(imgname);
+               console.log(imgname);
+             }
         }catch(e){
             console.log(e);
         }
@@ -208,10 +222,10 @@ const Detailsfirst = ({navigation,route}) => {
     if (!isValidPhone) {
       setErrorPhone('Please enter a valid Indian phone number');
     } else {
-      setErrorPhone('');
+        setErrorPhone('');
+        console.log(selectedname,temp);
     navigation.navigate("details2screen",{state:selectedname,address:textInputValueAddress,
-                        city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin,imgname})
-    console.log(selectedname);
+                        city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin,imagename:temp})
   }
 }
   };
@@ -346,17 +360,41 @@ const Detailsfirst = ({navigation,route}) => {
         {/* </View> */}
 
         <View style={{marginVertical: 10, marginLeft: 10}}>
-          <Text style={styles.Adress1}>Upload Profile Picture: </Text>
-          <View style={{flexDirection:'row',justifyContent: 'space-between',alignItems: 'flex-start', paddingLeft:20}}> 
-      <TouchableOpacity style={styles.button1} onPress={PickImage} >
-        <Text style={styles.buttonText1}>Gallery</Text>
-      </TouchableOpacity>
+            <Text style={styles.Adress1}>Upload Profile Picture: </Text>
+            <View style={{flexDirection:'row',justifyContent: 'space-between',alignItems: 'flex-start', paddingLeft:20}}> 
+              {uploadstatus?
+              <>
+              {uploading?
+              <>
+                <Lottie
+                    source={require('../animatedscreen/uploading.json')}
+                    autoPlay
+                    speed={0.7}
+                    loop
+                    style={{width: 60, height: 60,}}
+                />
+              </>
+              :
+              <>
+              <TouchableOpacity style={styles.button1} >
+                <Text style={styles.buttonText1}>Uploaded</Text>
+              </TouchableOpacity>
+              </>
+              }
+              </>
+              :
+              <>
+              <TouchableOpacity style={styles.button1} onPress={PickImage} >
+                <Text style={styles.buttonText1}>Gallery</Text>
+              </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button1} onPress={takePicture} >
-        <Text style={styles.buttonText1}>Open Camera</Text>
-      </TouchableOpacity>
-      </View>
-    </View>
+              <TouchableOpacity style={styles.button1} onPress={takePicture} >
+                <Text style={styles.buttonText1}>Open Camera</Text>
+              </TouchableOpacity>
+              </>  
+              }
+          </View>
+        </View>
 
 
         <View style={{flex:.5,justifyContent:'center',alignItems:'center'}}>

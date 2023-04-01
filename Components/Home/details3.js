@@ -39,7 +39,7 @@ const Detailsthird = ({navigation,route}) => {
   };
   
 
-  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imgname,age}=route.params;
+  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age}=route.params;
 
   const handleSubmit = async() => {
     let Id='';
@@ -78,7 +78,7 @@ const Detailsthird = ({navigation,route}) => {
           rbs,
           fbs,
           hba1c,
-          imgname,
+          imagename,
           age
       };
       

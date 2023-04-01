@@ -21,7 +21,7 @@ const Profile = ({navigation,route}) => {
 
     const getImage=async()=>{
         try {
-            const imgname=user.Item.imgname;
+            const imgname=user.Item.imagename;
             console.log(imgname)
             const response = await API.post('healthpadrestapi', '/imageretriever-staging', {
                 body: {
