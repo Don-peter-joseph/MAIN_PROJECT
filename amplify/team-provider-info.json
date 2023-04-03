@@ -39,6 +39,10 @@
         "imageretriever": {
           "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
           "s3Key": "amplify-builds/imageretriever-6b4d514e34444b587a79-build.zip"
+        },
+        "healthpadcodescanner": {
+          "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
+          "s3Key": "amplify-builds/healthpadcodescanner-6747324f6e3148636c46-build.zip"
         }
       },
       "api": {

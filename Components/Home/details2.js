@@ -46,7 +46,8 @@ const Detailssecond = ({navigation,route}) => {
   const [selectedSex, setSelectedSex] = useState(null);
 
 
-  const {state,city,phoneno,pincode,address}=route.params;
+  const {state,city,phoneno,pincode,address,imagename}=route.params;
+
 
   const handleSexSelection = (sex) => {
     setSelectedSex(sex);
@@ -98,48 +99,9 @@ const Detailssecond = ({navigation,route}) => {
   };
 
   const handleSubmit = async() => {
-  //   const currentUser = await Auth.currentAuthenticatedUser();
-  //   const Id = currentUser.attributes.sub;
-  //   const Name=currentUser.attributes.name;
-  //   const Email=currentUser.attributes.email;
-
-  //   // user creation
-  //   const newUser ={
-  //     id:Id,
-  //     name: Name,
-  //     email:Email,
-  //     phoneno,
-  //     address,
-  //     pincode,
-  //     city,
-  //     state,
-  //     height,
-  //     weight,
-  //     bmi,
-  //     selectedSex,
-  //     selectedDate,
-  //     age
-  // };
-  
-  // const data = {
-  //   operation: 'create',
-  //   payload: newUser,
-  // };
-
-
-  // try{
-  //   const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
-  //                 body: {
-  //                       data
-  //                 } 
-  //   });
-  //   console.log("user saved successfully")
-  //   console.log(response)
-  // }
-  // catch(e){
-  //   console.log('Error saving user', e);
-  // }
-    navigation.navigate("details3screen")
+    console.log(imagename);
+    navigation.navigate("details3screen",{state,city,phoneno,pincode,address,weight,height,bmi,date:selectedDate,
+                        gender:selectedSex,bloodgroup:selectedname,age,imagename})
   };
 
   const searchRef = useRef();

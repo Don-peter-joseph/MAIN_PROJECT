@@ -2,10 +2,14 @@ import React, { useEffect, useRef,useState } from 'react';
 import { View, Text, Image, StyleSheet, Pressable,ScrollView,TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
 import {Dimensions} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-import { Auth } from 'aws-amplify';
+import { Auth,Storage } from 'aws-amplify';
 import * as ImagePicker from 'expo-image-picker';
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
+import {launchCameraAsync} from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
+import { Camera,CameraType} from "expo-camera";
+import Lottie from 'lottie-react-native';
 
 
 
@@ -56,7 +60,8 @@ const Detailsfirst = ({navigation,route}) => {
   const [search, setSearch] = useState('');
   const [clicked, setClicked] = useState(false);
   const [data, setData] = useState(names);
-  const [textboxValue, setTextboxValue] = useState('');
+  const [uploadstatus,setuploadstatus] = useState(false);
+  const [uploading,setuploading] = useState(false);
   const [selected, setSelected] = useState(false);
   const [selectedname, setSelectedname] = useState('');
   const [textInputValueAddress, setTextInputValueAddress] = useState('');
@@ -68,6 +73,10 @@ const Detailsfirst = ({navigation,route}) => {
   const [error3, setErrorPin] = useState('')
   const [error4, setErrorPhone] = useState('')
   const [image,setImage] = useState(null);
+  const [temp,settemp]=useState('');
+  const[hasCameraPermission,sethasCameraPermission]=useState(null);
+  const cameraRef=useRef(null);
+  let imgname='';  
 
   useEffect( async () =>{
     if(Platform.OS !== 'web'){
@@ -76,6 +85,8 @@ const Detailsfirst = ({navigation,route}) => {
         alert('Permission denied!')
       }
     }
+    setuploadstatus(false)
+    setuploading(false)
   },[])
 
   const PickImage = async () => {
@@ -84,11 +95,75 @@ const Detailsfirst = ({navigation,route}) => {
       allowsEditing: true,
       quality: 1
     })
-    console.log(result)
-    if(!result.cancelled) {
-      setImage(result.uri)
+    console.log(result.uri)
+    if(result.uri){
+      await uploadimage(result);
+      imgname="public/"+imgname;
+      settemp(imgname);
+      console.log(imgname);
     }
   }
+
+  const fetchimage=async(imageuri)=>{
+    const response=await fetch(imageuri);
+    const blob=await response.blob();
+    return blob;
+  }
+
+  const uploadimage=async(image)=>{
+    setuploadstatus(true);
+    setuploading(true)
+    const img=await fetchimage(image.uri)
+    imgname=`demo${Math.random()}.jpg`;
+    // console.log(imgname);
+    return Storage.put(imgname,img,{
+        level:'public',
+        contentType:image.type,
+        progressCallback(uploadProgress){
+        console.log('PROGRESS-- ',uploadProgress.loaded+'/'+uploadProgress.total);
+        }
+    })
+    .then((res)=>{
+        Storage.get(res.key)
+        .then((result)=>{
+                console.log("RESULT-- ",result);
+            })
+            .catch(e=>{
+                console.log(error);
+            });
+          setuploading(false);
+        })
+    .catch(error=>{
+        console.log(error);
+    })
+}
+
+
+  const takePicture=async()=>{
+    MediaLibrary.requestPermissionsAsync();
+    const camerastatus=await Camera.requestCameraPermissionsAsync();
+    sethasCameraPermission(camerastatus.status==='granted');
+    if(cameraRef){
+        try{ 
+            const data=await launchCameraAsync({
+                allowsEditing:true,
+                quality:0.5,
+             });
+             if(data.uri){
+               await uploadimage(data);
+               imgname="public/"+imgname;
+                settemp(imgname);
+               console.log(imgname);
+             }
+        }catch(e){
+            console.log(e);
+        }
+    }
+  }
+
+  if(hasCameraPermission===false){
+    return <Text>No camera permission</Text>
+    }
 
   const handlenameChange = (name) => {
     setSelectedname(name);
@@ -147,10 +222,10 @@ const Detailsfirst = ({navigation,route}) => {
     if (!isValidPhone) {
       setErrorPhone('Please enter a valid Indian phone number');
     } else {
-      setErrorPhone('');
+        setErrorPhone('');
+        console.log(selectedname,temp);
     navigation.navigate("details2screen",{state:selectedname,address:textInputValueAddress,
-                        city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin})
-    console.log(selectedname);
+                        city:textInputValueCity,phoneno:textInputValuePhone,pincode:textInputValuePin,imagename:temp})
   }
 }
   };
@@ -285,17 +360,41 @@ const Detailsfirst = ({navigation,route}) => {
         {/* </View> */}
 
         <View style={{marginVertical: 10, marginLeft: 10}}>
-          <Text style={styles.Adress1}>Upload Profile Picture: </Text>
-          <View style={{flexDirection:'row',justifyContent: 'space-between',alignItems: 'flex-start', paddingLeft:20}}> 
-      <TouchableOpacity style={styles.button1} onPress={PickImage} >
-        <Text style={styles.buttonText1}>Gallery</Text>
-      </TouchableOpacity>
+            <Text style={styles.Adress1}>Upload Profile Picture: </Text>
+            <View style={{flexDirection:'row',justifyContent: 'space-between',alignItems: 'flex-start', paddingLeft:20}}> 
+              {uploadstatus?
+              <>
+              {uploading?
+              <>
+                <Lottie
+                    source={require('../animatedscreen/uploading.json')}
+                    autoPlay
+                    speed={0.7}
+                    loop
+                    style={{width: 60, height: 60,}}
+                />
+              </>
+              :
+              <>
+              <TouchableOpacity style={styles.button1} >
+                <Text style={styles.buttonText1}>Uploaded</Text>
+              </TouchableOpacity>
+              </>
+              }
+              </>
+              :
+              <>
+              <TouchableOpacity style={styles.button1} onPress={PickImage} >
+                <Text style={styles.buttonText1}>Gallery</Text>
+              </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button1} >
-        <Text style={styles.buttonText1}>Open Camera</Text>
-      </TouchableOpacity>
-      </View>
-    </View>
+              <TouchableOpacity style={styles.button1} onPress={takePicture} >
+                <Text style={styles.buttonText1}>Open Camera</Text>
+              </TouchableOpacity>
+              </>  
+              }
+          </View>
+        </View>
 
 
         <View style={{flex:.5,justifyContent:'center',alignItems:'center'}}>

@@ -9,31 +9,32 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Profile = ({navigation,route}) => {
-    
+
     useEffect(()=>{
         getImage();
     },[])
 
     const [profileData, setprofileData] = useState(null);
+    const {user}=route.params;
+    const [flag,setflag]=useState("");
+    const [loading,setloading]=useState("");
 
     const getImage=async()=>{
         try {
-            const imgname="hihih";
+            const imgname=user.Item.imagename;
+            console.log(imgname)
             const response = await API.post('healthpadrestapi', '/imageretriever-staging', {
                 body: {
                     imgname,
                 }
                 });
             setprofileData(`data:image/jpeg;base64,${response}`);
-            console.log('Lambda response:', response);
         } catch (error) {
             console.log('Lambda error:', error);
         }        
     }
 
 
-    const [flag,setflag]=useState("");
-    const {user} =route.params;
     // console.log(user.Item.city)
 
     const SignOut=async()=>{
@@ -97,7 +98,7 @@ const Profile = ({navigation,route}) => {
                             <Text style={styles.label}>Age</Text>
                             <Text style={styles.item}>{user.Item.age}</Text>
                             <Text style={styles.label}>Gender</Text>
-                            <Text style={styles.item}>{user.Item.selectedSex}</Text>
+                            <Text style={styles.item}>{user.Item.gender}</Text>
                             <Text style={styles.label}>Address</Text>
                             <Text style={styles.item}>{user.Item.address}</Text>
                             <Text style={styles.label}>Type</Text>
@@ -116,6 +117,17 @@ const Profile = ({navigation,route}) => {
                             <Text style={styles.item}>{user.Item.state}</Text>
                             <Text style={styles.label}>Zip Code</Text>
                             <Text style={styles.item}>{user.Item.pincode}</Text>
+                            <Text style={styles.label}>Disease</Text>
+                            <Text style={styles.item}>{user.Item.disease}</Text>
+                            <Text style={styles.label}>FBS</Text>
+                            <Text style={styles.item}>{user.Item.fbs}</Text>
+                            <Text style={styles.label}>RBS</Text>
+                            <Text style={styles.item}>{user.Item.rbs}</Text>
+                            <Text style={styles.label}>HBA1C</Text>
+                            <Text style={styles.item}>{user.Item.hba1c}</Text>
+                            <Text style={styles.label}>Blood Group</Text>
+                            <Text style={styles.item}>{user.Item.bloodgroup}</Text>
+
                         </View>
                         <View style={styles.expandedcontentfooter}>
                             <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFBA2A',width:pressed?'72%':'70%'}]}

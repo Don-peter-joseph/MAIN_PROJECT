@@ -60,8 +60,8 @@ export default function App() {
     }
   };
   
-  useEffect(()=>{
-    checkUser();
+  useEffect(async()=>{
+      await checkUser();
   },[]);
   
   // useEffect(()=>{
@@ -110,19 +110,19 @@ export default function App() {
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
+            {/* <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="signup" component={Signup}/>  */}
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
             <Stack.Screen name="details2screen" component={Detailssecond}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>
-            <Stack.Screen name="signin" component={Signin}/>
-            <Stack.Screen name="signup" component={Signup}/>
         </>
          : 
          ( <>
             <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="signup" component={Signup}/>
-            <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
-            <Stack.Screen name="details2screen" component={Detailssecond}/>
-            <Stack.Screen name="details3screen" component={Detailsthird}/>                                                                        " component={Signin}/>
+            <Stack.Screen name="detailsScreen" component={Detailsfirst}/> 
+            <Stack.Screen name="details2screen" component={Detailssecond}/>     
+            <Stack.Screen name="details3screen" component={Detailsthird}/>     
             <Stack.Screen name="homescreen" component={Home}/>
             <Stack.Screen name="profilescreen" component={Profile}/> 
             <Stack.Screen name="confirmemail" component={Confirmemail}/>
@@ -136,7 +136,7 @@ export default function App() {
             <Stack.Screen name="scanscreen" component={Scanimage}/>
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
-            <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
+            <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/> 
         </>)
     }
       </Stack.Navigator>
