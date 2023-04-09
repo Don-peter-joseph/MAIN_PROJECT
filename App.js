@@ -118,12 +118,12 @@ export default function App() {
         </>
          : 
          ( <>
-            <Stack.Screen name="signin" component={Signin}/>
-            <Stack.Screen name="signup" component={Signup}/>
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
-            <Stack.Screen name="details2screen" component={Detailssecond}/>
-            <Stack.Screen name="details3screen" component={Detailsthird}/>                                                                        " component={Signin}/>
+            <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="signup" component={Signup}/>
+            <Stack.Screen name="details2screen" component={Detailssecond}/>
+            <Stack.Screen name="details3screen" component={Detailsthird}/>                                                           
             <Stack.Screen name="profilescreen" component={Profile}/> 
             <Stack.Screen name="confirmemail" component={Confirmemail}/>
             <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
