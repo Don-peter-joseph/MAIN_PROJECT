@@ -1,8 +1,10 @@
-import React, { useRef,useState } from 'react';
-import { View, Text, Image, StyleSheet, Pressable, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
+import { Auth,Hub,API } from "aws-amplify";
+import { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
 import {Dimensions} from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
+// import { NavigationContainer } from "@react-navigation/native";
 import { CheckBox } from 'react-native-elements';
+import Lottie from 'lottie-react-native';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -19,8 +21,12 @@ const diseases = [
 const Detailsthird = ({navigation,route}) => {
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [diabetesCount, setDiabetesCount] = useState(0);
-  const [hbpCount, setHbpCount] = useState(0);
-  const [obesityCount, setObesityCount] = useState(0);    
+  const [fbs,setfbs]=useState();
+  const [rbs,setrbs]=useState();
+  const [hba1c,sethba1c]=useState();
+  const [loading,setloading]=useState(false);
+  // const [hbpCount, setHbpCount] = useState(0);
+  // const [obesityCount, setObesityCount] = useState(0);    
 
   const handleDiseaseSelect = (id) => {
     setSelectedDiseases((prevSelectedDiseases) => {
@@ -32,7 +38,68 @@ const Detailsthird = ({navigation,route}) => {
     });
   };
   
-  const handleSubmit = () => {
+
+  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age}=route.params;
+
+  const handleSubmit = async() => {
+    let Id='';
+    let Name='';
+    let Email='';
+    if(loading)
+    return;
+    setloading(true);
+        console.log('saving....')
+        try{
+          const currentUser = await Auth.currentAuthenticatedUser();
+          Id = currentUser.attributes.sub;
+          Name=currentUser.attributes.name;
+          Email=currentUser.attributes.email;
+        }
+        catch(e){
+          console.log(e);
+        }
+        // user creation
+        const newUser ={
+          id:Id,
+          name: Name,
+          email:Email,
+          phoneno,
+          address,
+          pincode,
+          city,
+          state,
+          height,
+          weight,
+          bmi,
+          birthdate:date,
+          gender,
+          bloodgroup,
+          disease:selectedDiseases,
+          rbs,
+          fbs,
+          hba1c,
+          imagename,
+          age
+      };
+      
+      const data = {
+        operation: 'create',
+        payload: newUser,
+      };
+
+
+      try{
+        const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+                      body: {
+                            data
+                      } 
+        });
+        console.log("user saved successfully")
+        console.log(response)
+      }
+      catch(e){
+        console.log('Error saving user', e);
+      }
     navigation.navigate("homescreen")
   };
   
@@ -57,59 +124,46 @@ const Detailsthird = ({navigation,route}) => {
         <View>
           <Text style={styles.Adress1}>Enter the FBS value:</Text>
           <TextInput
+          onChangeText={(text) => {
+            setfbs(text);
+          }}
+          value={fbs}
           style={styles.textb}
           placeholder="Enter a value"
           />
           <Text style={styles.Adress2}>Enter the RBS value:</Text>
           <TextInput
+          onChangeText={(text) => {
+            setrbs(text);
+          }}
+          value={rbs}
           style={styles.textb}
           placeholder="Enter a value"
           />
           <Text style={styles.Adress2}>Enter the HbA1c value:</Text>
           <TextInput
+          onChangeText={(text) => {
+            sethba1c(text);
+          }}
+          value={hba1c}
           style={styles.textb}
           placeholder="Enter a value"
           />
-
-          {[...Array(diabetesCount)].map((_, i) => (
-            <TextInput
-              key={i}
-              onChangeText={(text) => setDiabetesCount(i, text)}
-            />
-          ))}
-          
         </View>
       )}
-      
-      {/* {selectedDiseases.includes(2) && (
-        <View>
-          <Text>High blood pressure</Text>
-          {[...Array(hbpCount)].map((_, i) => (
-            <TextInput
-              key={i}
-              onChangeText={(text) => setHbpCount(i, text)}
-            />
-          ))}
-        </View>
-      )}
-      
-      {selectedDiseases.includes(3) && (
-        <View>
-          <Text>Obesity</Text>
-          {[...Array(obesityCount)].map((_, i) => (
-            <TextInput
-              key={i}
-              onChangeText={(text) => setObesityCount(i, text)}
-            />
-          ))}
-        </View>
-      )} */}
-      
-      {/* add more disease-specific textboxes as needed */}
 
-      <View style={{marginTop:680, marginLeft:20, justifyContent:'center',alignItems:'center', position:"fixed"}}>
+      <View style={styles.mainb}>
           <Pressable style={styles.button} onPress={handleSubmit}>
-              <Text style={styles.buttontext}>Submit</Text>
+          {loading ? (
+                <Lottie
+                source={require('../animatedscreen/loadingmain.json')}
+                autoPlay
+                loop
+                style={{width: 100, height: 100}}
+                />
+            ) : (
+                <Text style={{fontSize:20,color:'white'}}>Submit</Text>
+            )}
           </Pressable>
         </View>
       
@@ -120,10 +174,6 @@ const Detailsthird = ({navigation,route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // borderWidth: 5,
-    // borderColor:'green',
-    width:'100%',
-    height: '100%'
   },
   
   checkboxmain:{
@@ -149,9 +199,9 @@ const styles = StyleSheet.create({
     color: 'gray'
   },
   text1:{
-    marginTop: 20,
+    marginTop: 80,
     fontSize:18,
-    paddingLeft: 30
+    paddingLeft:20
   },
   textb:{
     width: '90%',
@@ -188,6 +238,14 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     fontSize:22,
     color:'white'
+  },
+  mainb:{
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf: 'center', 
+    position: 'absolute',
+    width: '100%',
+    bottom: 40
   }
 });
 
