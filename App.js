@@ -17,7 +17,6 @@ import Scanimage from './Components/Home/scanpage';
 import Shop from './Components/Home/shop';
 import Statistics from './Components/Home/statistics';
 import Consult from './Components/Home/consultpage';
-import Diet from './Components/Home/dietpage';
 import Customercare from './Components/Home/customercare';
 import DetectFaces from './Components/Home/detectface';
 import TextRecogniser from './Components/Home/textrecognition';
@@ -25,7 +24,7 @@ import FoodDetector from './Components/Home/fooddetection';
 import Detailsfirst from './Components/Home/details';
 import Detailssecond from './Components/Home/details2';
 import Detailsthird from './Components/Home/details3';
-
+import Diet from './Components/diet/Home';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import * as Linking from 'expo-linking';
@@ -60,8 +59,8 @@ export default function App() {
     }
   };
   
-  useEffect(()=>{
-    checkUser();
+  useEffect(async()=>{
+      await checkUser();
   },[]);
   
   // useEffect(()=>{
@@ -110,33 +109,36 @@ export default function App() {
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
+            {/* <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="signup" component={Signup}/>  */}
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
             <Stack.Screen name="details2screen" component={Detailssecond}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>
-            <Stack.Screen name="signin" component={Signin}/>
-            <Stack.Screen name="signup" component={Signup}/>
         </>
          : 
          ( <>
-            <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
             <Stack.Screen name="signin" component={Signin}/>
-            <Stack.Screen name="homescreen" component={Home}/>
             <Stack.Screen name="signup" component={Signup}/>
-            <Stack.Screen name="details2screen" component={Detailssecond}/>
-            <Stack.Screen name="details3screen" component={Detailsthird}/>                                                           
+            <Stack.Screen name="detailsScreen" component={Detailsfirst}/> 
+            <Stack.Screen name="details2screen" component={Detailssecond}/>     
+            <Stack.Screen name="details3screen" component={Detailsthird}/>     
+            <Stack.Screen name="homescreen" component={Home}/>
+            {/* <Stack.Screen name="signup" component={Signup}/> */}
+            {/* <Stack.Screen name="details2screen" component={Detailssecond}/>
+            <Stack.Screen name="details3screen" component={Detailsthird}/>                                                            */}
             <Stack.Screen name="profilescreen" component={Profile}/> 
+            <Stack.Screen name="dietscreen" component={Diet}/>
             <Stack.Screen name="confirmemail" component={Confirmemail}/>
             <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
             <Stack.Screen name="resetpassword" component={Resetpassword}/>
             <Stack.Screen name="shopscreen" component={Shop}/>
             <Stack.Screen name="servicescreen" component={Customercare}/>
             <Stack.Screen name="consultscreen" component={Consult}/>
-            <Stack.Screen name="dietscreen" component={Diet}/>
             <Stack.Screen name="statisticsscreen" component={Statistics}/>
             <Stack.Screen name="scanscreen" component={Scanimage}/>
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
-            <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
+            <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/> 
         </>)
     }
       </Stack.Navigator>
