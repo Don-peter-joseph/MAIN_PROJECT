@@ -85,6 +85,7 @@ const Detailsthird = ({navigation,route}) => {
       const data = {
         operation: 'create',
         payload: newUser,
+        tablename:'heathpaduserdetails-staging'
       };
 
 
