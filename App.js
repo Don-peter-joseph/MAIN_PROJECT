@@ -25,6 +25,7 @@ import Detailsfirst from './Components/Home/details';
 import Detailssecond from './Components/Home/details2';
 import Detailsthird from './Components/Home/details3';
 import Diet from './Components/diet/Home';
+import Item from './Components/diet/Items';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import * as Linking from 'expo-linking';
@@ -96,6 +97,7 @@ export default function App() {
         { user? 
         <>
             <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="profilescreen" component={Profile}/> 
             <Stack.Screen name="confirmemail" component={Confirmemail}/>
             <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
@@ -103,17 +105,17 @@ export default function App() {
             <Stack.Screen name="shopscreen" component={Shop}/>
             <Stack.Screen name="servicescreen" component={Customercare}/>
             <Stack.Screen name="consultscreen" component={Consult}/>
-            <Stack.Screen name="dietscreen" component={Diet}/>
             <Stack.Screen name="statisticsscreen" component={Statistics}/>
             <Stack.Screen name="scanscreen" component={Scanimage}/>
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
-            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
             {/* <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="signup" component={Signup}/>  */}
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
             <Stack.Screen name="details2screen" component={Detailssecond}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>
+            <Stack.Screen name="dietscreen" component={Diet}/>
+            <Stack.Screen name="itemscreen" component={Item}/> 
         </>
          : 
          ( <>
@@ -136,6 +138,7 @@ export default function App() {
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/> 
+            <Stack.Screen name="itemscreen" component={Item}/> 
         </>)
     }
       </Stack.Navigator>

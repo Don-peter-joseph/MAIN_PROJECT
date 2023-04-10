@@ -46,6 +46,7 @@ const Home=({navigation,route})=>{
           const data = {
             operation: 'retrieve',
             payload: userid,
+            tablename:'heathpaduserdetails-staging'
           };
             const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
                 body: {
@@ -101,7 +102,7 @@ const Home=({navigation,route})=>{
                             <Lottie style={styles.animation} source={require('../animatedscreen/scan.json')} autoPlay loop speed={0.6}/>
                         {/* <Image style={[styles.featureimages]} source={require('./assets/scan.png')}/> */}
                             <Text style={{fontWeight:'bold',fontSize:15}}>Scan</Text></Pressable>
-                        <Pressable  style={styles.box} onPress={()=>navigation.navigate("dietscreen")}>        
+                        <Pressable  style={styles.box} onPress={()=>navigation.navigate("dietscreen",{user})}>        
                         {/* <Image style={[styles.featureimages]} source={require('./assets/diet.jpg')}/> */}
                         <Lottie style={styles.animation} source={require('../animatedscreen/diet.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Manage Diet</Text></Pressable>
