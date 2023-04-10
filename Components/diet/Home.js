@@ -25,7 +25,7 @@ const Diet = ({navigation,route}) => {
     const calculate=()=>{
         if(user.Item.gender==='male'){
             const bmr=88.362+(13.397*user.Item.weight)+(4.799*user.Item.height)-(5.677*user.Item.age);
-            setcal(bmr);
+            setcal(Math.round(bmr));
             setfil(1);
         }
         else{

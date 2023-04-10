@@ -26,6 +26,7 @@ import Detailssecond from './Components/Home/details2';
 import Detailsthird from './Components/Home/details3';
 import Diet from './Components/diet/Home';
 import Item from './Components/diet/Items';
+import Recipe from './Components/diet/recipe';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import * as Linking from 'expo-linking';
@@ -96,6 +97,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown:false}}>
         { user? 
         <>
+            <Stack.Screen name="itemscreen" component={Item}/> 
             <Stack.Screen name="homescreen" component={Home}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="profilescreen" component={Profile}/> 
@@ -115,7 +117,7 @@ export default function App() {
             <Stack.Screen name="details2screen" component={Detailssecond}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>
             <Stack.Screen name="dietscreen" component={Diet}/>
-            <Stack.Screen name="itemscreen" component={Item}/> 
+            <Stack.Screen name="recipescreen" component={Recipe}/>
         </>
          : 
          ( <>
@@ -139,6 +141,8 @@ export default function App() {
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/> 
             <Stack.Screen name="itemscreen" component={Item}/> 
+            <Stack.Screen name="recipescreen" component={Recipe}/>
+
         </>)
     }
       </Stack.Navigator>

@@ -9,20 +9,21 @@ import Lottie from 'lottie-react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Item = ({navigation,route}) => {
+const Recipe = ({navigation,route}) => {
 
-    const [list,setlist]=useState([]);
-    // const [image,setimage]=useState();
+    const {item}=route.params;
+    const parsedItem = JSON.parse(item);
 
     useEffect(() => {
         getDetails();
       }, []);
 
     const getDetails=async()=>{
+        console.log(parsedItem.Name);
         const data = {
-            operation: 'retrieve-all',
-            payload: 'nothing',
-            tablename:'healthpadfoodlist'
+            operation: 'retrieve',
+            payload: parsedItem.Name,
+            tablename:'recipehealthpad'
           };
             const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
                 body: {
@@ -30,51 +31,14 @@ const Item = ({navigation,route}) => {
                 } 
             });  
             console.log("items retrieved successfully")
-            setlist(response);
+            console.log(response)
       
-    }
-
-    const getImage=async(imgname)=>{
-        try {
-            console.log(imgname)
-            const response = await API.post('healthpadrestapi', '/imageretriever-staging', {
-                body: {
-                    imgname,
-                }
-                });
-            // setimage(`data:image/jpeg;base64,${response}`);
-            // return response;
-        } catch (error) {
-            console.log('Lambda error:', error);
-        }        
     }
 
     return(
 
         <View style={{width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
-            <View style={styles.heading}>
-                <Text style={{fontSize:30,fontWeight:'600'}}>Diet Plan</Text>
-            </View>
-            <View style={styles.food}>
-                <FlatList style={{flex:1 }} 
-                    data={list}
-                    numColumns={2}
-                    renderItem={({item, index}) => {
-                        // const image=getImage(item.imgpath);
-                        // console.log(item.imgpath.slice(7,))
-                        // const anotherimage='./assets/images/' +item.imgpath.slice(7,)
-                        // console.log(anotherimage)
-                        return (
-                        <Pressable style={styles.box} onPress={()=>navigation.navigate("recipescreen",{ item: JSON.stringify(item) })}>
-                            <Text style={{fontWeight:'bold',fontSize:15}}>{item.Name}</Text>
-                            {/* <Image source={require(anotherimage)}/> */}
-                            <Text style={{color:'#787777',paddingTop:0}}>{item.Calorie} kcal</Text>
-                        </Pressable>
-                        );
-                    }}
-                    scrollEnabled={true}
-                />
-            </View>
+            <Text>nothing</Text>
         </View>
     )
 }
@@ -132,4 +96,4 @@ const styles=StyleSheet.create({
 
 })
 
-export default Item;
+export default Recipe;
