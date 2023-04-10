@@ -1,5 +1,5 @@
 import React, { useEffect, useRef,useState } from 'react';
-import { View, Text, Image, StyleSheet, Pressable,ScrollView,TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable,ScrollView,TouchableOpacity,Alert, TextInput, FlatList, KeyboardAvoidingView} from 'react-native';
 import {Dimensions} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { Auth,Storage } from 'aws-amplify';
@@ -89,6 +89,15 @@ const Detailsfirst = ({navigation,route}) => {
     setuploading(false)
   },[])
 
+  const showAlert=()=>{
+      Alert.alert(
+        'Hello!',
+        'This is a simple message.',
+        [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+        { cancelable: false }
+      );
+  }
+
   const PickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -158,6 +167,10 @@ const Detailsfirst = ({navigation,route}) => {
         }catch(e){
             console.log(e);
         }
+    }
+    else {
+      sethasCameraPermission(false)
+      console.log('Camera permission not granted');
     }
   }
 

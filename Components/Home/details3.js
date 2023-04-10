@@ -31,7 +31,7 @@ const Detailsthird = ({navigation,route}) => {
   
   const handleCheckbox = () => {
     setIsChecked(!isChecked);
-  }
+  };
 
   const handleDiseaseSelect = (id) => {
     setSelectedDiseases((prevSelectedDiseases) => {
@@ -44,6 +44,16 @@ const Detailsthird = ({navigation,route}) => {
   };
 
   const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age}=route.params;
+
+  const terms = () =>
+  {
+    navigation.navigate("termsscreen")
+  }
+
+  const privacy = () =>
+  {
+    navigation.navigate("privacyscreen")
+  }
 
   const handleSubmit = async() => {
     let Id='';
@@ -155,13 +165,13 @@ const Detailsthird = ({navigation,route}) => {
           />
         </View>
       )}
-      
+
       <View style={styles.checkboxContainer2}>
-        <CheckBox value={isChecked} style={styles.checkbox} onChange={handleCheckbox} />
+        <CheckBox value={isChecked} style={styles.checkbox1} onChange={handleCheckbox} />
         <Text style={styles.labelc}>
           I have agree to the{' '} 
-          <Text style={styles.link}>terms & conditions</Text> and{'\n'}
-          <Text style={styles.link}>privacy policy</Text>.
+          <Text style={styles.link} onPress={terms}>terms & conditions </Text> and{'\n'}
+          <Text style={styles.link} onPress={privacy}>privacy policy</Text>.
         </Text>
       </View>
 
@@ -235,6 +245,9 @@ const styles = StyleSheet.create({
   marginTop:20,
   marginLeft:22,
   fontSize: 16,
+  },
+  checkbox1: {
+    alignSelf: 'center'
   },
   button:{
     borderWidth:0,
