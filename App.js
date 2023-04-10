@@ -97,8 +97,8 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown:false}}>
         { user? 
         <>
-            <Stack.Screen name="itemscreen" component={Item}/> 
             <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="itemscreen" component={Item}/> 
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="profilescreen" component={Profile}/> 
             <Stack.Screen name="confirmemail" component={Confirmemail}/>
