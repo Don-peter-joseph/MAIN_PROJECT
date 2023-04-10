@@ -52,7 +52,7 @@ const Item = ({navigation,route}) => {
 
         <View style={{width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
             <View style={styles.heading}>
-                <Text style={{fontSize:30,fontWeight:'600'}}>Diet Plan</Text>
+                <Text style={{fontSize:30,fontWeight:'600',paddingTop:40}}>Diet Plan</Text>
             </View>
             <View style={styles.food}>
                 <FlatList style={{flex:1 }} 
@@ -65,9 +65,14 @@ const Item = ({navigation,route}) => {
                         // console.log(anotherimage)
                         return (
                         <Pressable style={styles.box} onPress={()=>navigation.navigate("recipescreen",{ item: JSON.stringify(item) })}>
-                            <Text style={{fontWeight:'bold',fontSize:15}}>{item.Name}</Text>
-                            {/* <Image source={require(anotherimage)}/> */}
-                            <Text style={{color:'#787777',paddingTop:0}}>{item.Calorie} kcal</Text>
+                            <Text style={{fontWeight:'bold',fontSize:15,height:50}}>{item.Name}</Text>
+                            <Lottie
+                            source={require('./assets/imageloading.json')}
+                            autoPlay
+                            loop
+                            style={{width:"80%",height:150}}
+                            />
+                            <Text style={{color:'#787777',height:40,paddingTop:17}}>{item.Calorie} kcal</Text>
                         </Pressable>
                         );
                     }}
@@ -100,10 +105,12 @@ const styles=StyleSheet.create({
         // borderWidth:1,
         // borderColor:'green',
         width:windowWidth/2.2,
-        height:200,
+        // height:200,
         backgroundColor:'#ffffff',
         padding:10,
-        margin:8
+        margin:8,
+        justifyContent:'space-evenly',
+        alignItems:'center'
     },
     food:{
         flex:10,
