@@ -13,7 +13,7 @@ const Recipe = ({navigation,route}) => {
 
     const {item}=route.params;
     const parsedItem = JSON.parse(item);
-    const [content,setcontent]=useState('loading...');
+    const [content,setcontent]=useState();
 
     useEffect(() => {
         getDetails();
@@ -32,16 +32,29 @@ const Recipe = ({navigation,route}) => {
                 } 
             });  
             setcontent(response.Item.Recipe);
-      
     }
 
     return(
 
         <View style={styles.outline}>
-            <Text style={{fontSize:40,fontWeight:300,padding:20}}>Recipe</Text>
-            <View style={styles.content}>
-                <Text style={{padding:15}}>{content}</Text>
+            {content?
+            <>
+                <Text style={{fontSize:40,fontWeight:300,padding:20}}>Recipe</Text>
+                <View style={styles.content}>
+                    <Text style={{padding:15}}>{content}</Text>
+                </View>            
+            </>    
+            :
+            <>
+            <View style={{width:"70%",height:"70%"}}>
+                <Lottie
+                source={require('./assets/recipeloading.json')}
+                autoPlay
+                loop
+                />
             </View>
+            </>
+            }
         </View>
     )
 }
