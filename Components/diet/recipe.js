@@ -13,6 +13,7 @@ const Recipe = ({navigation,route}) => {
 
     const {item}=route.params;
     const parsedItem = JSON.parse(item);
+    const [content,setcontent]=useState('loading...');
 
     useEffect(() => {
         getDetails();
@@ -30,70 +31,32 @@ const Recipe = ({navigation,route}) => {
                         data 
                 } 
             });  
-            console.log("items retrieved successfully")
-            console.log(response)
+            setcontent(response.Item.Recipe);
       
     }
 
     return(
 
-        <View style={{width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
-            <Text>nothing</Text>
+        <View style={styles.outline}>
+            <Text style={{fontSize:40,fontWeight:300,padding:20}}>Recipe</Text>
+            <View style={styles.content}>
+                <Text style={{padding:15}}>{content}</Text>
+            </View>
         </View>
     )
 }
 
 const styles=StyleSheet.create({
     outline:{
-        flex: 1,
         width:'100%',
         height:'100%',
-        justifyContent: 'space-evenly', 
-        // borderWidth:2,
-        // borderColor:'red',
-        flexDirection:'row'
+        justifyContent:'space-evenly',
+        alignItems:'center',
     },
     content:{
-        justifyContent:'center',
-        alignItems:"center"
-    },
-    progressbar:{
-        marginTop:30,
-        marginBottom:20
-    },
-    box:{
-        // borderWidth:1,
-        // borderColor:'green',
-        width:windowWidth/2.2,
-        height:200,
-        backgroundColor:'#ffffff',
-        padding:10,
-        margin:8
-    },
-    food:{
-        flex:10,
-        width:'100%',
-        height:700,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#F1F1F1',
-        marginTop:60,
-        // borderWidth:1
-
-    },
-    image:{
-        width:'100%',
-        flex:3,
-        borderWidth:1,
-        borderColor:'green'
-    },
-    heading:{
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
+        width:'90%',
+        backgroundColor:'#ffffff'
     }
-
 })
 
 export default Recipe;

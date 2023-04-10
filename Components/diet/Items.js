@@ -29,9 +29,8 @@ const Item = ({navigation,route}) => {
                         data 
                 } 
             });  
-            console.log("items retrieved successfully")
+            console.log("items retrieved successfully ",response)
             setlist(response);
-      
     }
 
     const getImage=async(imgname)=>{
