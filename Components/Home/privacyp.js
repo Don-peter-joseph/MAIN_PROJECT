@@ -25,7 +25,7 @@ const PrivacyPolicy=({navigation,route})=>{
         <Text style={{ marginTop: 7 }}>
           We collect personal information, such as name, age, gender, email address, and health-related data,
            to provide personalized health and wellness recommendations and track progress. 
-           HealthPlus does not share any personal information with third parties unless required by law or 
+           HealthPad does not share any personal information with third parties unless required by law or 
            with user consent.
         </Text>
         <Text style={{ fontWeight: 'bold', fontSize: 14, marginTop:8 }}>Data Security:</Text>
@@ -44,7 +44,7 @@ const PrivacyPolicy=({navigation,route})=>{
         <Text style={{ marginTop: 7 }}>
           Users have the right to request access to, correction of, or deletion of their personal information.
           Users may also request a copy of their data or ask to restrict its processing. 
-          HealthPlus will respond to these requests promptly and in accordance with applicable laws.
+          HealthPad will respond to these requests promptly and in accordance with applicable laws.
         </Text>
         <Text style={{ fontWeight: 'bold', fontSize: 14, marginTop:8 }}>Changes to This Policy:</Text>
         <Text style={{ marginTop: 7 }}>
