@@ -2,7 +2,6 @@ import { Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
 import {Dimensions} from 'react-native';
-// import { NavigationContainer } from "@react-navigation/native";
 import { CheckBox } from 'react-native-elements';
 import Lottie from 'lottie-react-native';
 
@@ -25,8 +24,7 @@ const Detailsthird = ({navigation,route}) => {
   const [rbs,setrbs]=useState();
   const [hba1c,sethba1c]=useState();
   const [loading,setloading]=useState(false);
-  // const [hbpCount, setHbpCount] = useState(0);
-  // const [obesityCount, setObesityCount] = useState(0);    
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleDiseaseSelect = (id) => {
     setSelectedDiseases((prevSelectedDiseases) => {
@@ -37,9 +35,18 @@ const Detailsthird = ({navigation,route}) => {
       }
     });
   };
-  
 
   const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age}=route.params;
+
+  const terms = () =>
+  {
+    navigation.navigate("termsscreen")
+  }
+
+  const privacy = () =>
+  {
+    navigation.navigate("privacyscreen")
+  }
 
   const handleSubmit = async() => {
     let Id='';
@@ -153,6 +160,15 @@ const Detailsthird = ({navigation,route}) => {
         </View>
       )}
 
+      <View style={styles.checkboxContainer2}>
+        <CheckBox value={isChecked} onValueChange={setIsChecked} style={styles.checkbox1} />
+        <Text style={styles.labelc}>
+          I have agree to the{' '} 
+          <Text style={styles.link} onPress={terms}>terms & conditions </Text> and{'\n'}
+          <Text style={styles.link} onPress={privacy}>privacy policy</Text>.
+        </Text>
+      </View>
+
       <View style={styles.mainb}>
           <Pressable style={styles.button} onPress={handleSubmit}>
           {loading ? (
@@ -224,6 +240,9 @@ const styles = StyleSheet.create({
   marginLeft:22,
   fontSize: 16,
   },
+  checkbox1: {
+    alignSelf: 'center',
+  },
   button:{
     borderWidth:0,
     // borderColor:'#ADA2FF',
@@ -247,7 +266,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     bottom: 40
-  }
+  },
+  checkboxContainer2: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  labelc: {
+    fontSize: 16
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
 });
 
 export default Detailsthird;

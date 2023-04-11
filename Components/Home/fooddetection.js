@@ -100,7 +100,6 @@ const FoodDetector = ({navigation,route}) => {
   }
   
 
-
 return(
   <>
   <StatusBar hidden={true}/>
