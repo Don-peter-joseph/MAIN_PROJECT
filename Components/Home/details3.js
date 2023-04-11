@@ -1,6 +1,7 @@
 import { Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert} from "react-native";
+// import CheckBox from "@react-native-community/checkbox";
 import {Dimensions} from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import Lottie from 'lottie-react-native';
@@ -270,7 +271,10 @@ const styles = StyleSheet.create({
   checkboxContainer2: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 300,
+    // borderWidth:1,
+    // position:'absolute',
+    bottom:100
   },
   labelc: {
     fontSize: 16

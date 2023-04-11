@@ -125,10 +125,10 @@ export default function App() {
         </>
          : 
          ( <>
+            <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="details3screen" component={Detailsthird}/>     
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/> 
             <Stack.Screen name="details2screen" component={Detailssecond}/>     
-            <Stack.Screen name="details3screen" component={Detailsthird}/>     
-            <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="itemscreen" component={Item}/> 
             <Stack.Screen name="signup" component={Signup}/>
             {/* <Stack.Screen name="signin" component={Signin}/>
