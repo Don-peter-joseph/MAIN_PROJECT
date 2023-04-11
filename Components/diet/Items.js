@@ -12,7 +12,19 @@ const windowHeight = Dimensions.get('window').height;
 const Item = ({navigation,route}) => {
 
     const [list,setlist]=useState([]);
+    const {user}=route.params;
+    let {flag}=route.params;
     // const [image,setimage]=useState();
+    const images = {
+        'rice': require('./assets/images/rice.jpg'),
+        'eggroast': require('./assets/images/eggroast.jpg'),
+        'Appam': require('./assets/images/Appam.jpg'),
+        'cabbagethoran': require('./assets/images/cabbagethoran.jpg'),
+        'dosa': require('./assets/images/dosa.png'),
+        'bittergourd': require('./assets/images/bittergourd.jpg'),
+        'chickenstew': require('./assets/images/chickenstew.jpg'),
+        'idli': require('./assets/images/idli.jpg'),
+      };
 
     useEffect(() => {
         getDetails();
@@ -41,8 +53,6 @@ const Item = ({navigation,route}) => {
                     imgname,
                 }
                 });
-            // setimage(`data:image/jpeg;base64,${response}`);
-            // return response;
         } catch (error) {
             console.log('Lambda error:', error);
         }        
@@ -51,6 +61,8 @@ const Item = ({navigation,route}) => {
     return(
 
         <View style={{width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
+        {list.length?
+        <>
             <View style={styles.heading}>
                 <Text style={{fontSize:30,fontWeight:'600',paddingTop:40}}>Diet Plan</Text>
             </View>
@@ -60,18 +72,19 @@ const Item = ({navigation,route}) => {
                     numColumns={2}
                     renderItem={({item, index}) => {
                         // const image=getImage(item.imgpath);
-                        // console.log(item.imgpath.slice(7,))
-                        // const anotherimage='./assets/images/' +item.imgpath.slice(7,)
-                        // console.log(anotherimage)
+                        const imgpath=item.imgpath.slice(7,-4);
+                        const imagepath=images[imgpath];
+                        console.log(typeof(imagepath))
                         return (
-                        <Pressable style={styles.box} onPress={()=>navigation.navigate("recipescreen",{ item: JSON.stringify(item) })}>
+                        <Pressable style={styles.box} onPress={()=>navigation.navigate("recipescreen",{flag:!flag,user, item: JSON.stringify(item) })}>
                             <Text style={{fontWeight:'bold',fontSize:15,height:50}}>{item.Name}</Text>
-                            <Lottie
+                            {/* <Lottie
                             source={require('./assets/imageloading.json')}
                             autoPlay
                             loop
                             style={{width:"80%",height:150}}
-                            />
+                            /> */}
+                            <Image source={imagepath} style={styles.image}/>
                             <Text style={{color:'#787777',height:40,paddingTop:17}}>{item.Calorie} kcal</Text>
                         </Pressable>
                         );
@@ -79,6 +92,17 @@ const Item = ({navigation,route}) => {
                     scrollEnabled={true}
                 />
             </View>
+        </>
+        :
+        <>
+            <Lottie
+            source={require('./assets/recipeloading.json')}
+            autoPlay
+            loop
+            style={{width:400,height:400}}
+            />
+        </>
+        }
         </View>
     )
 }
@@ -126,9 +150,9 @@ const styles=StyleSheet.create({
     },
     image:{
         width:'100%',
-        flex:3,
+        height:150,
         borderWidth:1,
-        borderColor:'green'
+        borderColor:'#000000'
     },
     heading:{
         flex:1,
