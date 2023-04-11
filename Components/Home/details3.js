@@ -2,7 +2,6 @@ import { Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
 import {Dimensions} from 'react-native';
-// import { NavigationContainer } from "@react-navigation/native";
 import { CheckBox } from 'react-native-elements';
 import Lottie from 'lottie-react-native';
 
@@ -26,12 +25,6 @@ const Detailsthird = ({navigation,route}) => {
   const [hba1c,sethba1c]=useState();
   const [loading,setloading]=useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  // const [hbpCount, setHbpCount] = useState(0);
-  // const [obesityCount, setObesityCount] = useState(0);   
-  
-  const handleCheckbox = () => {
-    setIsChecked(!isChecked);
-  };
 
   const handleDiseaseSelect = (id) => {
     setSelectedDiseases((prevSelectedDiseases) => {
@@ -99,6 +92,7 @@ const Detailsthird = ({navigation,route}) => {
       const data = {
         operation: 'create',
         payload: newUser,
+        tablename:'heathpaduserdetails-staging'
       };
 
 
@@ -167,7 +161,7 @@ const Detailsthird = ({navigation,route}) => {
       )}
 
       <View style={styles.checkboxContainer2}>
-        <CheckBox value={isChecked} style={styles.checkbox1} onChange={handleCheckbox} />
+        <CheckBox value={isChecked} onValueChange={setIsChecked} style={styles.checkbox1} />
         <Text style={styles.labelc}>
           I have agree to the{' '} 
           <Text style={styles.link} onPress={terms}>terms & conditions </Text> and{'\n'}
@@ -247,7 +241,7 @@ const styles = StyleSheet.create({
   fontSize: 16,
   },
   checkbox1: {
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   button:{
     borderWidth:0,

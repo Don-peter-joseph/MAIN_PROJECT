@@ -1,16 +1,13 @@
 import { Auth,Hub } from "aws-amplify";
-import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert, ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
-import * as Linking from 'expo-linking';
-import * as webbrower from 'expo-web-browser';
 import { ScrollViewComponent } from "react-native";
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const privacyscreen=({navigation,route})=>{
+const PrivacyPolicy=({navigation,route})=>{
 
     return(
         <ScrollView style={{ paddingHorizontal: 20, paddingTop: 16 }}>
@@ -91,4 +88,4 @@ const styles=StyleSheet.create({
     }
 })
 
-export default privacyscreen;
+export default PrivacyPolicy;

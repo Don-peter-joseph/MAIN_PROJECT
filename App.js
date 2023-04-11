@@ -25,7 +25,9 @@ import Detailsfirst from './Components/Home/details';
 import Detailssecond from './Components/Home/details2';
 import Detailsthird from './Components/Home/details3';
 import Diet from './Components/diet/Home';
-import TermsCond from './Components/Home/termscond';
+import Item from './Components/diet/Items';
+import Recipe from './Components/diet/recipe';
+import TermsCondition from './Components/Home/termscond';
 import PrivacyPolicy from './Components/Home/privacyp';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
@@ -98,6 +100,8 @@ export default function App() {
         { user? 
         <>
             <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="itemscreen" component={Item}/> 
+            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="profilescreen" component={Profile}/> 
             <Stack.Screen name="confirmemail" component={Confirmemail}/>
             <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
@@ -105,18 +109,18 @@ export default function App() {
             <Stack.Screen name="shopscreen" component={Shop}/>
             <Stack.Screen name="servicescreen" component={Customercare}/>
             <Stack.Screen name="consultscreen" component={Consult}/>
-            <Stack.Screen name="dietscreen" component={Diet}/>
             <Stack.Screen name="statisticsscreen" component={Statistics}/>
             <Stack.Screen name="scanscreen" component={Scanimage}/>
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
-            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>
             {/* <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="signup" component={Signup}/>  */}
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/>
             <Stack.Screen name="details2screen" component={Detailssecond}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>
-            <Stack.Screen name="termsscreen" component={TermsCond}/>
+            <Stack.Screen name="dietscreen" component={Diet}/>
+            <Stack.Screen name="recipescreen" component={Recipe}/>
+            <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
         </>
          : 
@@ -125,7 +129,10 @@ export default function App() {
             <Stack.Screen name="details2screen" component={Detailssecond}/>     
             <Stack.Screen name="details3screen" component={Detailsthird}/>     
             <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="itemscreen" component={Item}/> 
             <Stack.Screen name="signup" component={Signup}/>
+            {/* <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="signup" component={Signup}/> */}
             <Stack.Screen name="homescreen" component={Home}/>
             {/* <Stack.Screen name="signup" component={Signup}/> */}
             {/* <Stack.Screen name="details2screen" component={Detailssecond}/>
@@ -143,8 +150,10 @@ export default function App() {
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/> 
-            <Stack.Screen name="termsscreen" component={TermsCond}/>
+            <Stack.Screen name="recipescreen" component={Recipe}/>
+            <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
+
         </>)
     }
       </Stack.Navigator>
