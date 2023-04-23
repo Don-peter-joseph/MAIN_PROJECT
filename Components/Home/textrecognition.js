@@ -66,7 +66,8 @@ const TextRecogniser = ({navigation,route}) => {
         try {
             const response = await API.post('healthpadrestapi', '/healthpadtextrecognition-staging', {
             body: {
-                imgname
+                imgname,
+                bucketname:'rawfoods82713-staging'
             }
         });
             settext(JSON.stringify(response, null, 2))

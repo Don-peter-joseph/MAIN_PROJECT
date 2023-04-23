@@ -13,8 +13,41 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Diet = ({navigation,route}) => {
+    const {user,calorie}=route.params  || {};
+    let {flag}=route.params||{};
     const [cal,setcal]=useState('2000');
     const [reading,setreading]=useState('40');
+    const [fil,setfil]=useState('0');
+    const [total,settotal]=useState('0');
+
+    useEffect(()=>{
+        if (calorie !== undefined) {
+            let value=(((total-(cal-calorie))/total)*100)
+            console.log(total,cal,calorie,value)
+            setfil(value)
+            setcal(cal-calorie)
+            flag=0;
+          }
+        else{
+            calculate();
+        }
+    },[calorie,flag])
+
+
+    const calculate=()=>{
+        if(user.Item.gender==='male'){
+            bmr=88.362+(13.397*user.Item.weight)+(4.799*user.Item.height)-(5.677*user.Item.age);
+            setcal(Math.round(bmr));
+            settotal(Math.round(bmr));
+            setfil(1);
+        }
+        else{
+            bmr=655+(9.6*user.Item.weight)+(1.8*user.Item.height)-(4.7*user.Item.age);
+            setcal(bmr);
+            settotal(Math.round(bmr));
+            setfil(1);
+        }
+    }
 
     return(
         <ImageBackground source={require('./assets/homescreen.png')}  style={{flex:1}}>
@@ -27,7 +60,7 @@ const Diet = ({navigation,route}) => {
                 <AnimatedCircularProgress
                     size={180}
                     width={13}
-                    fill={cal}
+                    fill={fil}
                     tintColor='#8f00ff'
                     lineCap="round"
                     arcSweepAngle={359}
@@ -73,7 +106,7 @@ const Diet = ({navigation,route}) => {
                 </AnimatedCircularProgress>
             </View>
             <View style={styles.food}>
-                <Pressable style={styles.box}>
+                <Pressable style={styles.box} onPress={()=>navigation.navigate("itemscreen",{flag,user,title:'BREAKFAST'})}>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <Text style={{fontWeight:'bold',fontSize:15}}>BREAKFAST</Text>
                         <Lottie
@@ -86,19 +119,19 @@ const Diet = ({navigation,route}) => {
                         <Text style={{color:'#787777',paddingTop:50}}>360-367 kcal recommended</Text>
                         <Text style={{color:'#787777',paddingTop:5}}>Total 0 kcal consumed</Text>
                 </Pressable>
-                <Pressable style={styles.box}>
+                <Pressable style={styles.box} onPress={()=>navigation.navigate("itemscreen",{flag,user,title:'LUNCH'})}>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <Text style={{fontWeight:'bold',fontSize:15}}>LUNCH</Text>
                         <Lottie
                         source={require('./assets/lunch.json')}
                         autoPlay
-                        style={{width: 40, height: 100,marginLeft:100}}
+                        style={{width: 30, height: 100,marginLeft:105}}
                         />
                     </View>
                         <Text style={{color:'#787777',paddingTop:50}}>360-367 kcal recommended</Text>
                         <Text style={{color:'#787777',paddingTop:5}}>Total 0 kcal consumed</Text>
                 </Pressable>            
-                <Pressable style={styles.box}>
+                <Pressable style={styles.box} onPress={()=>navigation.navigate("itemscreen",{flag,user,title:'SNACKS'})}>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <Text style={{fontWeight:'bold',fontSize:15}}>SNACKS</Text>
                         <Lottie
@@ -111,7 +144,7 @@ const Diet = ({navigation,route}) => {
                     <Text style={{color:'#787777',paddingTop:50}}>360-367 kcal recommended</Text>
                     <Text style={{color:'#787777',paddingTop:5}}>Total 0 kcal consumed</Text>
                 </Pressable>            
-                <Pressable style={styles.box}>
+                <Pressable style={styles.box} onPress={()=>navigation.navigate("itemscreen",{flag,user,title:'DINNER'})}>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <Text style={{fontWeight:'bold',fontSize:15}}>DINNER</Text>
                         <Lottie
