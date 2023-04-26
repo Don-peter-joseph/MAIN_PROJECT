@@ -10,8 +10,8 @@ const windowHeight = Dimensions.get('window').height;
 const TermsCondition=({navigation,route})=>{
 
     return(
-        <ScrollView style={{ paddingHorizontal: 20, paddingTop: 16 }}>
-            <View style={{ marginTop: 20 }}>
+        <ScrollView style={styles.container}>
+            <View style={{ marginTop: 20, height:990 }}>
         <Text style={{ fontWeight: 'bold', fontSize: 18}}>
             Terms and Conditions
         </Text>
@@ -71,19 +71,6 @@ const TermsCondition=({navigation,route})=>{
 }
 
 const styles=StyleSheet.create({
-    outline:{
-        flex: 1,
-        position:'absolute',
-        width:windowWidth,
-        height:windowHeight,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:' #f5f5f5'
-    },
-    content:{
-        justifyContent:'center',
-        alignItems:"center"
-    }   ,
     signout:{
         borderWidth:1,
         borderColor:'black',
@@ -94,6 +81,10 @@ const styles=StyleSheet.create({
         alignItems:'center',
         marginTop:13,
         width:'50%'
+    },
+    container:{
+         paddingHorizontal: 20, 
+         paddingTop: 16
     }
 })
 

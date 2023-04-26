@@ -149,6 +149,10 @@ const Profile = ({navigation,route}) => {
                 </>
                 }
             </View>
+            {/* <Pressable style={({pressed})=>[styles.signout,{width:pressed?'52%':'50%'}] } onPress={signOut}>
+                <Text>Get out</Text>
+            </Pressable>
+        </View> */}
         </ImageBackground>
     )
 }
