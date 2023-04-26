@@ -20,7 +20,6 @@ import Consult from './Components/Home/consultpage';
 import Customercare from './Components/Home/customercare';
 import DetectFaces from './Components/Home/detectface';
 import TextRecogniser from './Components/Home/textrecognition';
-import textDetection from './Components/Home/googlevisiontext';
 import FoodDetector from './Components/Home/fooddetection';
 import Detailsfirst from './Components/Home/details';
 import Detailssecond from './Components/Home/details2';
@@ -102,8 +101,7 @@ export default function App() {
         <>
             <Stack.Screen name="homescreen" component={Home}/>
             <Stack.Screen name="itemscreen" component={Item}/> 
-            {/* <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/> */}
-            <Stack.Screen name="googlevisiontextscreen" component={textDetection}/>
+            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="profilescreen" component={Profile}/> 
             <Stack.Screen name="confirmemail" component={Confirmemail}/>
             <Stack.Screen name="forgotpassword" component={Forgotpassword}/>
@@ -150,8 +148,7 @@ export default function App() {
             <Stack.Screen name="statisticsscreen" component={Statistics}/>
             <Stack.Screen name="scanscreen" component={Scanimage}/>
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
-            {/* <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/> */}
-            <Stack.Screen name="googlevisiontextscreen" component={textDetection}/>
+            <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/> 
             <Stack.Screen name="recipescreen" component={Recipe}/>
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
