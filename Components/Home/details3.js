@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
 import {Dimensions} from 'react-native';
 import { CheckBox } from 'react-native-elements';
+// import { CheckBox, Icon } from '@rneui/themed';
 import Lottie from 'lottie-react-native';
 
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const windowHeight = Dimensions.get('window').height; 
 
 
 const diseases = [
@@ -161,7 +162,7 @@ const Detailsthird = ({navigation,route}) => {
       )}
 
       <View style={styles.checkboxContainer2}>
-        <CheckBox value={isChecked} onValueChange={setIsChecked} style={styles.checkbox1} />
+        <CheckBox checked={isChecked} onPress={() => setIsChecked(!isChecked)} style={styles.checkbox1} />
         <Text style={styles.labelc}>
           I have agree to the{' '} 
           <Text style={styles.link} onPress={terms}>terms & conditions </Text> and{'\n'}
@@ -271,6 +272,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 20,
+    // position: 'absolute',
+    // bottom: 100
   },
   labelc: {
     fontSize: 16
