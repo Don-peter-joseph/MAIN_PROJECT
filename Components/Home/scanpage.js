@@ -117,14 +117,14 @@ import {Dimensions} from 'react-native';
           ) : null}
         </View>
 
-        <View style={styles.features}>
+        {/* <View style={styles.features}>
                 <Pressable onPress={()=>navigation.navigate("detectfacescreen")} 
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
                   <ImageBackground source={require('./assets/detectface.png')} style={styles.image} imageStyle={{ borderRadius: 30 }} >
                       <Text style={styles.label}>Detect Faces</Text>
                   </ImageBackground>
                 </Pressable>
-        </View>
+        </View> */}
         <View style={styles.features}>
                 <Pressable onPress={()=>navigation.navigate("fooddetectionscreen")}
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
