@@ -115,8 +115,19 @@ import {Dimensions} from 'react-native';
               />
             </View>
           ) : null}
-        </View>
 
+        {selectedname?
+        <>
+          <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen')}>
+            <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
+          </Pressable>        
+        </>:
+        <>
+        </>
+        }
+
+        </View>
+              
         {/* <View style={styles.features}>
                 <Pressable onPress={()=>navigation.navigate("detectfacescreen")} 
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
@@ -157,7 +168,7 @@ const styles=StyleSheet.create({
   dropdown:{
     // borderWidth:2,
     // borderColor:'yellow',
-    justifyContent:'center',
+    justifyContent:'space-evenly',
     alignItems:'center',
     flex:1,
   },
@@ -241,9 +252,21 @@ const styles=StyleSheet.create({
     alignItems: 'center',
     // borderWidth:2,
     // borderColor:'white'
-},
-label:{
-  color:'white',
-  fontSize:25
-}
+  },
+  label:{
+    color:'white',
+    fontSize:25
+  },
+  nextbutton:{
+    borderWidth:.4,
+    flex:.3,
+    justifyContent:'center',
+    // alignItems:'center',
+    // alignSelf:'center',
+    width:"30%",
+    borderRadius:20,
+    borderColor:'#000000',
+    backgroundColor:'#F806CC'
+  }
+
 })

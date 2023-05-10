@@ -29,7 +29,8 @@ import Item from './Components/diet/Items';
 import Recipe from './Components/diet/recipe';
 import TermsCondition from './Components/Home/termscond';
 import PrivacyPolicy from './Components/Home/privacyp';
-import textDetection from './Components/Home/Text Recognition/googlevisiontext'
+import textDetection from './Components/Home/Text Recognition/googlevisiontext';
+import Result from './Components/modelscreen/modelresult';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import * as Linking from 'expo-linking';
@@ -124,6 +125,7 @@ export default function App() {
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
             <Stack.Screen name="googlevisiontextscreen" component={textDetection}/>
+            <Stack.Screen name="resultscreen" component={Result}/>
         </>
          : 
          ( <>
@@ -156,6 +158,7 @@ export default function App() {
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
             <Stack.Screen name="googlevisiontextscreen" component={textDetection}/>
+            <Stack.Screen name="resultscreen" component={Result}/>
         </>)
     }
       </Stack.Navigator>

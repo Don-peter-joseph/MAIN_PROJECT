@@ -116,11 +116,30 @@ return(
           </>
           :
           <>
-              <Button title='Open cam' onPress={takePicture}></Button>
+              <Pressable style={styles.nextbutton} onPress={takePicture}>
+                <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Open Cam</Text>
+              </Pressable>
               <Image source={{uri:takenImage}} style={styles.camera}/>
-              <ScrollView style={styles.textarea}>
-                <Text style={{borderWidth:2,borderColor:'red',flex:1,}}>{text}</Text>
-              </ScrollView>
+              {text!='""'?
+              <>
+                <View style={styles.output}>
+                  <Text style={{fontWeight:'900',fontSize:20}}>Detected Item is <Text 
+                        style={{color:"purple"}}>{text}</Text></Text>
+                </View>
+                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen')}>
+                  <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
+                </Pressable>
+              </>
+              :
+              <>
+                <View style={styles.output}>
+                  <Text style={{fontWeight:'900',fontSize:20}}>Item unable to recognise</Text>
+                </View>
+                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('scanscreen')}>
+                  <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Go back</Text>
+                </Pressable>
+              </>
+              }
           </>
           }
         </View>
@@ -136,8 +155,8 @@ const styles=StyleSheet.create({
       flex: 1,
       position:'absolute',
       width:450,
-      height:1000,
-      justifyContent: 'center',
+      height:'100%',
+      justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor:'#ffffff',
       // borderWidth:2,
@@ -165,27 +184,30 @@ const styles=StyleSheet.create({
       width:'100%',
       height:'50%'
   },
-  button:{
-      width:150,
-      height:50,
-      justifyContent:'center',
-      alignItems:'center',
-      borderWidth:4,
-      borderColor:'red',
-      borderRadius:10,
-      marginTop:20
-  },
-  textarea:{
-    borderWidth:2,
-    borderColor:'blue',
-    width:'100%',
-    flex:1,
-  },
+
   animation:{
     // borderWidth:2,
     // borderColor:'black',
     height:500,
     marginBottom:200
-
-},
+  },
+  nextbutton:{
+    borderWidth:.4,
+    height:50,
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
+    width:"30%",
+    borderRadius:20,
+    borderColor:'#000000',
+    backgroundColor:'#F806CC',
+    flex:.15,
+  },
+  output:{
+    flex:.3,
+    // borderWidth:1,
+    width:'100%',
+    justifyContent:"center",
+    alignItems:'center',
+  }
 })
