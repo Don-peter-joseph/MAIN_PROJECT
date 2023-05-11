@@ -30,6 +30,7 @@ import Recipe from './Components/diet/recipe';
 import TermsCondition from './Components/Home/termscond';
 import PrivacyPolicy from './Components/Home/privacyp';
 import Result from './Components/modelscreen/modelresult';
+import Quantity from './Components/modelscreen/quantity';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import * as Linking from 'expo-linking';
@@ -124,9 +125,12 @@ export default function App() {
             <Stack.Screen name="recipescreen" component={Recipe}/>
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
+            <Stack.Screen name="quantityscreen" component={Quantity}/>
         </>
          : 
          ( <>
+            <Stack.Screen name="quantityscreen" component={Quantity}/>
+            <Stack.Screen name="resultscreen" component={Result}/>
             <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>     
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/> 
@@ -155,7 +159,6 @@ export default function App() {
             <Stack.Screen name="recipescreen" component={Recipe}/>
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
-            <Stack.Screen name="resultscreen" component={Result}/>
         </>)
     }
       </Stack.Navigator>

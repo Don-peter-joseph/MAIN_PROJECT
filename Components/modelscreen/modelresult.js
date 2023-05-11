@@ -56,7 +56,7 @@ const Result=({navigation,route})=>{
             console.log(response);
             setTimeout(() => {
                 setflag(1);
-              }, 8000);
+              }, 100);
     }
 
     return(
@@ -64,8 +64,8 @@ const Result=({navigation,route})=>{
             {flag?
             <>
                 <View style={styles.item}>
-                    {/* <Text>The detect item is {item}</Text> */}
                     <Text style={{width:'100%',textAlign:'center',fontSize:30,fontWeight:900}}>{item}</Text>
+                    {/* <Text style={{width:'100%',textAlign:'center',fontSize:30,fontWeight:900}}>Apple</Text> */}
                     <View style={styles.box}>
                         <Text style={styles.text}>Energy</Text>
                         <Text style={styles.text}>{eng}</Text>
@@ -86,7 +86,7 @@ const Result=({navigation,route})=>{
                 </View>
 
                 <View style={styles.result}>
-                    <Text style={{fontSize:25,fontWeight:900}}>Sugar Reading</Text>
+                    <Text style={{fontSize:25,fontWeight:900,width:'100%',textAlign:'center',marginBottom:20}}>Sugar Reading</Text>
                     {flag2?
                     <>
                         <View style={styles.reading}>
@@ -98,12 +98,12 @@ const Result=({navigation,route})=>{
                     </>
                     :
                     <>
-                    <View style={styles.reading}>
-                        <Lottie source={require('./assets/up.json')} autoPlay loop
-                                    style={{width:150}} />
-                        <Text style={{fontSize:30,fontWeight:500}}>188</Text>
-                    </View>
-                    <Text style={{fontSize:15,fontWeight:600}}>100g of Apple will increase your sugar level from 185 to 188</Text>
+                        <View style={styles.reading}>
+                            <Lottie source={require('./assets/up.json')} autoPlay loop
+                                        style={{width:150}} />
+                            <Text style={{fontSize:30,fontWeight:500}}>188</Text>
+                        </View>
+                        <Text style={{fontSize:15,fontWeight:600}}>100g of Apple will increase your sugar level from 185 to 188</Text>
                     </>
 
                     }
@@ -123,6 +123,16 @@ const Result=({navigation,route})=>{
                         </View>
                     </>
                     }
+                </View>
+
+                <View style={styles.choice}>
+                    <Pressable style={[styles.button,{backgroundColor:'#D33D29'}]}
+                        onPress={()=>navigation.navigate("scanscreen")}>
+                        <Text style={{fontSize:18,fontWeight:700}}>Cancel</Text>
+                    </Pressable>
+                    <Pressable style={[styles.button,{backgroundColor:'#3BA73A'}]} onPress={()=>navigation.navigate("quantityscreen")}>
+                        <Text style={{fontSize:18,fontWeight:700}}>Next</Text>
+                    </Pressable>
                 </View>
             </>
             :
@@ -174,7 +184,9 @@ const styles=StyleSheet.create({
         width:"95%",   
         height:250,
         justifyContent:'center',
-        alignItems:"center"
+        alignItems:"center",
+        flexWrap:'wrap',
+        flexDirection:'row'
     },
     recommendation:{
         width:'100%',
@@ -209,8 +221,38 @@ const styles=StyleSheet.create({
     reading:{
         // borderWidth:1,
         flexDirection:'row',
-        justifyContent:'space-evenly',
-        alignItems:'center'
+        justifyContent:'center',
+        alignItems:'center',
+        width:'45%',
+    },
+    button:{
+        width:130,
+        height:70,
+        borderWidth:.5,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:40,
+    },
+    choice:{
+        // borderWidth:1,
+        flexDirection:'row',
+        width:'100%',
+        justifyContent:'space-evenly'
+    },
+    quantity:{
+        width:'100%',
+        textAlign:'center',
+        fontSize:18,
+        fontWeight:700,
+        height:40,
+    },
+    quantity2:{
+        flexWrap:'wrap',
+        height:150,
+        justifyContent:'center',
+        borderWidth:1,
+        borderRadius:10,
+        backgroundColor:'#ffffff'
     }
 })
 
