@@ -129,9 +129,9 @@ export default function App() {
         </>
          : 
          ( <>
+            <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="quantityscreen" component={Quantity}/>
             <Stack.Screen name="resultscreen" component={Result}/>
-            <Stack.Screen name="signin" component={Signin}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>     
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/> 
             <Stack.Screen name="details2screen" component={Detailssecond}/>     
