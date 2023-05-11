@@ -118,7 +118,7 @@ import {Dimensions} from 'react-native';
 
         {selectedname?
         <>
-          <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen')}>
+          <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen',{item:selectedname})}>
             <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
           </Pressable>        
         </>:

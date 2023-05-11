@@ -29,7 +29,6 @@ import Item from './Components/diet/Items';
 import Recipe from './Components/diet/recipe';
 import TermsCondition from './Components/Home/termscond';
 import PrivacyPolicy from './Components/Home/privacyp';
-import textDetection from './Components/Home/Text Recognition/googlevisiontext';
 import Result from './Components/modelscreen/modelresult';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
@@ -102,6 +101,7 @@ export default function App() {
         { user? 
         <>
             <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="resultscreen" component={Result}/>
             <Stack.Screen name="itemscreen" component={Item}/> 
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="profilescreen" component={Profile}/> 
@@ -124,8 +124,6 @@ export default function App() {
             <Stack.Screen name="recipescreen" component={Recipe}/>
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
-            <Stack.Screen name="googlevisiontextscreen" component={textDetection}/>
-            <Stack.Screen name="resultscreen" component={Result}/>
         </>
          : 
          ( <>
@@ -139,6 +137,7 @@ export default function App() {
             <Stack.Screen name="signup" component={Signup}/> */}
             <Stack.Screen name="homescreen" component={Home}/>
             {/* <Stack.Screen name="signup" component={Signup}/> */}
+            <Stack.Screen name="scanscreen" component={Scanimage}/>
             {/* <Stack.Screen name="details2screen" component={Detailssecond}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>                                                            */}
             <Stack.Screen name="profilescreen" component={Profile}/> 
@@ -150,14 +149,12 @@ export default function App() {
             <Stack.Screen name="servicescreen" component={Customercare}/>
             <Stack.Screen name="consultscreen" component={Consult}/>
             <Stack.Screen name="statisticsscreen" component={Statistics}/>
-            <Stack.Screen name="scanscreen" component={Scanimage}/>
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/> 
             <Stack.Screen name="recipescreen" component={Recipe}/>
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
-            <Stack.Screen name="googlevisiontextscreen" component={textDetection}/>
             <Stack.Screen name="resultscreen" component={Result}/>
         </>)
     }

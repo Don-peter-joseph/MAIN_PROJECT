@@ -12,7 +12,7 @@ import Lottie from 'lottie-react-native';
 const FoodDetector = ({navigation,route}) => {
   let imgname='';  
   const [text,settext]=useState("No Response")
-  const[hasCameraPermission,sethasCameraPermission]=useState(null);
+  const [hasCameraPermission,sethasCameraPermission]=useState(null);
   const [takenImage, setTakenImage] = useState();
   const [type,settype]=useState(Camera.Constants.Type.back);
   const [flash,setflash]=useState(Camera.Constants.FlashMode.off);
@@ -69,7 +69,7 @@ const FoodDetector = ({navigation,route}) => {
                 imgname
             }
         });
-            settext(JSON.stringify(response, null, 2))
+            settext(JSON.stringify(response, null, 2).slice(1,-1))
             console.log('Lambda response:', response);
         } catch (error) {
             console.log('Lambda error:', error);
@@ -99,7 +99,6 @@ const FoodDetector = ({navigation,route}) => {
     }
   }
   
-
 return(
   <>
   <StatusBar hidden={true}/>
@@ -120,13 +119,13 @@ return(
                 <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Open Cam</Text>
               </Pressable>
               <Image source={{uri:takenImage}} style={styles.camera}/>
-              {text!='""'?
+              {text!=''?
               <>
                 <View style={styles.output}>
                   <Text style={{fontWeight:'900',fontSize:20}}>Detected Item is <Text 
                         style={{color:"purple"}}>{text}</Text></Text>
                 </View>
-                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen')}>
+                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen',{item:text.toUpperCase()})}>
                   <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
                 </Pressable>
               </>
