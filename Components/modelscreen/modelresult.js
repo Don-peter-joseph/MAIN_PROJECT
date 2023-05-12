@@ -12,7 +12,6 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Result=({navigation,route})=>{
-    const turn=0;
     const {item}=route.params;
     const value=item.toUpperCase();
     const [cal,setcal]=useState(0);
@@ -21,6 +20,8 @@ const Result=({navigation,route})=>{
     const [carbs,setcarbs]=useState(0);
     const [flag,setflag]=useState(0);
     const [flag2,setflag2]=useState(1);
+    const [gindex,setgindex]=useState(0);
+    const [gload,setgload]=useState(0);
     const [message,setmessage]=useState("Feeding Data ...");
 
     useEffect(async()=>{
@@ -53,6 +54,8 @@ const Result=({navigation,route})=>{
             setcal(response.Item.Calcium);
             setfib(response.Item.Fibre);
             setcarbs(response.Item.Carbos);
+            setgindex(response.Item.Glycemicindex);
+            setgload((response.Item.Glycemicindex*response.Item.Carbos)/100)
             console.log(response);
             setTimeout(() => {
                 setflag(1);
@@ -110,7 +113,7 @@ const Result=({navigation,route})=>{
                 </View>
 
                 <View style={styles.recommendation}>
-                    {turn?
+                    {gindex<50 && gload<10?
                     <>
                         <View style={styles.recommended}>
                             <Text style={{fontSize:20,fontWeight:700}}>Recommended</Text>
@@ -130,7 +133,8 @@ const Result=({navigation,route})=>{
                         onPress={()=>navigation.navigate("scanscreen")}>
                         <Text style={{fontSize:18,fontWeight:700}}>Cancel</Text>
                     </Pressable>
-                    <Pressable style={[styles.button,{backgroundColor:'#3BA73A'}]} onPress={()=>navigation.navigate("quantityscreen")}>
+                    <Pressable style={[styles.button,{backgroundColor:'#3BA73A'}]} 
+                        onPress={()=>navigation.navigate("quantityscreen",{carbs,eng,cal,fib,gindex})}>
                         <Text style={{fontSize:18,fontWeight:700}}>Next</Text>
                     </Pressable>
                 </View>
