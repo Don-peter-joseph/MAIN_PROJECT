@@ -16,6 +16,7 @@ const FoodDetector = ({navigation,route}) => {
   const [takenImage, setTakenImage] = useState();
   const [type,settype]=useState(Camera.Constants.Type.back);
   const [flash,setflash]=useState(Camera.Constants.FlashMode.off);
+  const {user}=route.params;
   const cameraRef=useRef(null);
 
   useEffect(()=>{
@@ -125,7 +126,7 @@ return(
                   <Text style={{fontWeight:'900',fontSize:20}}>Detected Item is <Text 
                         style={{color:"purple"}}>{text}</Text></Text>
                 </View>
-                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen',{item:text.toUpperCase()})}>
+                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen',{item:text.toUpperCase(),user})}>
                   <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
                 </Pressable>
               </>

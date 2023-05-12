@@ -2,23 +2,26 @@ import React, { useRef,useState } from 'react';
 import { View, Text, Image, StyleSheet,  TouchableOpacity, TextInput, FlatList, Pressable,ImageBackground} from 'react-native';
 import {Dimensions} from 'react-native';
 import Lottie from 'lottie-react-native';
-
+import {API } from "aws-amplify";
 
   const Quantity = ({navigation,route}) => {
     const [flag,setflag]=useState(1);
     const [flag2,setflag2]=useState(1);
     const [amount,setamount]=useState(100);
-    const {eng,carbs,cal,fib,gindex}=route.params;
+    const {eng,carbs,cal,fib,gindex,user,item}=route.params;
     const [gload,setgload]=useState(0);
+    const [content,setcontent]=useState(item+"                      "+amount+"g\n");
 
     const Increase=()=>{
         const updatedamount=amount+100;
         setamount(amount +100);
+        setcontent(item+"                      "+updatedamount+"g\n");
         Calculate(updatedamount);
     }
     const Decrease=()=>{
       if(amount>100){
         const updatedamount=amount-100;
+        setcontent(item+"                      "+updatedamount+"g\n");
         setamount(amount-100);
         Calculate(updatedamount);
       }
@@ -26,7 +29,8 @@ import Lottie from 'lottie-react-native';
     const Saveamount=(text)=>{
         const updatedamount=parseInt(text);
         setamount(parseInt(text));
-          Calculate(updatedamount);
+        setcontent(item+"                      "+updatedamount+"g\n");
+        Calculate(updatedamount);
     }
 
     const Calculate=(updatedamount)=>{
@@ -35,6 +39,52 @@ import Lottie from 'lottie-react-native';
         setgload((gindex*((carbs/100)*updatedamount))/100)
         setflag(1);
       }, 5000);
+    }
+
+    const Savedata=async()=>{
+      let temp="";
+      try{
+        const data = {
+          operation: 'retrieve',
+          payload: user.Item.id,
+          tablename:'HealthpadFoodHistory'
+        };
+          const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+              body: {
+                      data 
+              } 
+          });
+          temp=response.Item.history;
+      }
+      catch(e){
+        console.log(e);
+      }
+
+      const newhistory ={
+        id:user.Item.id,
+        history:temp+content
+      };
+      const data = {
+        operation: 'create',
+        payload: newhistory,
+        tablename:'HealthpadFoodHistory'
+      };
+
+
+      try{
+        const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+                      body: {
+                            data
+                      } 
+        });
+        console.log("history saved successfully")
+        console.log(response)
+      }
+      catch(e){
+        console.log('Error saving history', e);
+      }
+
+      navigation.navigate("scanscreen",{user})
     }
 
     return (
@@ -102,10 +152,10 @@ import Lottie from 'lottie-react-native';
         </View>
 
         <View style={{flexDirection:'row',marginTop:30,width:'80%',justifyContent:"space-evenly"}}>
-            <Pressable style={[styles.button,{backgroundColor:'#D33D29'}]} onPress={()=>navigation.navigate("scanscreen")}> 
+            <Pressable style={[styles.button,{backgroundColor:'#D33D29'}]} onPress={()=>navigation.navigate("scanscreen",{user})}> 
                 <Text style={styles.heading}>Cancel</Text>
             </Pressable>
-            <Pressable style={styles.button} onPress={()=>navigation.navigate("scanscreen")}> 
+            <Pressable style={styles.button} onPress={Savedata}> 
                 <Text style={styles.heading}>Confirm</Text>
             </Pressable>
         </View>

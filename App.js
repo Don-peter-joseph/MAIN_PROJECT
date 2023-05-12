@@ -102,6 +102,7 @@ export default function App() {
         { user? 
         <>
             <Stack.Screen name="homescreen" component={Home}/>
+            <Stack.Screen name="statisticsscreen" component={Statistics}/>
             <Stack.Screen name="resultscreen" component={Result}/>
             <Stack.Screen name="itemscreen" component={Item}/> 
             <Stack.Screen name="textrecognitionscreen" component={TextRecogniser}/>
@@ -112,7 +113,6 @@ export default function App() {
             <Stack.Screen name="shopscreen" component={Shop}/>
             <Stack.Screen name="servicescreen" component={Customercare}/>
             <Stack.Screen name="consultscreen" component={Consult}/>
-            <Stack.Screen name="statisticsscreen" component={Statistics}/>
             <Stack.Screen name="scanscreen" component={Scanimage}/>
             <Stack.Screen name="detectfacescreen" component={DetectFaces}/>
             <Stack.Screen name="fooddetectionscreen" component={FoodDetector}/>

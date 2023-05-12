@@ -98,7 +98,7 @@ const Home=({navigation,route})=>{
                         </Pressable>
                     </View>
                     <View style={styles.features}>
-                        <Pressable  style={styles.box} onPress={()=>navigation.navigate("scanscreen")}>
+                        <Pressable  style={styles.box} onPress={()=>navigation.navigate("scanscreen",{user})}>
                             <Lottie style={styles.animation} source={require('../animatedscreen/scan.json')} autoPlay loop speed={0.6}/>
                         {/* <Image style={[styles.featureimages]} source={require('./assets/scan.png')}/> */}
                             <Text style={{fontWeight:'bold',fontSize:15}}>Scan</Text></Pressable>
@@ -110,7 +110,7 @@ const Home=({navigation,route})=>{
                         {/* <Image style={[styles.featureimages]} source={require('./assets/cart.jpg')}/> */}
                         <Lottie style={styles.animation} source={require('../animatedscreen/shop.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Medicine Shop</Text></Pressable>
-                        <Pressable style={styles.box} onPress={()=>navigation.navigate("statisticsscreen")}>
+                        <Pressable style={styles.box} onPress={()=>navigation.navigate("statisticsscreen",{user})}>
                         {/* <Image style={[styles.featureimages]} source={require('./assets/statistics.png')}/> */}
                         <Lottie style={styles.animation} source={require('../animatedscreen/statistics.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Statistics</Text></Pressable>

@@ -52,6 +52,9 @@ import {Dimensions} from 'react-native';
     const [clicked, setClicked] = useState(false);
     const [data, setData] = useState(names);
     const [selectedname, setSelectedname] = useState('');
+    const {user}=route.params;
+    console.log(user)
+
     const handlenameChange = (name) => {
       setSelectedname(name);
     }
@@ -118,7 +121,7 @@ import {Dimensions} from 'react-native';
 
         {selectedname?
         <>
-          <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen',{item:selectedname})}>
+          <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen',{item:selectedname,user})}>
             <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
           </Pressable>        
         </>:
@@ -137,7 +140,7 @@ import {Dimensions} from 'react-native';
                 </Pressable>
         </View> */}
         <View style={styles.features}>
-                <Pressable onPress={()=>navigation.navigate("fooddetectionscreen")}
+                <Pressable onPress={()=>navigation.navigate("fooddetectionscreen",{user})}
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
                   <ImageBackground source={require('./assets/detectfood.png')} style={styles.image} imageStyle={{ borderRadius: 20 }} >
                       <Text style={styles.label}>Detect Food</Text>
@@ -145,7 +148,7 @@ import {Dimensions} from 'react-native';
                 </Pressable>
         </View>
         <View style={styles.features}>
-                <Pressable onPress={()=>navigation.navigate("textrecognitionscreen")}
+                <Pressable onPress={()=>navigation.navigate("textrecognitionscreen",{user})}
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
                   <ImageBackground source={require('./assets/detecttext.png')} style={styles.image} imageStyle={{ borderRadius: 20 }} >
                       <Text style={styles.label}>Detect Text</Text>

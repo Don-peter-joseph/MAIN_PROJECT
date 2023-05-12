@@ -81,7 +81,7 @@ const Diet = ({navigation,route}) => {
                     }
                 </AnimatedCircularProgress>
 
-                <AnimatedCircularProgress
+                {/* <AnimatedCircularProgress
                     style={styles.progressbar}
                     size={180}
                     width={13}
@@ -97,13 +97,13 @@ const Diet = ({navigation,route}) => {
                                 <Text style={{fontSize:30,fontWeight:'bold'}}>
                                     {reading}
                                 </Text>
-                                {/* <Text style={{fontSize:30,fontWeight:'bold'}}>
+                                <Text style={{fontSize:30,fontWeight:'bold'}}>
                                     
-                                </Text> */}
+                                </Text>
                             </View>
                         )
                     }
-                </AnimatedCircularProgress>
+                </AnimatedCircularProgress> */}
             </View>
             <View style={styles.food}>
                 <Pressable style={styles.box} onPress={()=>navigation.navigate("itemscreen",{flag,user,title:'BREAKFAST'})}>

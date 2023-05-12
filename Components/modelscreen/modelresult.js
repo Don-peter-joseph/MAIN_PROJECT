@@ -12,7 +12,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Result=({navigation,route})=>{
-    const {item}=route.params;
+    const {item,user}=route.params;
     const value=item.toUpperCase();
     const [cal,setcal]=useState(0);
     const [eng,seteng]=useState(0);
@@ -134,7 +134,7 @@ const Result=({navigation,route})=>{
                         <Text style={{fontSize:18,fontWeight:700}}>Cancel</Text>
                     </Pressable>
                     <Pressable style={[styles.button,{backgroundColor:'#3BA73A'}]} 
-                        onPress={()=>navigation.navigate("quantityscreen",{carbs,eng,cal,fib,gindex})}>
+                        onPress={()=>navigation.navigate("quantityscreen",{carbs,eng,cal,fib,gindex,user,item})}>
                         <Text style={{fontSize:18,fontWeight:700}}>Next</Text>
                     </Pressable>
                 </View>
