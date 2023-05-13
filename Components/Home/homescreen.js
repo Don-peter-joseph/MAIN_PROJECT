@@ -114,7 +114,7 @@ const Home=({navigation,route})=>{
                         {/* <Image style={[styles.featureimages]} source={require('./assets/statistics.png')}/> */}
                         <Lottie style={styles.animation} source={require('../animatedscreen/statistics.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Statistics</Text></Pressable>
-                        <Pressable style={styles.box} onPress={()=>navigation.navigate("detectfacescreen")}>
+                        <Pressable style={styles.box} onPress={()=>navigation.navigate("consultscreen")}>
                         {/* <Image style={[styles.featureimages]} source={require('./assets/doctor.jpg')}/> */}
                         <Lottie style={styles.animation} source={require('../animatedscreen/doctor.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Consult Doctor</Text></Pressable>

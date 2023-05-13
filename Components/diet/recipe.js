@@ -36,10 +36,51 @@ const Recipe = ({navigation,route}) => {
               }, 2000);
     }
 
-    const Confirm=()=>{
-        console.log(content);
+    const Confirm=async()=>{
+        let temp="";
+        try{
+          const data = {
+            operation: 'retrieve',
+            payload: user.Item.id,
+            tablename:'HealthpadFoodHistory'
+          };
+            const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+                body: {
+                        data 
+                } 
+            });
+            temp=response.Item.history;
+        }
+        catch(e){
+          console.log(e);
+        }
+  
+        const newhistory ={
+          id:user.Item.id,
+          history:temp+(parsedItem.Name+"\n")
+        };
+        const data = {
+          operation: 'create',
+          payload: newhistory,
+          tablename:'HealthpadFoodHistory'
+        };
+  
+  
+        try{
+          const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+                        body: {
+                              data
+                        } 
+          });
+          console.log("history saved successfully")
+          console.log(response)
+        }
+        catch(e){
+          console.log('Error saving history', e);
+        }    
         navigation.navigate("dietscreen",{user,calorie:content.Item.Calories,flag})
     }
+
     const Cancel=()=>{
         navigation.navigate("itemscreen",{user})
     }

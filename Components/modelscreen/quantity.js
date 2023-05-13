@@ -10,18 +10,18 @@ import {API } from "aws-amplify";
     const [amount,setamount]=useState(100);
     const {eng,carbs,cal,fib,gindex,user,item}=route.params;
     const [gload,setgload]=useState(0);
-    const [content,setcontent]=useState(item+"                      "+amount+"g\n");
+    const [content,setcontent]=useState(item+"  ---------------  "+amount+"g\n");
 
     const Increase=()=>{
         const updatedamount=amount+100;
         setamount(amount +100);
-        setcontent(item+"                      "+updatedamount+"g\n");
+        setcontent(item+"  ---------------  "+updatedamount+"g\n");
         Calculate(updatedamount);
     }
     const Decrease=()=>{
       if(amount>100){
         const updatedamount=amount-100;
-        setcontent(item+"                      "+updatedamount+"g\n");
+        setcontent(item+"  ---------------  "+updatedamount+"g\n");
         setamount(amount-100);
         Calculate(updatedamount);
       }
@@ -29,7 +29,7 @@ import {API } from "aws-amplify";
     const Saveamount=(text)=>{
         const updatedamount=parseInt(text);
         setamount(parseInt(text));
-        setcontent(item+"                      "+updatedamount+"g\n");
+        setcontent(item+"  ---------------  "+updatedamount+"g\n");
         Calculate(updatedamount);
     }
 

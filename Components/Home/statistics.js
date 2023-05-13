@@ -71,9 +71,9 @@ const Statistics=({navigation,route})=>{
             </View>
 
             <View style={styles.history} >
-                <Text style={{fontSize:25,fontWeight:600}}>Consumption History</Text>
+                <Text style={{fontSize:25,fontWeight:600,margin:10}}>Consumption History</Text>
                 <ScrollView contentContainerStyle={styles.scroll}>
-                    <Text style={{fontSize:25,fontWeight:400}}>{content}</Text>
+                    <Text style={{fontSize:20,fontWeight:400}}>{content}</Text>
                 </ScrollView>
             </View>
             
@@ -96,29 +96,26 @@ const styles=StyleSheet.create({
     },
     content:{
         justifyContent:'center',
-        alignItems:"center",
+        alignItems:"center",    
         // borderWidth:1,
         width:'100%',
         flex:2,
     }   ,
     history:{
-        // borderWidth:1,
-        width:"100%",
-        flex:2.3,
-        justifyContent:'center',
-        alignItems:'center'
-        // backgroundColor:"#ffffff"
-    },
-    scroll:{
+        borderWidth:1,
+        width:"90%",
+        flex:2,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#ffffff',
-        borderRadius:30,
-        padding:30,
-        marginTop:10,
-        borderWidth:2,
-        width:windowWidth-50,
-        height:200
+        borderRadius: 30,
+        // height:500,
+        backgroundColor:"#ffffff"
+    },
+    scroll:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: windowWidth - 50,
+        // flexGrow: 1
     }
 
 })
