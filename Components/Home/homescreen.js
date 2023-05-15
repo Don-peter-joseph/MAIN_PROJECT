@@ -118,7 +118,7 @@ const Home=({navigation,route})=>{
                             <Lottie style={styles.animation} source={require('../animatedscreen/doctor.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Consult Doctor</Text></Pressable>
                         
-                        <Pressable style={styles.box} onPress={()=>navigation.navigate("servicescreen")}>
+                        <Pressable style={styles.box} onPress={()=>navigation.navigate("chatbotscreen")}>
                             <Lottie style={styles.animation} source={require('../animatedscreen/customercare.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Customer Care</Text></Pressable>
                         
