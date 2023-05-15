@@ -43,6 +43,10 @@
         "healthpadcodescanner": {
           "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
           "s3Key": "amplify-builds/healthpadcodescanner-6747324f6e3148636c46-build.zip"
+        },
+        "healtpadsugarpredictor": {
+          "deploymentBucketName": "amplify-healthpad-staging-82713-deployment",
+          "s3Key": "amplify-builds/healtpadsugarpredictor-56754a4345336663344c-build.zip"
         }
       },
       "api": {

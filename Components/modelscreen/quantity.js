@@ -8,7 +8,8 @@ import {API } from "aws-amplify";
     const [flag,setflag]=useState(1);
     const [flag2,setflag2]=useState(1);
     const [amount,setamount]=useState(100);
-    const {eng,carbs,cal,fib,gindex,user,item}=route.params;
+    const {eng,carbs,cal,fib,gindex,user,item,temp,insulinfactor}=route.params;
+    const [reading,setreading]=useState(temp);
     const [gload,setgload]=useState(0);
     const [content,setcontent]=useState(item+"  ---------------  "+amount+"g\n");
 
@@ -33,13 +34,26 @@ import {API } from "aws-amplify";
         Calculate(updatedamount);
     }
 
-    const Calculate=(updatedamount)=>{
+    const Calculate=async(updatedamount)=>{
       setflag(0);
       setTimeout(() => {
         setgload((gindex*((carbs/100)*updatedamount))/100)
+        setreading(Math.round(parseInt(user.Item.rbs)+((gindex*((carbs/100)*updatedamount))/10000)*(gindex/100)*user.Item.rbs*insulinfactor))
         setflag(1);
       }, 5000);
     }
+
+    const Predict=async()=>{
+      console.log('hi');
+      try{
+
+            const response=await API.post('healthpadrestapi', '/healtpadsugarpredictor-staging');
+            setreading(response);
+        }
+        catch(e){
+          console.log(e);
+        }
+  }
 
     const Savedata=async()=>{
       let temp="";
@@ -83,8 +97,30 @@ import {API } from "aws-amplify";
       catch(e){
         console.log('Error saving history', e);
       }
+      
+      try{
+        const id=user.Item.id;
+        const data = {
+          operation: 'update',
+          payload: {id,rbs:reading,intake:parseInt(user.Item.intake)+parseInt(eng)},
+          tablename:'heathpaduserdetails-staging'
+        };
+          const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+              body: {
+                      data 
+              } 
+          });
+          console.log("rbs updated");
+      }
+      catch(e){
+        console.log("rbs not updated");
+      }
 
-      navigation.navigate("scanscreen",{user})
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'homescreen' }],
+      });
     }
 
     return (
@@ -104,23 +140,23 @@ import {API } from "aws-amplify";
         {flag?
         <>
               <Text style={{fontSize:25,fontWeight:900,width:'100%',textAlign:'center',marginBottom:20}}>Sugar Reading</Text>
-              {flag2?
+              {reading<user.Item.rbs?
               <>
                   <View style={styles.reading}>
                       <Lottie source={require('./assets/down.json')} autoPlay loop
                                   style={{width:150}} />
-                      <Text style={{fontSize:30,fontWeight:500}}>188</Text>
+                      <Text style={{fontSize:30,fontWeight:500}}>{reading} <Text style={{fontSize:20}}> mg/dL</Text></Text>
                   </View>
-                  <Text style={{fontSize:15,fontWeight:600}}>{amount}g of Apple will decrease your sugar level from 190 to 188</Text>
+                  <Text style={{fontSize:15,fontWeight:600}}>{amount}g of {item} will decrease your sugar level from {user.Item.rbs} to {reading}</Text>
               </>
               :
               <>
                   <View style={styles.reading}>
                       <Lottie source={require('./assets/up.json')} autoPlay loop
                                   style={{width:150}} />
-                      <Text style={{fontSize:30,fontWeight:500}}>188</Text>
+                      <Text style={{fontSize:30,fontWeight:500}}>{reading}<Text style={{fontSize:20}}> mg/dL</Text></Text>
                   </View>
-                  <Text style={{fontSize:15,fontWeight:600}}>100g of Apple will increase your sugar level from 185 to 188</Text>
+                  <Text style={{fontSize:15,fontWeight:600}}>{amount}g of {item} will increase your sugar level from {user.Item.rbs} to {reading}</Text>
               </>
             }
         </>
@@ -136,10 +172,10 @@ import {API } from "aws-amplify";
         </View>
 
         <View style={styles.recommendation}>
-                    {gindex<50 && gload<10?
+                    {gindex<50 && gload<10 && reading<180?
                     <>
                         <View style={styles.recommended}>
-                            <Text style={{fontSize:20,fontWeight:700}}>Recommended</Text>
+                            <Text style={{fontSize:20,fontWeight:700}}>Safe</Text>
                         </View>
                     </>
                     :

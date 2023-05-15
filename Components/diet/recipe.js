@@ -14,6 +14,7 @@ const Recipe = ({navigation,route}) => {
     const {item}=route.params;
     const parsedItem = JSON.parse(item);
     const [content,setcontent]=useState();
+    const [reading,setreading]=useState(0);
 
     useEffect(() => {
         getDetails();
@@ -33,6 +34,9 @@ const Recipe = ({navigation,route}) => {
             });  
             setTimeout(() => {
                 setcontent(response);
+                const insulinfactor = (1 + (0.01 * (user.Item.bmi - 25))) * (1 + (0.01 * (user.Item.age - 20)))
+                setreading(Math.round(parseInt(user.Item.rbs)+((response.Item.Glycemicindex*response.Item.Carbohydrates)/10000)*(response.Item.Glycemicindex/100)*user.Item.rbs*insulinfactor))
+                console.log(response)
               }, 2000);
     }
 
@@ -78,7 +82,32 @@ const Recipe = ({navigation,route}) => {
         catch(e){
           console.log('Error saving history', e);
         }    
-        navigation.navigate("dietscreen",{user,calorie:content.Item.Calories,flag})
+
+     
+        try{
+            const id=user.Item.id;
+            const data = {
+              operation: 'update',
+              payload: {id,rbs:reading,intake:parseInt(user.Item.intake)+parseInt(content.Item.Calories)},
+              tablename:'heathpaduserdetails-staging'
+            };
+              const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+                  body: {
+                          data 
+                  } 
+              });
+              console.log("rbs updated");
+          }
+          catch(e){
+            console.log("rbs not updated");
+          }
+
+
+        // navigation.navigate("dietscreen",{user,calorie:content.Item.Calories,flag})
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'homescreen' }],
+          });
     }
 
     const Cancel=()=>{

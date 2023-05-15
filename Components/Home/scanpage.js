@@ -53,7 +53,7 @@ import {Dimensions} from 'react-native';
     const [data, setData] = useState(names);
     const [selectedname, setSelectedname] = useState('');
     const {user}=route.params;
-    console.log(user)
+    // console.log(user)
 
     const handlenameChange = (name) => {
       setSelectedname(name);

@@ -31,6 +31,7 @@ import TermsCondition from './Components/Home/termscond';
 import PrivacyPolicy from './Components/Home/privacyp';
 import Result from './Components/modelscreen/modelresult';
 import Quantity from './Components/modelscreen/quantity';
+import Activity from './Components/Home/acitivity';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import * as Linking from 'expo-linking';
@@ -126,10 +127,12 @@ export default function App() {
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
             <Stack.Screen name="quantityscreen" component={Quantity}/>
+            <Stack.Screen name="activityscreen" component={Activity}/>
         </>
          : 
          ( <>
             <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="activityscreen" component={Activity}/>
             <Stack.Screen name="quantityscreen" component={Quantity}/>
             <Stack.Screen name="resultscreen" component={Result}/>
             <Stack.Screen name="details3screen" component={Detailsthird}/>     

@@ -38,7 +38,7 @@ const Detailsthird = ({navigation,route}) => {
     });
   };
 
-  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age}=route.params;
+  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age,calorie}=route.params;
 
   const terms = () =>
   {
@@ -67,6 +67,8 @@ const Detailsthird = ({navigation,route}) => {
         catch(e){
           console.log(e);
         }
+
+
         // user creation
         const newUser ={
           id:Id,
@@ -88,7 +90,9 @@ const Detailsthird = ({navigation,route}) => {
           fbs,
           hba1c,
           imagename,
-          age
+          age,
+          calorie,
+          intake:0,
       };
       
       const data = {
@@ -110,7 +114,11 @@ const Detailsthird = ({navigation,route}) => {
       catch(e){
         console.log('Error saving user', e);
       }
-    navigation.navigate("homescreen")
+    // navigation.navigate("homescreen")
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'homescreen' }],
+    });
   };
   
   return (      

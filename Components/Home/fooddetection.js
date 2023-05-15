@@ -135,7 +135,7 @@ return(
                 <View style={styles.output}>
                   <Text style={{fontWeight:'900',fontSize:20}}>Item unable to recognise</Text>
                 </View>
-                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('scanscreen')}>
+                <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('scanscreen',{user})}>
                   <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Go back</Text>
                 </Pressable>
               </>

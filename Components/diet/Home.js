@@ -15,39 +15,43 @@ const windowHeight = Dimensions.get('window').height;
 const Diet = ({navigation,route}) => {
     const {user,calorie}=route.params  || {};
     let {flag}=route.params||{};
-    const [cal,setcal]=useState('2000');
+    // const [cal,setcal]=useState('2000');
     const [reading,setreading]=useState('40');
     const [fil,setfil]=useState('0');
     const [total,settotal]=useState('0');
 
+    // useEffect(()=>{
+    //     if (calorie !== undefined) {
+    //         let value=(((total-(cal-calorie))/total)*100)
+    //         console.log(total,cal,calorie,value)
+    //         setfil(value)
+    //         setcal(cal-calorie)
+    //         flag=0;
+    //       }
+    //     else{
+    //         calculate();
+    //     }
+    // },[calorie,flag])
+
     useEffect(()=>{
-        if (calorie !== undefined) {
-            let value=(((total-(cal-calorie))/total)*100)
-            console.log(total,cal,calorie,value)
-            setfil(value)
-            setcal(cal-calorie)
-            flag=0;
-          }
-        else{
-            calculate();
-        }
-    },[calorie,flag])
+        let value=(user.Item.intake/user.Item.calorie)*100;
+        setfil(value);
+    },[])
 
-
-    const calculate=()=>{
-        if(user.Item.gender==='male'){
-            bmr=88.362+(13.397*user.Item.weight)+(4.799*user.Item.height)-(5.677*user.Item.age);
-            setcal(Math.round(bmr));
-            settotal(Math.round(bmr));
-            setfil(1);
-        }
-        else{
-            bmr=655+(9.6*user.Item.weight)+(1.8*user.Item.height)-(4.7*user.Item.age);
-            setcal(bmr);
-            settotal(Math.round(bmr));
-            setfil(1);
-        }
-    }
+    // const calculate=()=>{
+    //     if(user.Item.gender==='male'){
+    //         bmr=88.362+(13.397*user.Item.weight)+(4.799*user.Item.height)-(5.677*user.Item.age);
+    //         setcal(Math.round(bmr));
+    //         settotal(Math.round(bmr));
+    //         setfil(1);
+    //     }
+    //     else{
+    //         bmr=655+(9.6*user.Item.weight)+(1.8*user.Item.height)-(4.7*user.Item.age);
+    //         setcal(bmr);
+    //         settotal(Math.round(bmr));
+    //         setfil(1);
+    //     }
+    // }
 
     return(
         <ImageBackground source={require('./assets/homescreen.png')}  style={{flex:1}}>
@@ -71,7 +75,7 @@ const Diet = ({navigation,route}) => {
                         (fill) => (
                             <View style={{alignItems:'center'}}>
                                 <Text style={{fontSize:30,fontWeight:'bold'}}>
-                                    {cal}
+                                    {user.Item.calorie-user.Item.intake}
                                 </Text>
                                 <Text style={{fontSize:15,fontWeight:'100'}}>
                                     kcal remaining
@@ -81,29 +85,8 @@ const Diet = ({navigation,route}) => {
                     }
                 </AnimatedCircularProgress>
 
-                {/* <AnimatedCircularProgress
-                    style={styles.progressbar}
-                    size={180}
-                    width={13}
-                    fill={reading}
-                    tintColor='#8f00ff'
-                    lineCap="round"
-                    arcSweepAngle={359}
-                    tintColorSecondary="#FF8A00"
-                    backgroundColor="#FF9C28">
-                    {
-                        (fill) => (
-                            <View>
-                                <Text style={{fontSize:30,fontWeight:'bold'}}>
-                                    {reading}
-                                </Text>
-                                <Text style={{fontSize:30,fontWeight:'bold'}}>
-                                    
-                                </Text>
-                            </View>
-                        )
-                    }
-                </AnimatedCircularProgress> */}
+                <Text style={{fontSize:17,fontWeight:500}}>Today's Calorie Intake- {user.Item.intake}</Text>    
+
             </View>
             <View style={styles.food}>
                 <Pressable style={styles.box} onPress={()=>navigation.navigate("itemscreen",{flag,user,title:'BREAKFAST'})}>
@@ -169,9 +152,10 @@ const styles=StyleSheet.create({
         width:'100%',
         height:'100%',
         justifyContent: 'space-evenly', 
+        alignItems:'center',
         // borderWidth:2,
         // borderColor:'red',
-        flexDirection:'row'
+        // flexDirection:'row'
     },
     content:{
         justifyContent:'center',

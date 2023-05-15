@@ -100,28 +100,31 @@ const Home=({navigation,route})=>{
                     <View style={styles.features}>
                         <Pressable  style={styles.box} onPress={()=>navigation.navigate("scanscreen",{user})}>
                             <Lottie style={styles.animation} source={require('../animatedscreen/scan.json')} autoPlay loop speed={0.6}/>
-                        {/* <Image style={[styles.featureimages]} source={require('./assets/scan.png')}/> */}
                             <Text style={{fontWeight:'bold',fontSize:15}}>Scan</Text></Pressable>
+                        
                         <Pressable  style={styles.box} onPress={()=>navigation.navigate("dietscreen",{user})}>        
-                        {/* <Image style={[styles.featureimages]} source={require('./assets/diet.jpg')}/> */}
-                        <Lottie style={styles.animation} source={require('../animatedscreen/diet.json')} autoPlay loop />
+                            <Lottie style={styles.animation} source={require('../animatedscreen/diet.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Manage Diet</Text></Pressable>
+                        
                         <Pressable style={styles.box} onPress={()=>navigation.navigate("shopscreen")}>
-                        {/* <Image style={[styles.featureimages]} source={require('./assets/cart.jpg')}/> */}
-                        <Lottie style={styles.animation} source={require('../animatedscreen/shop.json')} autoPlay loop />
+                            <Lottie style={styles.animation} source={require('../animatedscreen/shop.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Medicine Shop</Text></Pressable>
+                        
                         <Pressable style={styles.box} onPress={()=>navigation.navigate("statisticsscreen",{user})}>
-                        {/* <Image style={[styles.featureimages]} source={require('./assets/statistics.png')}/> */}
-                        <Lottie style={styles.animation} source={require('../animatedscreen/statistics.json')} autoPlay loop />
+                            <Lottie style={styles.animation} source={require('../animatedscreen/statistics.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Statistics</Text></Pressable>
+                        
                         <Pressable style={styles.box} onPress={()=>navigation.navigate("consultscreen")}>
-                        {/* <Image style={[styles.featureimages]} source={require('./assets/doctor.jpg')}/> */}
-                        <Lottie style={styles.animation} source={require('../animatedscreen/doctor.json')} autoPlay loop />
+                            <Lottie style={styles.animation} source={require('../animatedscreen/doctor.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Consult Doctor</Text></Pressable>
+                        
                         <Pressable style={styles.box} onPress={()=>navigation.navigate("servicescreen")}>
-                        {/* <Image style={[styles.featureimages]} source={require('./assets/customercare.jpg')}/> */}
-                        <Lottie style={styles.animation} source={require('../animatedscreen/customercare.json')} autoPlay loop />
+                            <Lottie style={styles.animation} source={require('../animatedscreen/customercare.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Customer Care</Text></Pressable>
+                        
+                        <Pressable style={[styles.box,{width:'90%',height:70,flexDirection:'row',paddingBottom:0,paddingTop:0}]} onPress={()=>navigation.navigate("activityscreen")} >
+                            <Lottie style={{width:80}} source={require('../animatedscreen/settings.json')} autoPlay loop />
+                            <Text style={{fontWeight:'bold',fontSize:15}}>Settings</Text></Pressable>
                     </View>
                 </View>
             </>
@@ -150,15 +153,17 @@ const styles=StyleSheet.create({
     navbar:{
         flexDirection:'row',
         padding:10,
+        marginTop:20,
         paddingTop:50,
         paddingBottom:30,
         borderWidth:.5,
         // borderColor:'red',
         borderRadius:25,
         alignItems:'center',
-        width:'100%',
+        width:'95%',
         justifyContent:'space-evenly',
-        backgroundColor:'#F7EBFE'
+        backgroundColor:'#F7EBFE',
+        alignSelf:'center'
     },
     features:{
         // borderWidth:2,
@@ -168,7 +173,7 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         flexWrap:'wrap',
         justifyContent:'space-evenly',
-        paddingTop:50
+        paddingTop:10
     },
     logo:{
         // position:'absolute',
