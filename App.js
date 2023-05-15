@@ -27,12 +27,14 @@ import Detailsthird from './Components/Home/details3';
 import Diet from './Components/diet/Home';
 import Item from './Components/diet/Items';
 import Recipe from './Components/diet/recipe';
-import TermsCondition from './Components/Home/termscond';
-import PrivacyPolicy from './Components/Home/privacyp';
+import TermsCondition from './Components/Settings/termscond';
+import PrivacyPolicy from './Components/Settings/privacyp';
 import Result from './Components/modelscreen/modelresult';
 import Quantity from './Components/modelscreen/quantity';
-import Activity from './Components/Home/acitivity';
+import Activity from './Components/Settings/acitivity';
 import ChatBot from './Components/Chatbot';
+import Settings from './Components/Settings/settings';
+import About from './Components/Settings/about';
 import {AmazonAIPredictionsProvider} from '@aws-amplify/predictions';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import * as Linking from 'expo-linking';
@@ -130,10 +132,15 @@ export default function App() {
             <Stack.Screen name="quantityscreen" component={Quantity}/>
             <Stack.Screen name="activityscreen" component={Activity}/>
             <Stack.Screen name="chatbotscreen" component={ChatBot}/>
+            <Stack.Screen name="settingscreen" component={Settings}/>
+            <Stack.Screen name="aboutscreen" component={About}/>
         </>
          : 
          ( <>
+
             <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="settingscreen" component={Settings}/>
+            <Stack.Screen name="aboutscreen" component={About}/>
             <Stack.Screen name="chatbotscreen" component={ChatBot}/>
             <Stack.Screen name="activityscreen" component={Activity}/>
             <Stack.Screen name="quantityscreen" component={Quantity}/>

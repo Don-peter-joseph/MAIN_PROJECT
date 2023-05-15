@@ -69,12 +69,12 @@ const Profile = ({navigation,route}) => {
                             <Text style={styles.item}>{user.Item.age}</Text>
                         </View>
                         <View style={styles.contentfooter}>
-                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFBA2A',width:pressed?'72%':'70%'}]}
                             onPress={()=>setflag("1")}>
                                     <Text style={{fontSize:15,color:'#000000'}}>Expand Profile</Text>
                             </Pressable>
 
-                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#6A8AFF':'#FFBA2A',width:pressed?'72%':'70%'}]}
+                            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFBA2A',width:pressed?'72%':'70%'}]}
                             onPress={SignOut}>
                                     <Text style={{fontSize:15,color:'#000000'}}>SignOut</Text>
                             </Pressable>

@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform,
+  Platform,ImageBackground
 } from 'react-native';
 import styles from './styles';
 import Msg from './msg';
@@ -44,7 +44,8 @@ const ChatBot = () => {
   };
 
   return (
-    <View>
+    <ImageBackground source={require('./assets/background.jpg')}  style={{flex:1}}>
+    <View style={styles.outline}>
       <FlatList
         style={{height: '87%', bottom: '3%'}}
         inverted={true}
@@ -66,13 +67,15 @@ const ChatBot = () => {
           onChangeText={val => setMsg(val)}
         />
         <TouchableOpacity
-          style={[styles.sendBtn, {backgroundColor: msg ? 'orange' : 'grey'}]}
+          style={[styles.sendBtn, {backgroundColor: msg ? 'orange' : '#cc5500'}]}
           disabled={msg ? false : true}
           onPress={() => onSendMsg()}>
           <Text style={styles.sendTxt}>send</Text>
         </TouchableOpacity>
       </View>
     </View>
+    </ImageBackground>
+
   );
 };
 
