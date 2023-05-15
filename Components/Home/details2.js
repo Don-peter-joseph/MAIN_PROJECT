@@ -33,7 +33,7 @@ const Detailssecond = ({navigation,route}) => {
   const [error2, setErrorCity] = useState('')
   const [error3, setErrorPin] = useState('')
   const [error4, setErrorPhone] = useState('')
-
+  const [calorie,setcalorie]=useState(0);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [bmi, setBmi] = useState('');
@@ -51,6 +51,14 @@ const Detailssecond = ({navigation,route}) => {
 
   const handleSexSelection = (sex) => {
     setSelectedSex(sex);
+    if(sex==='male'){
+      bmr=88.362+(13.397*weight)+(4.799*height)-(5.677*age);
+      setcalorie(Math.round(bmr));
+    }
+    else{
+      bmr=655+(9.6*weight)+(1.8*height)-(4.7*age);
+      setcalorie(Math.round(bmr));
+    }
   };
 
   const handlenameChange = (name) => {
@@ -82,6 +90,7 @@ const Detailssecond = ({navigation,route}) => {
     const heightInMeters = height / 10;
     const bmiIndex = weight / (heightInMeters * heightInMeters);
     setBmi(bmiIndex.toFixed(2));
+
   };
 
   const handleConfirm = (date) => {
@@ -101,7 +110,7 @@ const Detailssecond = ({navigation,route}) => {
   const handleSubmit = async() => {
     console.log(imagename);
     navigation.navigate("details3screen",{state,city,phoneno,pincode,address,weight,height,bmi,date:selectedDate,
-                        gender:selectedSex,bloodgroup:selectedname,age,imagename})
+                        gender:selectedSex,bloodgroup:selectedname,age,imagename,calorie})
   };
 
   const searchRef = useRef();

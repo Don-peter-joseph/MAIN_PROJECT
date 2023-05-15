@@ -92,7 +92,7 @@ const Signin = ({ navigation }) => {
                             style={{width: 100, height: 100}}
                             />
                         ) : (
-                            <Text style={{fontSize:20,color:'white'}}>Login</Text>
+                            <Text style={{fontSize:20,color:'white'}}>SignUp</Text>
                         )}
                 </Pressable>
             </View>

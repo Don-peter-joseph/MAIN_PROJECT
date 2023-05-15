@@ -52,6 +52,9 @@ import {Dimensions} from 'react-native';
     const [clicked, setClicked] = useState(false);
     const [data, setData] = useState(names);
     const [selectedname, setSelectedname] = useState('');
+    const {user}=route.params;
+    // console.log(user)
+
     const handlenameChange = (name) => {
       setSelectedname(name);
     }
@@ -115,18 +118,29 @@ import {Dimensions} from 'react-native';
               />
             </View>
           ) : null}
-        </View>
 
-        <View style={styles.features}>
+        {selectedname?
+        <>
+          <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen',{item:selectedname,user})}>
+            <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
+          </Pressable>        
+        </>:
+        <>
+        </>
+        }
+
+        </View>
+              
+        {/* <View style={styles.features}>
                 <Pressable onPress={()=>navigation.navigate("detectfacescreen")} 
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
                   <ImageBackground source={require('./assets/detectface.png')} style={styles.image} imageStyle={{ borderRadius: 30 }} >
                       <Text style={styles.label}>Detect Faces</Text>
                   </ImageBackground>
                 </Pressable>
-        </View>
+        </View> */}
         <View style={styles.features}>
-                <Pressable onPress={()=>navigation.navigate("fooddetectionscreen")}
+                <Pressable onPress={()=>navigation.navigate("fooddetectionscreen",{user})}
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
                   <ImageBackground source={require('./assets/detectfood.png')} style={styles.image} imageStyle={{ borderRadius: 20 }} >
                       <Text style={styles.label}>Detect Food</Text>
@@ -134,7 +148,7 @@ import {Dimensions} from 'react-native';
                 </Pressable>
         </View>
         <View style={styles.features}>
-                <Pressable onPress={()=>navigation.navigate("textrecognitionscreen")}
+                <Pressable onPress={()=>navigation.navigate("textrecognitionscreen",{user})}
                 style={({ pressed }) =>[styles.Button1,pressed ? styles.Button1pressed : null,]}>
                   <ImageBackground source={require('./assets/detecttext.png')} style={styles.image} imageStyle={{ borderRadius: 20 }} >
                       <Text style={styles.label}>Detect Text</Text>
@@ -157,7 +171,7 @@ const styles=StyleSheet.create({
   dropdown:{
     // borderWidth:2,
     // borderColor:'yellow',
-    justifyContent:'center',
+    justifyContent:'space-evenly',
     alignItems:'center',
     flex:1,
   },
@@ -241,9 +255,21 @@ const styles=StyleSheet.create({
     alignItems: 'center',
     // borderWidth:2,
     // borderColor:'white'
-},
-label:{
-  color:'white',
-  fontSize:25
-}
+  },
+  label:{
+    color:'white',
+    fontSize:25
+  },
+  nextbutton:{
+    borderWidth:.4,
+    flex:.3,
+    justifyContent:'center',
+    // alignItems:'center',
+    // alignSelf:'center',
+    width:"30%",
+    borderRadius:20,
+    borderColor:'#000000',
+    backgroundColor:'#F806CC'
+  }
+
 })

@@ -1,6 +1,6 @@
-import { Auth,Hub } from "aws-amplify";
+import { Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert} from "react-native";
 import {Dimensions} from 'react-native';
 import * as Linking from 'expo-linking';
 import * as webbrower from 'expo-web-browser';
@@ -12,11 +12,25 @@ const windowHeight = Dimensions.get('window').height;
 
 const Customercare=({navigation,route})=>{
 
+    const Predict=async()=>{
+        console.log('hi');
+        try{
+
+              const response=await API.post('healthpadrestapi', '/healtpadsugarpredictor-staging');
+              console.log(response);
+          }
+          catch(e){
+            console.log(e);
+          }
+    }
+
     return(
         <View style={styles.outline}>
             <View style={styles.content}>
                 <Text >This is customercare screen hi</Text>
-                <Lottie style={styles.animation} source={require('../animatedscreen/loading.json')} autoPlay loop speed={0.8} />
+                <Pressable onPress={Predict}>
+                    <Text>click me</Text>
+                </Pressable>
             </View>
         </View>
     )

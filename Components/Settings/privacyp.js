@@ -48,7 +48,7 @@ const PrivacyPolicy=({navigation,route})=>{
         </Text>
         <Text style={{ fontWeight: 'bold', fontSize: 14, marginTop:8 }}>Changes to This Policy:</Text>
         <Text style={{ marginTop: 7 }}>
-          HealthPlus may update this Privacy Policy from time to time. Users will be notified of
+          HealthPad may update this Privacy Policy from time to time. Users will be notified of
           any changes and are encouraged to review this Policy periodically.
         </Text>
         <Text style={{ fontWeight: 'bold', fontSize: 14, marginTop:8 }}>Contact Information:</Text>

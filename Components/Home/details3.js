@@ -1,6 +1,7 @@
 import { Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert} from "react-native";
+// import CheckBox from "@react-native-community/checkbox";
 import {Dimensions} from 'react-native';
 import { CheckBox } from 'react-native-elements';
 // import { CheckBox, Icon } from '@rneui/themed';
@@ -37,7 +38,7 @@ const Detailsthird = ({navigation,route}) => {
     });
   };
 
-  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age}=route.params;
+  const {state,city,phoneno,pincode,address,weight,height,bmi,date,gender,bloodgroup,imagename,age,calorie}=route.params;
 
   const terms = () =>
   {
@@ -66,6 +67,8 @@ const Detailsthird = ({navigation,route}) => {
         catch(e){
           console.log(e);
         }
+
+
         // user creation
         const newUser ={
           id:Id,
@@ -87,7 +90,9 @@ const Detailsthird = ({navigation,route}) => {
           fbs,
           hba1c,
           imagename,
-          age
+          age,
+          calorie,
+          intake:0,
       };
       
       const data = {
@@ -109,7 +114,11 @@ const Detailsthird = ({navigation,route}) => {
       catch(e){
         console.log('Error saving user', e);
       }
-    navigation.navigate("homescreen")
+    // navigation.navigate("homescreen")
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'homescreen' }],
+    });
   };
   
   return (      
