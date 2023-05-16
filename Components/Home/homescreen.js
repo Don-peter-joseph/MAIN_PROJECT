@@ -35,6 +35,7 @@ const Home=({navigation,route})=>{
             console.log(profileData)
         } catch (error) {
             console.log('Lambda error:', error);
+            setprofileData(`data:image/jpeg;base64`);
         }        
     }
 
