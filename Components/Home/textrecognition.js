@@ -169,7 +169,7 @@ return(
               <ScrollView style={styles.textarea}>
                 <Text style={{borderWidth:1,elevation:5,backgroundColor:'#fff',flex:1,padding:10,fontSize:15,fontWeight:400}}>{text}</Text>
               </ScrollView>
-              <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen2',{item:" ",user,cal:calciumValue,fib:fiberValue,eng:calorieValue,carbs:carboValue})}>
+              <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen2',{item:"Packaged Food",user,cal:calciumValue,fib:fiberValue,eng:calorieValue,carbs:carboValue})}>
                   <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
               </Pressable>
           </>
