@@ -17,6 +17,12 @@ const TextRecogniser = ({navigation,route}) => {
   const [type,settype]=useState(Camera.Constants.Type.back);
   const [flash,setflash]=useState(Camera.Constants.FlashMode.off);
   const cameraRef=useRef(null);
+  const {user}=route.params;
+  const [calciumValue,setcal]=useState(null)
+  const [calorieValue,seteng]=useState(null)
+  const [carboValue,setcarbs]=useState(null)
+  const [fiberValue,setfib]=useState(null)
+
 
   useEffect(()=>{
       (async()=>{
@@ -70,15 +76,49 @@ const TextRecogniser = ({navigation,route}) => {
                 bucketname:'rawfoods82713-staging'
             }
         });
-        settext(response.TextDetections
-          .filter((detection) => detection.Type == "LINE")
-          .map((detection) => detection.DetectedText)
-          .join("\n"), null, 2);
-      
-            console.log('Lambda response:',response);
-        } catch (error) {
-            console.log('Lambda error:', error);
-        }
+        // settext(response.TextDetections
+        //   .filter((detection) => detection.Type == "LINE")
+        //   .map((detection) => detection.DetectedText)
+        //   .join("\n"), null, 2);
+
+        const detectedText = response.TextDetections.map((detection) => detection.DetectedText).join("\n");
+        
+        // Find the values for calcium, fiber, and calorie
+        const calciumMatch = detectedText.match(/Calcium(?:\s*\(\w+\))?\s+(\d+)/i);
+        const fiberMatch = detectedText.match(/Fibre(?:\s*\(\w+\))?\s+(\d+)/i);
+        const calorieMatch = detectedText.match(/Energy(?:\s*\(\w+\))?\s+(\d+)/i);
+        const carboMatch = detectedText.match(/Carbohydrate(?:\s*\(\w+\))?\s+(\d+)/i);
+        const sugarMatch = detectedText.match(/Sugar(?:\s*\(\w+\))?\s+(\d+)/i);
+        const protienMatch = detectedText.match(/Protein(?:\s*\(\w+\))?\s+(\d+)/i);
+        const fatMatch = detectedText.match(/Fat(?:\s*\(\w+\))?\s+(\d+)/i);
+
+        // Extract the values from the matches
+        const calciumValue2 = calciumMatch ? calciumMatch[1] : null;
+        setcal(calciumValue2)
+        const fiberValue2 = fiberMatch ? fiberMatch[1] : null;
+        setfib(fiberValue2)
+        const calorieValue2 = calorieMatch ? calorieMatch[1] : null;
+        seteng(calorieValue2)
+        const carboValue2 = carboMatch ? carboMatch[1] : null;
+        setcarbs(carboValue2)
+        const sugarValue = sugarMatch ? sugarMatch[1] : null;
+        const protienValue = protienMatch ? protienMatch[1] : null;
+        const fatValue = fatMatch ? fatMatch[1] : null;
+
+
+        const cal=`Calcium : ${calciumValue2}`;
+        const fib=`Fibre : ${fiberValue2}`;
+        const eng=`Calorie : ${calorieValue2}`;
+        const carbo=`Carbohydrates : ${carboValue2}`;
+        const sugar=`Sugar : ${sugarValue}`;
+        const protein=`Protein : ${protienValue}`;
+        const fat=`fat : ${fatValue}`;
+        const resuttext=`${cal}\n${fib}\n${eng}\n${carbo}\n${sugar}\n${protein}\n${fat}`;
+        settext(resuttext, null, 2);
+    } 
+    catch (error) {
+        console.log('Lambda error:', error);
+    }
     }
 
   const takePicture=async()=>{
@@ -127,8 +167,11 @@ return(
               </Pressable>
               <Image source={{uri:takenImage}} style={styles.camera}/>
               <ScrollView style={styles.textarea}>
-                <Text style={{borderWidth:1,elevation:1,backgroundColor:'#fff',flex:1,padding:10}}>{text}</Text>
+                <Text style={{borderWidth:1,elevation:5,backgroundColor:'#fff',flex:1,padding:10,fontSize:15,fontWeight:400}}>{text}</Text>
               </ScrollView>
+              <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('resultscreen2',{item:" ",user,cal:calciumValue,fib:fiberValue,eng:calorieValue,carbs:carboValue})}>
+                  <Text style={{textAlign:'center',fontSize:18,fontWeight:'600',color:'#ffffff'}}>Next</Text>
+              </Pressable>
           </>
           }
         </View>
@@ -144,7 +187,7 @@ const styles=StyleSheet.create({
       flex: 1,
       // position:'absolute',
       width:450,
-      height:1000,
+      // height:1000,
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor:'#ffffff',

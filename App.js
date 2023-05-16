@@ -35,6 +35,7 @@ import Activity from './Components/Settings/acitivity';
 import ChatBot from './Components/Chatbot';
 import Settings from './Components/Settings/settings';
 import About from './Components/Settings/about';
+import Result2 from './Components/modelscreen/modelresult2';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import * as Linking from 'expo-linking';
@@ -173,6 +174,7 @@ export default function App() {
             <Stack.Screen name="chatbotscreen" component={ChatBot}/>
             <Stack.Screen name="settingscreen" component={Settings}/>
             <Stack.Screen name="aboutscreen" component={About}/>
+            <Stack.Screen name="resultscreen2" component={Result2}/>
             {/* <Stack.Screen name="signin" component={Signin}/> */}
             {/* <Stack.Screen name="signup" component={Signup}/> */}
 
@@ -209,6 +211,7 @@ export default function App() {
             <Stack.Screen name="recipescreen" component={Recipe}/>
             <Stack.Screen name="termsscreen" component={TermsCondition}/>
             <Stack.Screen name="privacyscreen" component={PrivacyPolicy}/>
+            <Stack.Screen name="resultscreen2" component={Result2}/>
         </>)
     }
       </Stack.Navigator>
