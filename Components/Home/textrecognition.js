@@ -186,7 +186,7 @@ const styles=StyleSheet.create({
   outline:{
       flex: 1,
       // position:'absolute',
-      width:450,
+      width:'100%',
       // height:1000,
       justifyContent: 'space-evenly',
       alignItems: 'center',
@@ -217,16 +217,7 @@ const styles=StyleSheet.create({
       height:'40%',
       alignSelf:'center'
   },
-  button:{
-      width:150,
-      height:50,
-      justifyContent:'center',
-      alignItems:'center',
-      borderWidth:4,
-      borderColor:'red',
-      borderRadius:10,
-      marginTop:20
-  },
+
   textarea:{
     // borderWidth:2,
     borderColor:'blue',
@@ -250,5 +241,6 @@ const styles=StyleSheet.create({
   borderColor:'#000000',
   backgroundColor:'#F806CC',
   flex:.15,
+  margin:50,
 },
 })
