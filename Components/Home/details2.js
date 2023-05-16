@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import { API,Auth } from 'aws-amplify';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -188,6 +189,7 @@ const Detailssecond = ({navigation,route}) => {
           {/* <Text style={styles.heading1}>
             Enter your details :
           </Text> */}
+      <ScrollView>
           <View style={{marginVertical: 10, marginLeft: 10}}>
             <Text style={styles.Adress1}>Enter your weight (kg):</Text>
             <TextInput 
@@ -308,6 +310,7 @@ const Detailssecond = ({navigation,route}) => {
               <Text style={styles.buttontext}>Next</Text>
           </Pressable>
         </View>
+        </ScrollView>
     </View>
 
     );

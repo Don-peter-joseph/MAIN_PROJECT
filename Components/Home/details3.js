@@ -170,16 +170,16 @@ const Detailsthird = ({navigation,route}) => {
         </View>
       )}
 
-      <View style={styles.checkboxContainer2}>
-        <CheckBox checked={isChecked} onPress={() => setIsChecked(!isChecked)} style={styles.checkbox1} />
-        <Text style={styles.labelc}>
-          I have agree to the{' '} 
-          <Text style={styles.link} onPress={terms}>terms & conditions </Text> and{'\n'}
-          <Text style={styles.link} onPress={privacy}>privacy policy</Text>.
-        </Text>
-      </View>
 
       <View style={styles.mainb}>
+        <View style={styles.checkboxContainer2}>
+          <CheckBox checked={isChecked} onPress={() => setIsChecked(!isChecked)} style={styles.checkbox1} />
+          <Text style={styles.labelc}>
+            I have agree to the{' '} 
+            <Text style={styles.link} onPress={terms}>terms & conditions </Text> and{'\n'}
+            <Text style={styles.link} onPress={privacy}>privacy policy</Text>.
+          </Text>
+        </View>
           <Pressable style={styles.button} onPress={handleSubmit}>
           {loading ? (
                 <Lottie

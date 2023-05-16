@@ -10,8 +10,8 @@ const windowHeight = Dimensions.get('window').height;
 const TermsCondition=({navigation,route})=>{
 
     return(
-        <ScrollView style={styles.container}>
-            <View style={{ marginTop: 20, height:990 }}>
+        <View style={{ marginTop: 20, height:990 }}>
+            <ScrollView style={styles.container}>
         <Text style={{ fontWeight: 'bold', fontSize: 18}}>
             Terms and Conditions
         </Text>
@@ -65,8 +65,11 @@ const TermsCondition=({navigation,route})=>{
         Your continued use of the Application after any such changes constitutes your acceptance of the new 
         Terms.
         </Text>
-        </View>
+        <Text style={{ marginTop: 7 }}>
+                                   
+        </Text>
         </ScrollView>
+        </View>
     )
 }
 

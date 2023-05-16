@@ -71,7 +71,7 @@ const Home=({navigation,route})=>{
       console.log(redirectUrl);
     return(
         <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center'}}>
-
+            
         {!profileData?
             <>
             <Lottie
@@ -122,7 +122,7 @@ const Home=({navigation,route})=>{
                             <Lottie style={styles.animation} source={require('../animatedscreen/customercare.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Customer Care</Text></Pressable>
                         
-                        <Pressable style={[styles.box,{width:'90%',height:70,flexDirection:'row',paddingBottom:0,paddingTop:0}]} onPress={()=>navigation.navigate("settingscreen")} >
+                        <Pressable style={[styles.box,{width:'90%',height:70,flexDirection:'row',paddingBottom:0,paddingTop:0}]} onPress={()=>navigation.navigate("settingscreen",{user})} >
                             <Lottie style={{width:80}} source={require('../animatedscreen/settings.json')} autoPlay loop />
                             <Text style={{fontWeight:'bold',fontSize:15}}>Settings</Text></Pressable>
                     </View>

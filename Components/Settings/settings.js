@@ -11,15 +11,15 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Settings=({navigation,route})=>{
-
+    const {user}=route.params;
 
     return(
         <View style={styles.outline}>
                 <Text style={{fontSize:40,fontWeight:600,marginBottom:40,paddingLeft:20}}>Settings</Text>
-                <Pressable style={({pressed})=>[styles.box,{backgroundColor:pressed?'#EFEFEF':'#fff'}]} onPress={()=>navigation.navigate("activityscreen")}>
+                <Pressable style={({pressed})=>[styles.box,{backgroundColor:pressed?'#EFEFEF':'#fff'}]} onPress={()=>navigation.navigate("activityscreen",{user})}>
                     <Text style={styles.text}>Activity</Text>
                 </Pressable>
-                <Pressable style={({pressed})=>[styles.box,{backgroundColor:pressed?'#EFEFEF':'#fff'}]}>
+                <Pressable style={({pressed})=>[styles.box,{backgroundColor:pressed?'#EFEFEF':'#fff'}]} onPress={()=>navigation.navigate("detectfacescreen")}>
                     <Text style={styles.text}>Go Premium</Text>
                 </Pressable>
                 <Pressable style={({pressed})=>[styles.box,{backgroundColor:pressed?'#EFEFEF':'#fff'}]} onPress={()=>navigation.navigate("aboutscreen")}>
@@ -52,7 +52,9 @@ const styles=StyleSheet.create({
         // borderWidth:1,
         margin:6,
         borderRadius:5,
-        backgroundColor:'#FFFFFF'
+        backgroundColor:'#FFFFFF',
+        elevation:3,
+        // shadowColor:'#FFCA2F'
       }
 })
 

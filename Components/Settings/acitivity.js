@@ -2,17 +2,27 @@ import { Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert} from "react-native";
 import {Dimensions} from 'react-native';
-import * as Linking from 'expo-linking';
-import * as webbrower from 'expo-web-browser';
-import Lottie from 'lottie-react-native';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Activity=({navigation,route})=>{
-
+  
+    const [confirmed, setConfirmed] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
+    const {user}=route.params;
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        const currentDate = new Date();
+        if (currentDate.getHours() === 0 && currentDate.getMinutes() === 0 && currentDate.getSeconds() === 0) {
+          setConfirmed(false);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }, []);
+    
 
     const handleOptionPress = (option) => {
       setSelectedOption(option);
@@ -28,6 +38,71 @@ const Activity=({navigation,route})=>{
           catch(e){
             console.log(e);
           }
+    }
+
+    const Confirm=async()=>{
+
+      try {
+        // Check if the Confirm button has already been pressed today
+        const currentDate = new Date();
+        const storedDate = await AsyncStorage.getItem('lastConfirmDate');
+        if (storedDate) {
+          const lastConfirmDate = new Date(storedDate);
+          if (currentDate.getDate() === lastConfirmDate.getDate() && 
+              currentDate.getMonth() === lastConfirmDate.getMonth() && 
+              currentDate.getFullYear() === lastConfirmDate.getFullYear()) {
+              Alert.alert("Physical activity already confirmed today")
+            return;
+          }
+          else{
+            console.log("not confirmed")
+          }
+        }
+        // The Confirm button has not been pressed today, store the current date
+        await AsyncStorage.setItem('lastConfirmDate', currentDate.toString());
+        setConfirmed(true);
+      } catch (error) {
+        console.log(error);
+      }
+
+      let reading=0;
+      if(selectedOption=='Less than 1 hour'){
+        reading = (user.Item.rbs - 80) * (1 - 0.005 * user.Item.bmi) * (1 - 0.01 * .3) + 80
+      }
+      else if(selectedOption === '2-4 hours'){
+        reading = (user.Item.rbs - 80) * (1 - 0.005 * user.Item.bmi) * (1 - 0.01 * 3*.9) + 80
+      }
+      else if(selectedOption === '5-7 hours'){
+        reading = (user.Item.rbs - 80) * (1 - 0.005 * user.Item.bmi) * (1 - 0.01 * 6 * .8) + 80   
+      }
+      else{
+        reading = (user.Item.rbs - 80) * (1 - 0.005 * user.Item.bmi) * (1 - 0.01 * 8 * .7) + 80
+      }
+      console.log(reading)
+
+
+      try{
+        const id=user.Item.id;
+        const data = {
+          operation: 'update',
+          payload: {id,rbs:Math.round(reading)},
+          tablename:'heathpaduserdetails-staging'
+        };
+          const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
+              body: {
+                      data 
+              } 
+          });
+          console.log("rbs updated");
+      }
+      catch(e){
+        console.log("rbs not updated");
+      }
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'homescreen' }],
+      });
     }
 
     return(
@@ -47,7 +122,7 @@ const Activity=({navigation,route})=>{
                     <Text style={{ color: selectedOption === 'Greater than 7 hours' ? '#fff' : '#000' }}>Greater than 7 hours</Text>
                 </Pressable>
             </View>
-            <Pressable style={({pressed})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFF'}]} onPress={()=>navigation.navigate("homescreen")}>
+            <Pressable style={({pressed,disabled})=>[styles.button,{backgroundColor:pressed?'#FFDA2a':'#FFF'}]} onPress={Confirm}   disabled={confirmed}>
                 <Text style={{fontWeight:500,fontSize:18}}>Confirm</Text>
             </Pressable>
         </View>
