@@ -1,6 +1,6 @@
 import { Auth,API } from "aws-amplify";
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert,ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
 import * as Linking from 'expo-linking';
 import * as webbrower from 'expo-web-browser';
@@ -71,7 +71,8 @@ const Home=({navigation,route})=>{
     const redirectUrl = Linking.createURL('home');
       console.log(redirectUrl);
     return(
-        <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center'}}>
+        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <View style={{flex:1,width:'100%',justifyContent:'center',alignItems:'center',height:windowHeight}}>
             
         {!profileData?
             <>
@@ -132,15 +133,22 @@ const Home=({navigation,route})=>{
 
         }
       </View>
+      </ScrollView>
     )
 }
 
 const styles=StyleSheet.create({
+    scrollViewContainer: {
+        flexGrow: 1,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
     outline:{
         flex: 1,
-        position:'absolute',
+        // position:'absolute',
         width:windowWidth,
-        height:windowHeight,
+        height:"100%",
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         backgroundColor:'#ffffff',
@@ -154,7 +162,8 @@ const styles=StyleSheet.create({
     navbar:{
         flexDirection:'row',
         padding:10,
-        marginTop:20,
+        marginTop:50,
+        marginBottom:40,
         paddingTop:50,
         paddingBottom:30,
         borderWidth:.5,
@@ -164,13 +173,15 @@ const styles=StyleSheet.create({
         width:'95%',
         justifyContent:'space-evenly',
         backgroundColor:'#F7EBFE',
-        alignSelf:'center'
+        alignSelf:'center',
+        flex:.1
     },
     features:{
         // borderWidth:2,
         // borderColor:'green',
         width:'100%',
-        height:'50%',
+        // height:'50%',
+        flex:1,
         flexDirection:'row',
         flexWrap:'wrap',
         justifyContent:'space-evenly',
@@ -202,7 +213,7 @@ const styles=StyleSheet.create({
         width:'40%',
         padding:5,
         marginTop:30,
-        height:'40%',
+        height:'22%',
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'#FFCA2F',

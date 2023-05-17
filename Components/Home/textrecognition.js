@@ -169,7 +169,7 @@ return(
               <ScrollView style={styles.textarea}>
                 <Text style={{borderWidth:1,elevation:5,backgroundColor:'#fff',flex:1,padding:10,fontSize:15,fontWeight:400}}>{text}</Text>
               </ScrollView>
-              {calorieValue==null || carboValue==null|| calciumValue==null?
+              {calorieValue==null || carboValue==null?
               <>
                 <Text style={{textAlign:'center',fontSize:18,fontWeight:'600'}}>Not enough data, try again !!!</Text>
                 <Pressable style={styles.nextbutton} onPress={()=>navigation.navigate('scanscreen',{user})}>
