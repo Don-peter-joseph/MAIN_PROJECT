@@ -315,7 +315,7 @@ const Detailsfirst = ({navigation,route}) => {
         {/* </View>   */}
         {/* <View style={styles.form2}> */}
         
-
+        <ScrollView>
           <Text style={styles.heading1}>
             Enter your details :
           </Text>
@@ -415,6 +415,7 @@ const Detailsfirst = ({navigation,route}) => {
               <Text  style={styles.buttontext}>Next</Text>
           </Pressable>
         </View>
+        </ScrollView>
     </View>
 
     );

@@ -11,13 +11,9 @@ import Lottie from 'lottie-react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Result=({navigation,route})=>{
-    const {item,user}=route.params;
+const Result2=({navigation,route})=>{
+    const {item,user,eng,fib,cal,carbs}=route.params;
     const value=item.toUpperCase();
-    const [cal,setcal]=useState(0);
-    const [eng,seteng]=useState(0);
-    const [fib,setfib]=useState(0);
-    const [carbs,setcarbs]=useState(0);
     const [flag,setflag]=useState(0);
     const [flag2,setflag2]=useState(1);
     const [gindex,setgindex]=useState(0);
@@ -53,50 +49,17 @@ const Result=({navigation,route})=>{
     }
 
     const getDetails=async()=>{
-        const data = {
-            operation: 'retrieve',
-            payload: value,
-            // payload:'APPLE',
-            tablename:'HealthpadNutritionList'
-          };
-          try{
-              const response=await API.post('healthpadrestapi', '/healthpaddynamodbTriggerd96984dd-staging',{ 
-                  body: {
-                          data 
-                  } 
-              });  
-              seteng(response.Item.Energy);
-              setcal(response.Item.Calcium);
-              setfib(response.Item.Fibre);
-              setcarbs(response.Item.Carbos);
-              setgindex(response.Item.Glycemicindex);
-              setgload((response.Item.Glycemicindex*response.Item.Carbos)/100)
-              const insulinf = (1 + (0.01 * (user.Item.bmi - 25))) * (1 + (0.01 * (user.Item.age - 20)));
-              setinsulinfactor(insulinf);
-              setreading(Math.round(parseInt(user.Item.rbs)+((response.Item.Glycemicindex*response.Item.Carbos)/10000)*(response.Item.Glycemicindex/100)*user.Item.rbs*insulinf))
-              console.log(response);
-              setTimeout(() => {
-                  setflag(1);
-                }, 100);
-          }
-          catch(e){
-            let Glycemicindex=Math.floor(Math.random() * 101)
-            let Carbos=Math.floor(Math.random() * 51)
-            seteng(Math.floor(Math.random() * 101));
-            setcal(Math.floor(Math.random() * 51));
-            setfib(Math.floor(Math.random() * 11));
-            setcarbs(Carbos);
-            setgindex(Glycemicindex);
-            setgload((Glycemicindex*Carbos)/100)
-            const insulinf = (1 + (0.01 * (user.Item.bmi - 25))) * (1 + (0.01 * (user.Item.age - 20)));
-            setinsulinfactor(insulinf);
-            setreading(Math.round(parseInt(user.Item.rbs)+((Glycemicindex*Carbos)/10000)*(Glycemicindex/100)*user.Item.rbs*insulinf))
-            setTimeout(() => {
-                setflag(1);
-              }, 100);
-            console.log("error in fetching datbase data")
-          }
-    }
+        const gind=Math.floor(Math.random() * 101)
+        setgindex(gind);
+        console.log(gind)
+        setgload((gind*carbs)/100)
+        const insulinf = (1 + (0.01 * (user.Item.bmi - 25))) * (1 + (0.01 * (user.Item.age - 20)));
+        setinsulinfactor(insulinf);
+        setreading(Math.round(parseInt(user.Item.rbs)+((gind*carbs)/10000)*(gind/100)*user.Item.rbs*insulinf))
+        setTimeout(() => {
+            setflag(1);
+        }, 100);
+     }
 
     return(
         <View style={styles.outline}>
@@ -104,7 +67,6 @@ const Result=({navigation,route})=>{
             <>
                 <View style={styles.item}>
                     <Text style={{width:'100%',textAlign:'center',fontSize:30,fontWeight:900}}>{item}</Text>
-                    {/* <Text style={{width:'100%',textAlign:'center',fontSize:30,fontWeight:900}}>Apple</Text> */}
                     <View style={styles.box}>
                         <Text style={styles.text}>Energy</Text>
                         <Text style={styles.text}>{eng}</Text>
@@ -296,4 +258,4 @@ const styles=StyleSheet.create({
     }
 })
 
-export default Result;
+export default Result2;

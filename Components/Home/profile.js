@@ -40,7 +40,10 @@ const Profile = ({navigation,route}) => {
     const SignOut=async()=>{
         try{
             await Auth.signOut();
-            navigation.navigate("signin");
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'signin' }],
+              });
         }
         catch(e){
             Alert.alert(e.message);
