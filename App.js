@@ -183,13 +183,13 @@ export default function App() {
          ( <>
 
             <Stack.Screen name="signin" component={Signin}/>
+            <Stack.Screen name="details3screen" component={Detailsthird}/>     
             <Stack.Screen name="settingscreen" component={Settings}/>
             <Stack.Screen name="aboutscreen" component={About}/>
             <Stack.Screen name="chatbotscreen" component={ChatBot}/>
             <Stack.Screen name="activityscreen" component={Activity}/>
             <Stack.Screen name="quantityscreen" component={Quantity}/>
             <Stack.Screen name="resultscreen" component={Result}/>
-            <Stack.Screen name="details3screen" component={Detailsthird}/>     
             <Stack.Screen name="detailsScreen" component={Detailsfirst}/> 
             <Stack.Screen name="details2screen" component={Detailssecond}/>     
             <Stack.Screen name="itemscreen" component={Item}/> 
