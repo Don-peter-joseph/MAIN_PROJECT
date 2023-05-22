@@ -155,9 +155,10 @@ const styles=StyleSheet.create({
         borderColor:'#000000'
     },
     heading:{
-        flex:1,
+        flex:2,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        // borderWidth:1,
     }
 
 })

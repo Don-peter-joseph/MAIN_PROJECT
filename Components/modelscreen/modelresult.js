@@ -149,7 +149,7 @@ const Result=({navigation,route})=>{
                 </View>
 
                 <View style={styles.recommendation}>
-                    {gindex<50 && gload<10 && reading<180?
+                    {gindex<50 && gload<10 || reading<150?
                     <>
                         <View style={styles.recommended}>
                             <Text style={{fontSize:20,fontWeight:700}}>Safe</Text>

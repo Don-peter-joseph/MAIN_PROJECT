@@ -4,6 +4,9 @@ import {Dimensions} from 'react-native';
 import Lottie from 'lottie-react-native';
 import {API } from "aws-amplify";
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
   const Quantity = ({navigation,route}) => {
     const [flag,setflag]=useState(1);
     const [flag2,setflag2]=useState(1);
@@ -126,15 +129,17 @@ import {API } from "aws-amplify";
     return (
       
     <View style={styles.outline}>
-        <View style={styles.quantity}>
-            <Text style={styles.heading}>Quantity(gm)</Text>
-            <View style={{flexDirection:'row'}}>
-                <Pressable><Text style={{fontSize:60}} onPress={Decrease}>◀</Text></Pressable>
-                <TextInput style={{width:'50%',fontSize:40,textAlign:'center'}} value={amount.toString()}
-                     keyboardType="numeric" onChangeText={Saveamount}/>
-                <Pressable><Text style={{fontSize:60}} onPress={Increase}>▶</Text></Pressable>
-            </View>
-        </View>   
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+          <View style={styles.quantity}>
+              <Text style={styles.heading}>Quantity(gm)</Text>
+              <View style={{flexDirection:'row'}}>
+                  <Pressable><Text style={{fontSize:60}} onPress={Decrease}>◀</Text></Pressable>
+                  <TextInput style={{width:'50%',fontSize:40,textAlign:'center'}} value={amount.toString()}
+                      keyboardType="numeric" onChangeText={Saveamount}/>
+                  <Pressable><Text style={{fontSize:60}} onPress={Increase}>▶</Text></Pressable>
+              </View>
+          </View>   
+        </View>
 
         <View style={styles.result}>
         {flag?
@@ -172,7 +177,7 @@ import {API } from "aws-amplify";
         </View>
 
         <View style={styles.recommendation}>
-                    {gindex<50 && gload<10 && reading<180?
+                    {gindex<50 && gload<10 || reading<150?
                     <>
                         <View style={styles.recommended}>
                             <Text style={{fontSize:20,fontWeight:700}}>Safe</Text>
@@ -187,7 +192,7 @@ import {API } from "aws-amplify";
                     }
         </View>
 
-        <View style={{flexDirection:'row',marginTop:30,width:'80%',justifyContent:"space-evenly"}}>
+        <View style={{flexDirection:'row',width:'80%',justifyContent:"space-evenly",flex:.2}}>
             <Pressable style={[styles.button,{backgroundColor:'#D33D29'}]} onPress={()=>navigation.navigate("scanscreen",{user})}> 
                 <Text style={styles.heading}>Cancel</Text>
             </Pressable>
@@ -203,7 +208,7 @@ export default Quantity;
 
 const styles=StyleSheet.create({
   outline:{
-    flex:1,
+    height:windowHeight,
     // borderWidth:2,
     // borderColor:'red',
     // backgroundColor:'black',
@@ -219,6 +224,7 @@ const styles=StyleSheet.create({
     borderRadius:20,
     backgroundColor:'#ffffff',
     // borderColor:'#FFBA2A'
+    marginTop:40
   },
   heading:{
     width:'100%',
@@ -243,27 +249,28 @@ const styles=StyleSheet.create({
     alignItems:'center',
     width:'45%',
   },    
-    result:{
+  result:{
     // borderWidth:1,
     width:"95%",   
-    height:250,
+    flex:.8,
     justifyContent:'center',
     alignItems:"center",
     flexWrap:'wrap',
     flexDirection:'row',
-    marginTop:80,
-    marginBottom:30
+    // marginTop:80,
+    // marginBottom:30
   },
 recommendation:{
     width:'100%',
     // borderWidth:1,
     justifyContent:'center',
     alignItems:'center',
-    height:200,
+    // height:200,
+    flex:.7
 },
 recommended:{
     width:'55%',
-    height:180,
+    height:"85%",
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:"#b1fcb1",
@@ -271,7 +278,7 @@ recommended:{
 },
 notrecommended:{
     width:'55%',
-    height:180,
+    height:"85%",
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:"#ff4d4d",

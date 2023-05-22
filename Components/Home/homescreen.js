@@ -162,8 +162,8 @@ const styles=StyleSheet.create({
     navbar:{
         flexDirection:'row',
         padding:10,
-        marginTop:50,
-        marginBottom:40,
+        marginTop:10,
+        // marginBottom:40,
         paddingTop:50,
         paddingBottom:30,
         borderWidth:.5,
@@ -185,7 +185,7 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         flexWrap:'wrap',
         justifyContent:'space-evenly',
-        paddingTop:10
+        // paddingTop:10
     },
     logo:{
         // position:'absolute',

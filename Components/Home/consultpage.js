@@ -138,7 +138,7 @@ const styles=StyleSheet.create({
         marginRight:10
     },
     heading:{
-        flex:1,
+        flex:2,
         alignItems:'center',
         justifyContent:'center'
     }
