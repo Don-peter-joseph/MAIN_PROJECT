@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/36ebd0e9-99a3-4ade-a36c-dea5874af8d9"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -39,6 +40,9 @@
         "projectId": "36ebd0e9-99a3-4ade-a36c-dea5874af8d9"
       }
     },
-    "githubUrl": "https://github.com/Don-peter-joseph/MAIN_PROJECT.git"
+    "githubUrl": "https://github.com/Don-peter-joseph/MAIN_PROJECT.git",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }
