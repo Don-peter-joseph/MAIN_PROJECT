@@ -137,16 +137,19 @@ const Detailsthird = ({navigation,route}) => {
           <CheckBox       
             checkBoxColor="grey"
             style={styles.checkbox}
+            disabled={true}
           />
           <Text style={[styles.label]}>High blood Pressure</Text>
           <CheckBox       
             checkBoxColor="grey"
             style={styles.checkbox}
+            disabled={true}
           />
           <Text style={[styles.label]}>Cholestrol</Text>
           <CheckBox       
             checkBoxColor="grey"
             style={styles.checkbox}
+            disabled={true}
           />
           <Text style={[styles.label]}>Obesity</Text>
 
