@@ -119,7 +119,7 @@ const Profile = ({navigation,route}) => {
                             <Text style={styles.label}>Zip Code</Text>
                             <Text style={styles.item}>{user.Item.pincode}</Text>
                             <Text style={styles.label}>Disease</Text>
-                            <Text style={styles.item}>Diabetic</Text>
+                            <Text style={styles.item}>Diabetics</Text>
                             <Text style={styles.label}>FBS</Text>
                             <Text style={styles.item}>{user.Item.fbs}</Text>
                             <Text style={styles.label}>RBS</Text>
