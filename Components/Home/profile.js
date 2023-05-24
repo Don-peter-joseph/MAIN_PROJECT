@@ -105,9 +105,7 @@ const Profile = ({navigation,route}) => {
                             <Text style={styles.label}>Address</Text>
                             <Text style={styles.item}>{user.Item.address}</Text>
                             <Text style={styles.label}>Type</Text>
-                            <Text style={styles.item}></Text>
-                            <Text style={styles.label}>Diabetic</Text>
-                            <Text style={styles.item}></Text>
+                            <Text style={styles.item}>   </Text>
                             <Text style={styles.label}>Height</Text>
                             <Text style={styles.item}>{user.Item.height}</Text>
                             <Text style={styles.label}>Weight</Text>
@@ -121,7 +119,7 @@ const Profile = ({navigation,route}) => {
                             <Text style={styles.label}>Zip Code</Text>
                             <Text style={styles.item}>{user.Item.pincode}</Text>
                             <Text style={styles.label}>Disease</Text>
-                            <Text style={styles.item}>{user.Item.disease}</Text>
+                            <Text style={styles.item}>Diabetics</Text>
                             <Text style={styles.label}>FBS</Text>
                             <Text style={styles.item}>{user.Item.fbs}</Text>
                             <Text style={styles.label}>RBS</Text>

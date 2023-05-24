@@ -153,7 +153,7 @@ export default FoodDetector;
 const styles=StyleSheet.create({
   outline:{
       flex: 1,
-      position:'absolute',
+      // position:'absolute',
       width:450,
       height:'100%',
       justifyContent: 'space-evenly',

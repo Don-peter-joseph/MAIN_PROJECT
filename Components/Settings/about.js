@@ -15,7 +15,7 @@ const About=({navigation,route})=>{
             <Text style={{alignSelf:'center',fontSize:18}}>Don Peter Joseph</Text>
             <Text style={{alignSelf:'center',fontSize:18}}>Sreehari P</Text>
             <Text style={{alignSelf:'center',fontSize:18}}>Amith Bino</Text>
-        <Image source={require('../Home/assets/icon.png')} style={{width:300,height:300,alignSelf:"center",marginTop:70}}/>
+        <Image source={require('../Home/assets/icon.png')} style={{width:300,height:"30%",alignSelf:"center",marginTop:70}}/>
             <Text style={{position:'absolute',bottom:100}}>
         If you have any questions, feedback, or suggestions, please feel free to reach out to us at  
         <Text style={{fontWeight:600,fontSize:15}}> appsupport@healtpad.org </Text>. We would love to hear from you!

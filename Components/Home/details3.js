@@ -1,10 +1,10 @@
 import { Auth,Hub,API } from "aws-amplify";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput,Pressable,Image,ImageBackground, Alert} from "react-native";
-// import CheckBox from "@react-native-community/checkbox";
 import {Dimensions} from 'react-native';
-import { CheckBox } from 'react-native-elements';
-// import { CheckBox, Icon } from '@rneui/themed';
+// import { CheckBox } from 'react-native-elements';
+import CheckBox from "react-native-check-box";
+
 import Lottie from 'lottie-react-native';
 
 
@@ -26,7 +26,8 @@ const Detailsthird = ({navigation,route}) => {
   const [rbs,setrbs]=useState();
   const [hba1c,sethba1c]=useState();
   const [loading,setloading]=useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false); 
+  const [isChecked2, setIsChecked2] = useState(false); 
 
   const handleDiseaseSelect = (id) => {
     setSelectedDiseases((prevSelectedDiseases) => {
@@ -125,20 +126,37 @@ const Detailsthird = ({navigation,route}) => {
     <View style={styles.container}>
       <Text style={styles.text1}>Select the diseases: </Text>
       <View style={styles.checkboxmain}>
-      {diseases.map((disease) => (
-        <View key={disease.id} style={styles.checkboxContainer}>
-          <CheckBox
-            checked={selectedDiseases.includes(disease.id)}
-            onPress={() => handleDiseaseSelect(disease.id)}
+
+ 
+          <CheckBox       
+            isChecked={isChecked}
+            onClick={()=>setIsChecked(!isChecked)}
             style={styles.checkbox}
           />
-          <Text style={[styles.label,disease.id === 1 && {color: 'black' }]}>{disease.name}</Text>
-        </View>
-        
-      ))}
+          <Text style={[styles.label,{color:'#000'}]}>Diabetis</Text>
+          <CheckBox       
+            checkBoxColor="grey"
+            style={styles.checkbox}
+            disabled={true}
+          />
+          <Text style={[styles.label]}>High blood Pressure</Text>
+          <CheckBox       
+            checkBoxColor="grey"
+            style={styles.checkbox}
+            disabled={true}
+          />
+          <Text style={[styles.label]}>Cholestrol</Text>
+          <CheckBox       
+            checkBoxColor="grey"
+            style={styles.checkbox}
+            disabled={true}
+          />
+          <Text style={[styles.label]}>Obesity</Text>
+
+
       </View>
       
-      {selectedDiseases.includes(1) && (
+      {isChecked!=false && (
         <View>
           <Text style={styles.Adress1}>Enter the FBS value:</Text>
           <TextInput
@@ -173,13 +191,20 @@ const Detailsthird = ({navigation,route}) => {
 
       <View style={styles.mainb}>
         <View style={styles.checkboxContainer2}>
-          <CheckBox checked={isChecked} onPress={() => setIsChecked(!isChecked)} style={styles.checkbox1} />
+          
+          <CheckBox 
+            isChecked={isChecked2}
+            onClick={()=>setIsChecked2(!isChecked2)}
+            style={[styles.checkbox,{paddingRight:10,paddingLeft:0}]} 
+            />
           <Text style={styles.labelc}>
             I have agree to the{' '} 
             <Text style={styles.link} onPress={terms}>terms & conditions </Text> and{'\n'}
             <Text style={styles.link} onPress={privacy}>privacy policy</Text>.
           </Text>
         </View>
+        {isChecked2!=false &&(
+
           <Pressable style={styles.button} onPress={handleSubmit}>
           {loading ? (
                 <Lottie
@@ -192,6 +217,7 @@ const Detailsthird = ({navigation,route}) => {
                 <Text style={{fontSize:20,color:'white'}}>Submit</Text>
             )}
           </Pressable>
+        )}
         </View>
       
     </View>
@@ -217,7 +243,8 @@ const styles = StyleSheet.create({
     // marginTop: 50,
   },
   checkbox: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingLeft:40,
   },
   label: {
 
