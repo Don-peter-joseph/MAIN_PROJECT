@@ -277,7 +277,7 @@ const styles=StyleSheet.create({
         // borderWidth:1,
         flexDirection:'row',
         width:'100%',
-        justifyContent:'space-evenly'
+        justifyContent:'space-evenly',
     },
     quantity:{
         width:'100%',
