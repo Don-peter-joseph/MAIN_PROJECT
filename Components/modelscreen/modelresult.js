@@ -77,7 +77,7 @@ const Result=({navigation,route})=>{
               console.log(response);
               setTimeout(() => {
                   setflag(1);
-                }, 100);
+                }, 7000);
           }
           catch(e){
             let Glycemicindex=Math.floor(Math.random() * 101)
@@ -149,7 +149,7 @@ const Result=({navigation,route})=>{
                 </View>
 
                 <View style={styles.recommendation}>
-                    {gindex<50 && gload<10 || reading<150?
+                    {gindex<50 && gload<10 && reading<180|| reading<150?
                     <>
                         <View style={styles.recommended}>
                             <Text style={{fontSize:20,fontWeight:700}}>Safe</Text>
@@ -277,7 +277,7 @@ const styles=StyleSheet.create({
         // borderWidth:1,
         flexDirection:'row',
         width:'100%',
-        justifyContent:'space-evenly'
+        justifyContent:'space-evenly',
     },
     quantity:{
         width:'100%',

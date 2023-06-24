@@ -177,7 +177,7 @@ const windowHeight = Dimensions.get('window').height;
         </View>
 
         <View style={styles.recommendation}>
-                    {gindex<50 && gload<10 || reading<150?
+                    {gindex<50 && gload<10 && reading<180 || reading<150?
                     <>
                         <View style={styles.recommended}>
                             <Text style={{fontSize:20,fontWeight:700}}>Safe</Text>
@@ -192,7 +192,7 @@ const windowHeight = Dimensions.get('window').height;
                     }
         </View>
 
-        <View style={{flexDirection:'row',width:'80%',justifyContent:"space-evenly",flex:.2}}>
+        <View style={{flexDirection:'row',width:'80%',justifyContent:"space-evenly",flex:.3}}>
             <Pressable style={[styles.button,{backgroundColor:'#D33D29'}]} onPress={()=>navigation.navigate("scanscreen",{user})}> 
                 <Text style={styles.heading}>Cancel</Text>
             </Pressable>
@@ -208,12 +208,12 @@ export default Quantity;
 
 const styles=StyleSheet.create({
   outline:{
-    height:windowHeight,
+    height:'100%',
     // borderWidth:2,
     // borderColor:'red',
     // backgroundColor:'black',
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
   },
   quantity:{
     height:200,
@@ -270,7 +270,7 @@ recommendation:{
 },
 recommended:{
     width:'55%',
-    height:"85%",
+    height:"80%",
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:"#b1fcb1",
@@ -278,7 +278,7 @@ recommended:{
 },
 notrecommended:{
     width:'55%',
-    height:"85%",
+    height:"80%",
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:"#ff4d4d",
